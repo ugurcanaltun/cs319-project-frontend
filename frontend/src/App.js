@@ -1,11 +1,9 @@
-import logo from './logo.svg';
 import './App.css';
+import AppDrawer from './components/AppDrawer'
 
 function App() {
   return (
-        <a>
-          deneme
-        </a>
+    <AppDrawer/>
   );
 }
 
