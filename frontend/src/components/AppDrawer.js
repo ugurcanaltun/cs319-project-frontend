@@ -126,6 +126,24 @@ export default function AppDrawer() {
       icon: (<SwapHorizIcon/>),
     }
   ]
+  const navBarItems = [
+    {
+      id: 0,
+      button: (<Button size="large" color="inherit" sx={{textTransform: 'none'}}> Application </Button>),
+    },
+    {
+      id: 1,
+      button: (<Button size="large" color="inherit" sx={{textTransform: 'none'}}> Contacts </Button>),
+    },
+    {
+      id: 2,
+      button: (<Button size="large" color="inherit" sx={{textTransform: 'none'}}> Announcements </Button>),
+    },
+    {
+      id: 3,
+      button: (<Button size="large" color="inherit" sx={{textTransform: 'none'}}> Evaluations </Button>), 
+    }
+  ]
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
 
@@ -155,20 +173,16 @@ export default function AppDrawer() {
           >
             <MenuIcon />
           </IconButton>
-          <Box sx={{flexGrow: 1}}>
-            <Button size="large" color="inherit" sx={{textTransform: 'none'}}>
-              Application
-            </Button>
-            <Button size="large" color="inherit" sx={{textTransform: 'none'}}>
-              Contacts
-            </Button>
-            <Button size="large" color="inherit" sx={{textTransform: 'none'}}>
-              Announcements
-            </Button>
-            <Button size="large" color="inherit" sx={{textTransform: 'none'}}>
-              Evaluations
-            </Button>
+          <Box>
+            <List sx={{display: 'flex', flexDirection: 'row'}}>
+              {navBarItems.map((item) => (
+                <ListItem key={item.id} disablePadding sx={{display: 'block' }}>
+                  {item.button}
+                </ListItem>
+              ))}
+            </List>
           </Box>
+          <Box sx={{flexGrow: 1}} />
           <Box>
             <IconButton
               size="large"
@@ -204,7 +218,7 @@ export default function AppDrawer() {
           </IconButton>
         </DrawerHeader>
         <List>
-          {sideBarItems.map((item, index) => (
+          {sideBarItems.map((item) => (
             <ListItem key={item.id} disablePadding sx={{ display: 'block' }}>
               <ListItemButton
                 sx={{
