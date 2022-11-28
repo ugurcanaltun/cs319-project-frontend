@@ -1,6 +1,7 @@
 import * as React from 'react';
 import './App.css';
 import Box from '@mui/material/Box';
+import { styled } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import AppNavbar from './components/AppNavbar';
 import AppSidebar from './components/AppSidebar';
@@ -44,17 +45,29 @@ function SidebarAndNavbar () {
   );
 }
 
+const DrawerHeader = styled('div')(({ theme }) => ({
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'flex-end',
+  padding: theme.spacing(0, 1),
+  // necessary for content to be below app bar
+  ...theme.mixins.toolbar,
+}));
+
 function App() {
   return (
     <Router>
       <Box sx={{ display: 'flex' }}>
         <CssBaseline />
         <SidebarAndNavbar/>
-        <Routes>
-          <Route path="/" element={<Home/>}/>
-          <Route path="/about" element={<About/>}/>
-          <Route path="/dashboard" element={<Dashboard/>}/>
-        </Routes>
+        <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
+          <DrawerHeader />
+          <Routes>
+            <Route path="/" element={<Home/>}/>
+            <Route path="/about" element={<About/>}/>
+            <Route path="/dashboard" element={<Dashboard/>}/>
+          </Routes>
+        </Box>
       </Box>
     </Router>
 );
