@@ -4,7 +4,7 @@ import MessageIcon from '@mui/icons-material/Message';
 import IconButton from '@mui/material/IconButton';
 
 
-export default function Contacts() {
+export default function ContactsScreen() {
   return (
     <div>
       <h1>Contacts</h1>

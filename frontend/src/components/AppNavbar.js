@@ -39,22 +39,22 @@ export default function AppNavbar(props) {
         {
           id: 0,
           button: (<Button size="large" color="inherit" sx={{textTransform: 'none'}}> Application </Button>),
-          link: "/",
+          link: "/application",
         },
         {
           id: 1,
           button: (<Button size="large" color="inherit" sx={{textTransform: 'none'}}> Contacts </Button>),
-          link: "/about",
+          link: "/contacts",
         },
         {
           id: 2,
           button: (<Button size="large" color="inherit" sx={{textTransform: 'none'}}> Announcements </Button>),
-          link: "/dashboard",
+          link: "/announcements",
         },
         {
           id: 3,
           button: (<Button size="large" color="inherit" sx={{textTransform: 'none'}}> Evaluations </Button>),
-          link: "/", 
+          link: "/evaluations", 
         }
     ]
 
@@ -91,7 +91,7 @@ export default function AppNavbar(props) {
                 </Box>
                 <Box sx={{flexGrow: 1}} />
                 <Box>
-                    <Link to="/">
+                    <Link to="/forum">
                         <IconButton
                         size="large"
                         color="inherit"
@@ -99,7 +99,7 @@ export default function AppNavbar(props) {
                             <ForumIcon/>
                         </IconButton>
                     </Link>
-                    <Link to="/dashboard">
+                    <Link to="/message">
                         <IconButton
                         size="large"
                         color="inherit"
@@ -107,22 +107,18 @@ export default function AppNavbar(props) {
                             <MessageIcon/>
                         </IconButton>
                     </Link>
-                    <Link to="/about">
-                        <IconButton
-                        size="large"
-                        color="inherit"
-                        >
-                            <NotificationsIcon/>
-                        </IconButton>
-                    </Link>
-                    <Link to="/dashboard">
-                        <IconButton
-                        size="large"
-                        color="inherit"
-                        >
-                            <AccountCircleIcon/>
-                        </IconButton>                    
-                    </Link>
+                    <IconButton
+                    size="large"
+                    color="inherit"
+                    >
+                        <NotificationsIcon/>
+                    </IconButton>
+                    <IconButton
+                    size="large"
+                    color="inherit"
+                    >
+                        <AccountCircleIcon/>
+                    </IconButton>                    
                 </Box>
             </Toolbar>
         </AppBar>

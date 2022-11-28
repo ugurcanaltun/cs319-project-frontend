@@ -78,31 +78,31 @@ export default function AppSidebar(props) {
       id: 1,
       label: "Checklist",
       icon: (<ChecklistIcon/>),
-      link: "/about",
+      link: "/checklist",
     },
     {
       id: 2,
       label: "Wish List",
       icon: (<WishListIcon/>),
-      link: "/dashboard",
+      link: "/wishlist",
     },
     {
       id: 3,
       label: "Preapproval",
       icon: (<PreapprovalIcon/>),
-      link: "/contacts",
+      link: "/preapproval",
     },
     {
       id: 4,
       label: "Learning Agreement",
       icon: (<LearningAgreementIcon/>),
-      link: "/",
+      link: "/learningAgreement",
     },
     {
       id: 5,
       label: "Course Transfer",
       icon: (<SwapHorizIcon/>),
-      link: "/",
+      link: "/courseTransfer",
 
     }
   ]
