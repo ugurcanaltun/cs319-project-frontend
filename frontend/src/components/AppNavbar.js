@@ -44,7 +44,7 @@ export default function AppNavbar(props) {
         {
           id: 1,
           button: (<Button size="large" color="inherit" sx={{textTransform: 'none'}}> Contacts </Button>),
-          link: "/about",
+          link: "/contacts",
         },
         {
           id: 2,
