@@ -5,6 +5,9 @@ import { styled } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import AppNavbar from './components/AppNavbar';
 import AppSidebar from './components/AppSidebar';
+import Contacts from './components/Contacts'
+
+
 import {
   BrowserRouter as Router,
   Routes,
@@ -66,6 +69,7 @@ function App() {
             <Route path="/" element={<Home/>}/>
             <Route path="/about" element={<About/>}/>
             <Route path="/dashboard" element={<Dashboard/>}/>
+            <Route path="/contacts" element={<Contacts/>}/>
           </Routes>
         </Box>
       </Box>

@@ -90,7 +90,7 @@ export default function AppSidebar(props) {
       id: 3,
       label: "Preapproval",
       icon: (<PreapprovalIcon/>),
-      link: "/",
+      link: "/contacts",
     },
     {
       id: 4,
