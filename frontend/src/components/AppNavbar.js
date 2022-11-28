@@ -12,6 +12,7 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import ForumIcon from '@mui/icons-material/Forum';
 import MessageIcon from '@mui/icons-material/Message';
 import NotificationsIcon from '@mui/icons-material/Notifications';
+import {Link} from 'react-router-dom';
 
 const drawerWidth = 240;
 
@@ -38,18 +39,22 @@ export default function AppNavbar(props) {
         {
           id: 0,
           button: (<Button size="large" color="inherit" sx={{textTransform: 'none'}}> Application </Button>),
+          link: "/",
         },
         {
           id: 1,
           button: (<Button size="large" color="inherit" sx={{textTransform: 'none'}}> Contacts </Button>),
+          link: "/about",
         },
         {
           id: 2,
           button: (<Button size="large" color="inherit" sx={{textTransform: 'none'}}> Announcements </Button>),
+          link: "/dashboard",
         },
         {
           id: 3,
-          button: (<Button size="large" color="inherit" sx={{textTransform: 'none'}}> Evaluations </Button>), 
+          button: (<Button size="large" color="inherit" sx={{textTransform: 'none'}}> Evaluations </Button>),
+          link: "/", 
         }
     ]
 
@@ -76,38 +81,48 @@ export default function AppNavbar(props) {
                 <Box>
                     <List sx={{display: 'flex', flexDirection: 'row'}}>
                         {navBarItems.map((item) => (
-                            <ListItem key={item.id} disablePadding sx={{display: 'block' }}>
-                                {item.button}
-                            </ListItem>
+                            <Link key={item.id} to={item.link}>
+                                <ListItem key={item.id} disablePadding sx={{display: 'block' }}>
+                                    {item.button}
+                                </ListItem>                            
+                            </Link>
                         ))}
                     </List>
                 </Box>
                 <Box sx={{flexGrow: 1}} />
                 <Box>
-                    <IconButton
-                    size="large"
-                    color="inherit"
-                    >
-                        <ForumIcon/>
-                    </IconButton>
-                    <IconButton
-                    size="large"
-                    color="inherit"
-                    >
-                        <MessageIcon/>
-                    </IconButton>
-                    <IconButton
-                    size="large"
-                    color="inherit"
-                    >
-                        <NotificationsIcon/>
-                    </IconButton>
-                    <IconButton
-                    size="large"
-                    color="inherit"
-                    >
-                        <AccountCircleIcon/>
-                    </IconButton>
+                    <Link to="/">
+                        <IconButton
+                        size="large"
+                        color="inherit"
+                        >
+                            <ForumIcon/>
+                        </IconButton>
+                    </Link>
+                    <Link to="/dashboard">
+                        <IconButton
+                        size="large"
+                        color="inherit"
+                        >
+                            <MessageIcon/>
+                        </IconButton>
+                    </Link>
+                    <Link to="/about">
+                        <IconButton
+                        size="large"
+                        color="inherit"
+                        >
+                            <NotificationsIcon/>
+                        </IconButton>
+                    </Link>
+                    <Link to="/dashboard">
+                        <IconButton
+                        size="large"
+                        color="inherit"
+                        >
+                            <AccountCircleIcon/>
+                        </IconButton>                    
+                    </Link>
                 </Box>
             </Toolbar>
         </AppBar>
