@@ -27,7 +27,7 @@ export default function AccountMenu() {
           <AccountCircleIcon
             onClick={handleClick}
             size="small"
-            sx={{padding: 0}}
+            sx={{padding: 0, ml: -1, mt: 0.5}}
             aria-controls={open ? 'account-menu' : undefined}
             aria-haspopup="true"
             aria-expanded={open ? 'true' : undefined}
@@ -58,7 +58,7 @@ export default function AccountMenu() {
               display: 'block',
               position: 'absolute',
               top: 0,
-              right: 14,
+              right: 6,
               width: 10,
               height: 10,
               bgcolor: 'background.paper',
