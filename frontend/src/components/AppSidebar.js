@@ -71,7 +71,7 @@ export default function AppSidebar(props) {
     {
       id: 0,
       label: "To Do List",
-      icon: (<PlaylistAddCheckIcon/>),
+      icon: (<PlaylistAddCheckIcon sx={{color: '#000'}}/>),
       link: "/",
     },
     {
@@ -101,7 +101,7 @@ export default function AppSidebar(props) {
     {
       id: 5,
       label: "Course Transfer",
-      icon: (<SwapHorizIcon/>),
+      icon: (<SwapHorizIcon sx={{color: '#000'}}/>),
       link: "/courseTransfer",
 
     }
@@ -119,7 +119,7 @@ export default function AppSidebar(props) {
       </DrawerHeader>
       <List>
         {sideBarItems.map((item) => (
-          <Link key={item.id} to={item.link}>
+          <Link style={{color: '#000', textDecoration: 'none'}} key={item.id} to={item.link}>
             <ListItem key={item.id} disablePadding sx={{ display: 'block' }}>
               <ListItemButton
               sx={{

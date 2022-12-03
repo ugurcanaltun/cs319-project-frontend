@@ -8,11 +8,11 @@ import List from '@mui/material/List';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import ListItem from '@mui/material/ListItem';
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import ForumIcon from '@mui/icons-material/Forum';
 import MessageIcon from '@mui/icons-material/Message';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import {Link} from 'react-router-dom';
+import AccountMenu from './AccountMenu';
 
 const drawerWidth = 240;
 
@@ -43,7 +43,7 @@ export default function AppNavbar(props) {
         },
         {
           id: 1,
-          button: (<Button size="large" color="inherit" sx={{textTransform: 'none'}}> Contacts </Button>),
+          button: (<Button size="large" color="inherit" sx={{textTransform: 'none', textDecoration: 'none'}}> Contacts </Button>),
           link: "/contacts",
         },
         {
@@ -81,7 +81,7 @@ export default function AppNavbar(props) {
                 <Box>
                     <List sx={{display: 'flex', flexDirection: 'row'}}>
                         {navBarItems.map((item) => (
-                            <Link key={item.id} to={item.link}>
+                            <Link style={{color: '#fff', textDecoration: 'none'}} key={item.id} to={item.link}>
                                 <ListItem key={item.id} disablePadding sx={{display: 'block' }}>
                                     {item.button}
                                 </ListItem>                            
@@ -91,7 +91,7 @@ export default function AppNavbar(props) {
                 </Box>
                 <Box sx={{flexGrow: 1}} />
                 <Box>
-                    <Link to="/forum">
+                    <Link style={{color: '#fff'}} to="/forum">
                         <IconButton
                         size="large"
                         color="inherit"
@@ -99,7 +99,7 @@ export default function AppNavbar(props) {
                             <ForumIcon/>
                         </IconButton>
                     </Link>
-                    <Link to="/message">
+                    <Link style={{color: '#fff'}} to="/message">
                         <IconButton
                         size="large"
                         color="inherit"
@@ -117,7 +117,7 @@ export default function AppNavbar(props) {
                     size="large"
                     color="inherit"
                     >
-                        <AccountCircleIcon/>
+                        <AccountMenu/>
                     </IconButton>                    
                 </Box>
             </Toolbar>

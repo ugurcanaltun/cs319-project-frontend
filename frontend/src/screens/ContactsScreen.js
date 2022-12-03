@@ -15,7 +15,7 @@ export default function ContactsScreen() {
             <IconButton>
                 <MessageIcon sx={{color: 'black'}}/>
             </IconButton>
-            <IconButton>
+            <IconButton sx={{padding: 0}}>
                 <EmailIcon sx={{color: 'black'}}/>
             </IconButton>
         </div>
@@ -25,7 +25,7 @@ export default function ContactsScreen() {
             <IconButton>
                 <MessageIcon sx={{color: 'black'}}/>
             </IconButton>
-            <IconButton>
+            <IconButton sx={{padding: 0}}>
                 <EmailIcon sx={{color: 'black'}}/>
             </IconButton>
         </div>
@@ -38,7 +38,7 @@ export default function ContactsScreen() {
             <IconButton>
                 <MessageIcon sx={{color: 'black'}}/>
             </IconButton>
-            <IconButton>
+            <IconButton sx={{padding: 0}}>
                 <EmailIcon sx={{color: 'black'}}/>
             </IconButton>
         </div>
@@ -49,7 +49,7 @@ export default function ContactsScreen() {
             <IconButton>
                 <MessageIcon sx={{color: 'black'}}/>
             </IconButton>
-            <IconButton>
+            <IconButton sx={{padding: 0}}>
                 <EmailIcon sx={{color: 'black'}}/>
             </IconButton>
         </div>
@@ -60,7 +60,7 @@ export default function ContactsScreen() {
             <IconButton>
                 <MessageIcon sx={{color: 'black'}}/>
             </IconButton>
-            <IconButton>
+            <IconButton sx={{padding: 0}}>
                 <EmailIcon sx={{color: 'black'}}/>
             </IconButton>
         </div>
