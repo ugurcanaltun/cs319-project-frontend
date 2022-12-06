@@ -72,6 +72,7 @@ export default function AppNavbar(props) {
                     edge="start"
                     color="inherit"
                     sx={{
+                    color: "#646C9A",
                     marginRight: 5,
                     ...(props.open && { display: 'none' }),
                     }}
@@ -81,7 +82,7 @@ export default function AppNavbar(props) {
                 <Box>
                     <List sx={{display: 'flex', flexDirection: 'row'}}>
                         {navBarItems.map((item) => (
-                            <Link style={{color: '#fff', textDecoration: 'none'}} key={item.id} to={item.link}>
+                            <Link style={{color: '#C7C5D8', textDecoration: 'none'}} key={item.id} to={item.link}>
                                 <ListItem key={item.id} disablePadding sx={{display: 'block' }}>
                                     {item.button}
                                 </ListItem>                            
@@ -91,7 +92,7 @@ export default function AppNavbar(props) {
                 </Box>
                 <Box sx={{flexGrow: 1}} />
                 <Box>
-                    <Link style={{color: '#fff'}} to="/forum">
+                    <Link style={{color: '#646C9A'}} to="/forum">
                         <IconButton
                         size="large"
                         color="inherit"
@@ -99,7 +100,7 @@ export default function AppNavbar(props) {
                             <ForumIcon/>
                         </IconButton>
                     </Link>
-                    <Link style={{color: '#fff'}} to="/message">
+                    <Link style={{color: '#646C9A'}} to="/message">
                         <IconButton
                         size="large"
                         color="inherit"
@@ -110,12 +111,14 @@ export default function AppNavbar(props) {
                     <IconButton
                     size="large"
                     color="inherit"
+                    sx={{color: '#646C9A'}}
                     >
                         <NotificationsIcon/>
                     </IconButton>
                     <IconButton
                     size="large"
                     color="inherit"
+                    sx={{color: '#646C9A'}}
                     >
                         <AccountMenu/>
                     </IconButton>                    

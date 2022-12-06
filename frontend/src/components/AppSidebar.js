@@ -21,6 +21,7 @@ const drawerWidth = 240;
 
 const openedMixin = (theme) => ({
   width: drawerWidth,
+  backgroundColor: '#282733',
   transition: theme.transitions.create('width', {
     easing: theme.transitions.easing.sharp,
     duration: theme.transitions.duration.enteringScreen,
@@ -34,6 +35,7 @@ const closedMixin = (theme) => ({
     duration: theme.transitions.duration.leavingScreen,
   }),
   overflowX: 'hidden',
+  backgroundColor: '#282733',
   width: `calc(${theme.spacing(7)} + 1px)`,
   [theme.breakpoints.up('sm')]: {
     width: `calc(${theme.spacing(8)} + 1px)`,
@@ -71,7 +73,7 @@ export default function AppSidebar(props) {
     {
       id: 0,
       label: "To Do List",
-      icon: (<PlaylistAddCheckIcon sx={{color: '#000'}}/>),
+      icon: (<PlaylistAddCheckIcon sx={{color: '#646C9A'}}/>),
       link: "/",
     },
     {
@@ -101,7 +103,7 @@ export default function AppSidebar(props) {
     {
       id: 5,
       label: "Course Transfer",
-      icon: (<SwapHorizIcon sx={{color: '#000'}}/>),
+      icon: (<SwapHorizIcon sx={{color: '#646C9A'}}/>),
       link: "/courseTransfer",
 
     }
@@ -113,13 +115,13 @@ export default function AppSidebar(props) {
   return (
     <Drawer variant="permanent" open={props.open}>
       <DrawerHeader>
-        <IconButton onClick={handleDrawerClose}>
+        <IconButton style={{color: '#C7C5D8'}} onClick={handleDrawerClose}>
           {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
         </IconButton>
       </DrawerHeader>
-      <List>
+      <List sx={{height: 700, backgroundColor: "#282733"}}>
         {sideBarItems.map((item) => (
-          <Link style={{color: '#000', textDecoration: 'none'}} key={item.id} to={item.link}>
+          <Link style={{color: '#C7C5D8', textDecoration: 'none'}} key={item.id} to={item.link}>
             <ListItem key={item.id} disablePadding sx={{ display: 'block' }}>
               <ListItemButton
               sx={{

@@ -10,7 +10,7 @@ export default function PreapprovalIcon(props) {
         preserveAspectRatio="xMidYMid meet"
     >
         <g transform="translate(0.000000,24.000000) scale(0.100000,-0.100000)"
-        fill="#000000" stroke="none">
+        fill="#646C9A" stroke="none">
         <path d="M44 207 c-3 -8 -4 -52 -2 -98 l3 -84 38 -3 c35 -3 37 -2 37 26 0 31
         36 72 63 72 27 0 20 43 -11 73 -22 22 -38 27 -75 27 -31 0 -49 -5 -53 -13z
         m116 -32 l23 -25 -26 0 c-22 0 -27 5 -27 25 0 14 1 25 3 25 2 0 14 -11 27 -25z"/>
