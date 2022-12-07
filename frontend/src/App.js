@@ -16,12 +16,14 @@ import ChecklistScreen from './screens/ChecklistScreen'
 import ContactsScreen from './screens/ContactsScreen'
 import CourseTransferScreen from './screens/CourseTransferScreen'
 import EvaluationsScreen from './screens/EvaluationsScreen'
-import ForumScreen from './screens/ForumScreen'
+// import ForumScreen from './screens/ForumScreen'
 import LearningAgreementScreen from './screens/LearningAgreementScreen'
 import MessageScreen from './screens/MessageScreen'
 import PreApprovalScreen from './screens/PreApprovalScreen'
 import ToDoListScreen from './screens/ToDoListScreen'
 import WishListScreen from './screens/WishListScreen'
+// import UploadTranscript from './screens/ISO/UploadTranscript';
+import UploadScoreTable from './screens/ISO/UploadScoreTable';
 
 function SidebarAndNavbar () {
   const [open, setOpen] = React.useState(false);
@@ -58,7 +60,7 @@ function App() {
             <Route path="/contacts" element={<ContactsScreen/>}/>
             <Route path="/courseTransfer" element={<CourseTransferScreen/>}/>
             <Route path="/evaluations" element={<EvaluationsScreen/>}/>
-            <Route path="/forum" element={<ForumScreen/>}/>
+            <Route path="/forum" element={<UploadScoreTable/>}/>
             <Route path="/learningAgreement" element={<LearningAgreementScreen/>}/>
             <Route path="/message" element={<MessageScreen/>}/>
             <Route path="/preapproval" element={<PreApprovalScreen/>}/>

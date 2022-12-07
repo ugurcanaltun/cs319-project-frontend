@@ -17,6 +17,7 @@ import PreapprovalIcon from '../assets/PreapprovalIcon';
 import LearningAgreementIcon from '../assets/LearningAgreementIcon';
 import {Link} from 'react-router-dom';
 
+
 const drawerWidth = 240;
 
 const openedMixin = (theme) => ({
