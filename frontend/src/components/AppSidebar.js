@@ -74,37 +74,37 @@ export default function AppSidebar(props) {
       id: 0,
       label: "To Do List",
       icon: (<PlaylistAddCheckIcon sx={{color: '#646C9A'}}/>),
-      link: "/home",
+      link: "todo",
     },
     {
       id: 1,
       label: "Checklist",
       icon: (<ChecklistIcon/>),
-      link: "/checklist",
+      link: "checklist",
     },
     {
       id: 2,
       label: "Wish List",
       icon: (<WishListIcon/>),
-      link: "/wishlist",
+      link: "wishlist",
     },
     {
       id: 3,
       label: "Preapproval",
       icon: (<PreapprovalIcon/>),
-      link: "/preapproval",
+      link: "preapproval",
     },
     {
       id: 4,
       label: "Learning Agreement",
       icon: (<LearningAgreementIcon/>),
-      link: "/learningAgreement",
+      link: "learningAgreement",
     },
     {
       id: 5,
       label: "Course Transfer",
       icon: (<SwapHorizIcon sx={{color: '#646C9A'}}/>),
-      link: "/courseTransfer",
+      link: "courseTransfer",
 
     }
   ]

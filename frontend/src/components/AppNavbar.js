@@ -39,22 +39,22 @@ export default function AppNavbar(props) {
         {
           id: 0,
           button: (<Button size="large" color="inherit" sx={{textTransform: 'none'}}> Application </Button>),
-          link: "/application",
+          link: "application",
         },
         {
           id: 1,
           button: (<Button size="large" color="inherit" sx={{textTransform: 'none', textDecoration: 'none'}}> Contacts </Button>),
-          link: "/contacts",
+          link: "contacts",
         },
         {
           id: 2,
           button: (<Button size="large" color="inherit" sx={{textTransform: 'none'}}> Announcements </Button>),
-          link: "/announcements",
+          link: "announcements",
         },
         {
           id: 3,
           button: (<Button size="large" color="inherit" sx={{textTransform: 'none'}}> Evaluations </Button>),
-          link: "/evaluations", 
+          link: "evaluations", 
         }
     ]
 
@@ -92,7 +92,7 @@ export default function AppNavbar(props) {
                 </Box>
                 <Box sx={{flexGrow: 1}} />
                 <Box>
-                    <Link style={{color: '#646C9A'}} to="/forum">
+                    <Link style={{color: '#646C9A'}} to="forum">
                         <IconButton
                         size="large"
                         color="inherit"
@@ -100,7 +100,7 @@ export default function AppNavbar(props) {
                             <ForumIcon/>
                         </IconButton>
                     </Link>
-                    <Link style={{color: '#646C9A'}} to="/message">
+                    <Link style={{color: '#646C9A'}} to="message">
                         <IconButton
                         size="large"
                         color="inherit"

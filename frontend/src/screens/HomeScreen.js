@@ -4,22 +4,7 @@ import { styled } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import AppNavbar from '../components/AppNavbar';
 import AppSidebar from '../components/AppSidebar';
-import {
-  Routes,
-  Route,
-} from "react-router-dom";
-import AnnouncementsScreen from '../screens/AnnouncementsScreen'
-import ApplicationScreen from '../screens/ApplicationScreen'
-import ChecklistScreen from '../screens/ChecklistScreen'
-import ContactsScreen from '../screens/ContactsScreen'
-import CourseTransferScreen from '../screens/CourseTransferScreen'
-import EvaluationsScreen from '../screens/EvaluationsScreen'
-import ForumScreen from '../screens/ForumScreen'
-import LearningAgreementScreen from '../screens/LearningAgreementScreen'
-import MessageScreen from '../screens/MessageScreen'
-import PreApprovalScreen from '../screens/PreApprovalScreen'
-import ToDoListScreen from '../screens/ToDoListScreen'
-import WishListScreen from '../screens/WishListScreen'
+import { Outlet } from "react-router-dom";
 
 function SidebarAndNavbar () {
     const [open, setOpen] = React.useState(false);
@@ -46,21 +31,8 @@ export default function HomeScreen() {
             <CssBaseline />
             <SidebarAndNavbar/>
             <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
-            <DrawerHeader />
-            <Routes>
-                <Route path="/home" element={<ToDoListScreen/>}/>
-                <Route path="/announcements" element={<AnnouncementsScreen/>}/>
-                <Route path="/application" element={<ApplicationScreen/>}/>
-                <Route path="/checklist" element={<ChecklistScreen/>}/>
-                <Route path="/contacts" element={<ContactsScreen/>}/>
-                <Route path="/courseTransfer" element={<CourseTransferScreen/>}/>
-                <Route path="/evaluations" element={<EvaluationsScreen/>}/>
-                <Route path="/forum" element={<ForumScreen/>}/>
-                <Route path="/learningAgreement" element={<LearningAgreementScreen/>}/>
-                <Route path="/message" element={<MessageScreen/>}/>
-                <Route path="/preapproval" element={<PreApprovalScreen/>}/>
-                <Route path="/wishlist" element={<WishListScreen/>}/>
-            </Routes>
+                <DrawerHeader />
+                <Outlet />
             </Box>
         </Box>
     )
