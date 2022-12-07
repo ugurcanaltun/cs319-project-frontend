@@ -74,7 +74,7 @@ export default function AppSidebar(props) {
       id: 0,
       label: "To Do List",
       icon: (<PlaylistAddCheckIcon sx={{color: '#646C9A'}}/>),
-      link: "/",
+      link: "/home",
     },
     {
       id: 1,
