@@ -10,7 +10,7 @@ export default function ChecklistIcon(props) {
         preserveAspectRatio="xMidYMid meet"
     >
         <g transform="translate(0.000000,30.000000) scale(0.100000,-0.100000)"
-        fill="#000000" stroke="none">
+        fill="#646C9A" stroke="none">
         <path d="M40 150 l0 -110 40 0 40 0 0 110 0 110 -40 0 -40 0 0 -110z m58 73
         c-10 -2 -26 -2 -35 0 -10 3 -2 5 17 5 19 0 27 -2 18 -5z m0 -130 c-10 -2 -26
         -2 -35 0 -10 3 -2 5 17 5 19 0 27 -2 18 -5z m0 -20 c-10 -2 -26 -2 -35 0 -10
