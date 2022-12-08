@@ -13,6 +13,7 @@ import MessageIcon from '@mui/icons-material/Message';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import {Link} from 'react-router-dom';
 import AccountMenu from './AccountMenu';
+import { useSelector } from 'react-redux'
 
 const drawerWidth = 240;
 
@@ -35,28 +36,81 @@ const AppBar = styled(MuiAppBar, {
 }));
 
 export default function AppNavbar(props) {
-    const navBarItems = [
-        {
-          id: 0,
-          button: (<Button size="large" color="inherit" sx={{textTransform: 'none'}}> Application </Button>),
-          link: "/application",
-        },
-        {
-          id: 1,
-          button: (<Button size="large" color="inherit" sx={{textTransform: 'none', textDecoration: 'none'}}> Contacts </Button>),
-          link: "/contacts",
-        },
-        {
-          id: 2,
-          button: (<Button size="large" color="inherit" sx={{textTransform: 'none'}}> Announcements </Button>),
-          link: "/announcements",
-        },
-        {
-          id: 3,
-          button: (<Button size="large" color="inherit" sx={{textTransform: 'none'}}> Evaluations </Button>),
-          link: "/evaluations", 
-        }
-    ]
+
+    const username = useSelector(state => state.userType.username)
+    const userType = useSelector(state => state.userType.userType)
+
+    let navBarItems;
+
+    if(userType === "student"){
+        navBarItems = [
+            {
+              id: 0,
+              button: (<Button size="large" color="inherit" sx={{textTransform: 'none'}}> Application </Button>),
+              link: "application",
+            },
+            {
+              id: 1,
+              button: (<Button size="large" color="inherit" sx={{textTransform: 'none', textDecoration: 'none'}}> Contacts </Button>),
+              link: "contacts",
+            },
+            {
+              id: 2,
+              button: (<Button size="large" color="inherit" sx={{textTransform: 'none'}}> Announcements </Button>),
+              link: "announcements",
+            },
+            {
+              id: 3,
+              button: (<Button size="large" color="inherit" sx={{textTransform: 'none'}}> Evaluations </Button>),
+              link: "evaluations", 
+            }
+        ]
+    }
+    else if(userType === "courseCoordinator" || userType === "iso" || 
+            userType === "admCoordinator" || userType === "dChair" || 
+            userType === "faCommittee" ||userType === "dean"){
+        navBarItems = [
+            {
+                id: 1,
+                button: (<Button size="large" color="inherit" sx={{textTransform: 'none', textDecoration: 'none'}}> Contacts </Button>),
+                link: "contacts",
+              },
+              {
+                id: 2,
+                button: (<Button size="large" color="inherit" sx={{textTransform: 'none'}}> Announcements </Button>),
+                link: "announcements",
+              },
+              {
+                id: 3,
+                button: (<Button size="large" color="inherit" sx={{textTransform: 'none'}}> Evaluations </Button>),
+                link: "evaluations", 
+              }
+        ]
+    }
+    else if(userType === "depCoordinator"){
+        navBarItems = [
+            {
+                id: 1,
+                button: (<Button size="large" color="inherit" sx={{textTransform: 'none', textDecoration: 'none'}}> Contacts </Button>),
+                link: "contacts",
+            },
+            {
+                id: 1,
+                button: (<Button size="large" color="inherit" sx={{textTransform: 'none', textDecoration: 'none'}}> Coordinators </Button>),
+                link: "coordinators",
+            },
+            {
+            id: 2,
+            button: (<Button size="large" color="inherit" sx={{textTransform: 'none'}}> Announcements </Button>),
+            link: "announcements",
+            },
+            {
+            id: 3,
+            button: (<Button size="large" color="inherit" sx={{textTransform: 'none'}}> Evaluations </Button>),
+            link: "evaluations", 
+            }
+        ]
+    }
 
     const handleDrawerOpen = () => {
         props.setOpen(true);
@@ -92,7 +146,7 @@ export default function AppNavbar(props) {
                 </Box>
                 <Box sx={{flexGrow: 1}} />
                 <Box>
-                    <Link style={{color: '#646C9A'}} to="/forum">
+                    <Link style={{color: '#646C9A'}} to="forum">
                         <IconButton
                         size="large"
                         color="inherit"
@@ -100,7 +154,7 @@ export default function AppNavbar(props) {
                             <ForumIcon/>
                         </IconButton>
                     </Link>
-                    <Link style={{color: '#646C9A'}} to="/message">
+                    <Link style={{color: '#646C9A'}} to="message">
                         <IconButton
                         size="large"
                         color="inherit"

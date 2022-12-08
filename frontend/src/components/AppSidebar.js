@@ -15,7 +15,14 @@ import ChecklistIcon from '../assets/ChecklistIcon';
 import WishListIcon from '../assets/WishlistIcon';
 import PreapprovalIcon from '../assets/PreapprovalIcon';
 import LearningAgreementIcon from '../assets/LearningAgreementIcon';
+import CourseProposalsIcon from '../assets/CourseProposalsIcon';
+import DeadlinesIcon from '../assets/DeadlinesIcon';
+import PlacementsIcon from '../assets/PlacementsIcon';
+import ScoreTableIcon from '../assets/ScoreTableIcon';
+import TranscriptsIcon from '../assets/TranscriptsIcon';
+import TransferrableCoursesIcon from '../assets/TransferrableCoursesIcon';
 import {Link} from 'react-router-dom';
+import { useSelector } from 'react-redux'
 
 
 const drawerWidth = 240;
@@ -70,45 +77,204 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 );
 
 export default function AppSidebar(props) {
-  const sideBarItems = [
-    {
-      id: 0,
-      label: "To Do List",
-      icon: (<PlaylistAddCheckIcon sx={{color: '#646C9A'}}/>),
-      link: "/",
-    },
-    {
-      id: 1,
-      label: "Checklist",
-      icon: (<ChecklistIcon/>),
-      link: "/checklist",
-    },
-    {
-      id: 2,
-      label: "Wish List",
-      icon: (<WishListIcon/>),
-      link: "/wishlist",
-    },
-    {
-      id: 3,
-      label: "Preapproval",
-      icon: (<PreapprovalIcon/>),
-      link: "/preapproval",
-    },
-    {
-      id: 4,
-      label: "Learning Agreement",
-      icon: (<LearningAgreementIcon/>),
-      link: "/learningAgreement",
-    },
-    {
-      id: 5,
-      label: "Course Transfer",
-      icon: (<SwapHorizIcon sx={{color: '#646C9A'}}/>),
-      link: "/courseTransfer",
 
-    }
-  ]
+  const username = useSelector(state => state.userType.username)
+  const userType = useSelector(state => state.userType.userType)
+
+  let sideBarItems;
+
+  if(userType === "student"){
+    sideBarItems = [
+      {
+        id: 0,
+        label: "To Do List",
+        icon: (<PlaylistAddCheckIcon sx={{color: '#646C9A'}}/>),
+        link: "todo",
+      },
+      {
+        id: 1,
+        label: "Checklist",
+        icon: (<ChecklistIcon/>),
+        link: "checklist",
+      },
+      {
+        id: 2,
+        label: "Wish List",
+        icon: (<WishListIcon/>),
+        link: "wishlist",
+      },
+      {
+        id: 3,
+        label: "Preapproval",
+        icon: (<PreapprovalIcon/>),
+        link: "preapproval",
+      },
+      {
+        id: 4,
+        label: "Learning Agreement",
+        icon: (<LearningAgreementIcon/>),
+        link: "learningAgreement",
+      },
+      {
+        id: 5,
+        label: "Course Transfer",
+        icon: (<SwapHorizIcon sx={{color: '#646C9A'}}/>),
+        link: "courseTransfer",
+  
+      }
+    ]
+  }
+  else if(userType === "depCoordinator"){
+    sideBarItems = [
+      {
+        id: 0,
+        label: "To Do List",
+        icon: (<PlaylistAddCheckIcon sx={{color: '#646C9A'}}/>),
+        link: "todo",
+      },
+      {
+        id: 1,
+        label: "Placements",
+        icon: (<PlacementsIcon/>),
+        link: "placements",
+      },
+      {
+        id: 2,
+        label: "Preapproval",
+        icon: (<PreapprovalIcon/>),
+        link: "preapproval",
+      },
+      {
+        id: 3,
+        label: "Course Proposals",
+        icon: (<CourseProposalsIcon/>),
+        link: "courseProposals",
+      },
+      {
+        id: 4,
+        label: "Course Transfer",
+        icon: (<SwapHorizIcon sx={{color: '#646C9A'}}/>),
+        link: "courseTransfer",
+      }
+    ]
+  }
+  else if(userType === "courseCoordinator"){
+    sideBarItems = [
+      {
+        id: 0,
+        label: "To Do List",
+        icon: (<PlaylistAddCheckIcon sx={{color: '#646C9A'}}/>),
+        link: "todo",
+      },
+      {
+        id: 1,
+        label: "Course Proposals",
+        icon: (<CourseProposalsIcon/>),
+        link: "courseProposals",
+      }
+    ]   
+  }
+  else if(userType === "iso"){
+    sideBarItems = [
+      {
+        id: 0,
+        label: "To Do List",
+        icon: (<PlaylistAddCheckIcon sx={{color: '#646C9A'}}/>),
+        link: "todo",
+      },
+      {
+        id: 1,
+        label: "Placements",
+        icon: (<PlacementsIcon/>),
+        link: "placements",
+      },
+      {
+        id: 2,
+        label: "Score Table",
+        icon: (<ScoreTableIcon/>),
+        link: "scoreTable",
+      },
+      {
+        id: 3,
+        label: "Transcripts",
+        icon: (<TranscriptsIcon/>),
+        link: "transcripts",
+      }
+    ]  
+  }
+  else if(userType === "admCoordinator") {
+    sideBarItems = [
+      {
+        id: 0,
+        label: "To Do List",
+        icon: (<PlaylistAddCheckIcon sx={{color: '#646C9A'}}/>),
+        link: "todo",
+      },
+      {
+        id: 1,
+        label: "Placements",
+        icon: (<PlacementsIcon/>),
+        link: "placements",
+      },
+      {
+        id: 2,
+        label: "Transcripts",
+        icon: (<TranscriptsIcon/>),
+        link: "transcripts",
+      },
+      {
+        id: 3,
+        label: "Deadlines",
+        icon: (<DeadlinesIcon/>),
+        link: "deadlines",
+      }
+    ]      
+  }
+  else if(userType === "dChair" || userType === "dean"){
+    sideBarItems = [
+      {
+        id: 0,
+        label: "To Do List",
+        icon: (<PlaylistAddCheckIcon sx={{color: '#646C9A'}}/>),
+        link: "todo",
+      },
+      {
+        id: 1,
+        label: "Course Transfer",
+        icon: (<SwapHorizIcon sx={{color: '#646C9A'}}/>),
+        link: "courseTransfer",
+      }
+    ] 
+  }
+  else if(userType === "faCommittee"){
+    sideBarItems = [
+      {
+        id: 0,
+        label: "To Do List",
+        icon: (<PlaylistAddCheckIcon sx={{color: '#646C9A'}}/>),
+        link: "todo",
+      },
+      {
+        id: 1,
+        label: "Preapproval",
+        icon: (<PreapprovalIcon/>),
+        link: "preapproval",
+      },
+      {
+        id: 2,
+        label: "Transferrable Courses",
+        icon: (<TransferrableCoursesIcon/>),
+        link: "transferrableCourses",
+      },
+      {
+        id: 3,
+        label: "Course Transfer",
+        icon: (<SwapHorizIcon sx={{color: '#646C9A'}}/>),
+        link: "courseTransfer",
+      }
+    ]
+  }
+
   const theme = useTheme();
   const handleDrawerClose = () => {
     props.setOpen(false);
