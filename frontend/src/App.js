@@ -9,7 +9,7 @@ import ChecklistScreen from './screens/ChecklistScreen'
 import ContactsScreen from './screens/ContactsScreen'
 import CourseTransferScreen from './screens/CourseTransferScreen'
 import EvaluationsScreen from './screens/EvaluationsScreen'
-// import ForumScreen from './screens/ForumScreen'
+import ForumScreen from './screens/ForumScreen'
 import LearningAgreementScreen from './screens/LearningAgreementScreen'
 import MessageScreen from './screens/MessageScreen'
 import PreApprovalScreen from './screens/PreApprovalScreen'
@@ -42,7 +42,7 @@ function App() {
             <Route path="preapproval" element={<PreApprovalScreen/>}/>
             <Route path="wishlist" element={<WishListScreen/>}/>
             <Route path="scoreTable" element={<UploadScoreTable/>}/>
-            <Route path="transcripts" element={<UploadScoreTable/>}/>
+            <Route path="transcripts" element={<UploadTranscript/>}/>
           </Route>
         </Routes>
       </Router>

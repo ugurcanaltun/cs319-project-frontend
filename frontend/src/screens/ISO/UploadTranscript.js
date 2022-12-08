@@ -2,8 +2,20 @@ import React from 'react'
 import SelectLabels from '../../components/SelectLabels'
 import StyledTable from '../../components/StyledTable'
 import Button from '@mui/material/Button';
+import DownloadIcon from '@mui/icons-material/Download';
+import DoneIcon from '@mui/icons-material/Done';
+
 
 export default function UploadTranscript() {
+
+  const headers = [
+    ["File", "File Format", "Status", "Download"]
+  ];
+  
+  const rows = [
+    ["Score Table", ".xls", <DoneIcon/>, <DownloadIcon/>],
+  ]
+
   return (
     <div>
         <h1>Transcripts</h1>
