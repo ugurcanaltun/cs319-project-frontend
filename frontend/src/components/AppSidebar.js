@@ -24,6 +24,7 @@ import TransferrableCoursesIcon from '../assets/TransferrableCoursesIcon';
 import {Link} from 'react-router-dom';
 import { useSelector } from 'react-redux'
 
+
 const drawerWidth = 240;
 
 const openedMixin = (theme) => ({
