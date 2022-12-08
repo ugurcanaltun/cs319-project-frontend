@@ -3,8 +3,6 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
     userType: "",
     username: "",
-    navbarItems: [],
-    sideBarItems: []
 }
 
 export const userTypeSlice = createSlice({
@@ -12,7 +10,8 @@ export const userTypeSlice = createSlice({
     initialState,
     reducers: {
         setUserTypeReducer: (state, action) => {
-            state.userType = action.payload;
+            state = action.payload;
+            return state
         },
     },
 });
