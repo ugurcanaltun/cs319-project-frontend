@@ -21,6 +21,8 @@ const selector = [
   "Industrial Engineering",
 ]
 
+const width = 800;
+
 export default function UploadScoreTable() {
   return (
     <div>
@@ -31,7 +33,7 @@ export default function UploadScoreTable() {
             Upload
             <input hidden accept="image/*" multiple type="file" />
         </Button>
-        <StyledTable headers={headers} rows={rows}/>
+        <StyledTable width={width} headers={headers} rows={rows}/>
     </div>
   )
 }

@@ -15,6 +15,7 @@ import MessageScreen from './screens/MessageScreen'
 import PreApprovalScreen from './screens/PreApprovalScreen'
 import ToDoListScreen from './screens/ToDoListScreen'
 import WishListScreen from './screens/WishListScreen'
+import PlacementScreen from './screens/Placements'
 import { store } from './redux/store';
 import { Provider } from 'react-redux';
 import UploadTranscript from './screens/ISO/UploadTranscript';
@@ -35,6 +36,7 @@ function App() {
             <Route path="checklist" element={<ChecklistScreen/>}/>
             <Route path="contacts" element={<ContactsScreen/>}/>
             <Route path="courseTransfer" element={<CourseTransferScreen/>}/>
+            <Route path="placements" element={<PlacementScreen/>}/>
             <Route path="evaluations" element={<EvaluationsScreen/>}/>
             <Route path="forum" element={<ForumScreen/>}/>
             <Route path="learningAgreement" element={<LearningAgreementScreen/>}/>

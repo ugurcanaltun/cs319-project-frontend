@@ -9,11 +9,14 @@ export default function ApplicationsScreen() {
     const rows = [
         ["1"]
     ];
+
+    const width = 800;
+
     return (
         <>
         <h1>Applications</h1>
         <h2>Erasmus Program (KA103)</h2>
-        <StyledTable headers={headers} rows={rows}/>
+        <StyledTable width={width} headers={headers} rows={rows}/>
         </>
     )
 }

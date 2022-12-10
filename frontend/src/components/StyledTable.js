@@ -21,7 +21,7 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
 
 export default function CustomizedTables(props) {
   return (
-    <TableContainer sx={{ width: 800, marginTop: 5, marginLeft: 1, }} component={Paper}>
+    <TableContainer sx={{ width: props.width, marginTop: 5, marginLeft: 1, }} component={Paper}>
       <Table aria-label="customized table">
         <TableHead>
           <TableRow>
