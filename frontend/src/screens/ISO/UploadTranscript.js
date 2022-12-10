@@ -1,20 +1,18 @@
-import React from 'react'
+import React, { useState } from 'react'
 import SelectLabels from '../../components/SelectLabels'
-import StyledTable from '../../components/StyledTable'
+import StyledFormTable from '../../components/StyledFormTable'
 import Button from '@mui/material/Button';
-import DownloadIcon from '@mui/icons-material/Download';
-import DoneIcon from '@mui/icons-material/Done';
-
 
 export default function UploadTranscript() {
+  const [rows, setRows] = useState([[0, 0, 0, 0]]);
+
+  const selectors = [
+    "A",
+  ]
 
   const headers = [
-    ["File", "File Format", "Status", "Download"]
+    ["Course Code", "Course Name", "Grade", "Credits"]
   ];
-  
-  const rows = [
-    ["Score Table", ".xls", <DoneIcon/>, <DownloadIcon/>],
-  ]
 
   return (
     <div>
@@ -22,23 +20,25 @@ export default function UploadTranscript() {
         <div style={{display: "flex", justifyContent: "space-between",}}>
           <div>
             <h2>Select University</h2>
-            <SelectLabels label="Select"/>
+            <SelectLabels selector={selectors} label="Select"/>
           </div>
           <div>
             <h2>Select Semester</h2>
-            <SelectLabels label="Select"/>
+            <SelectLabels selector={selectors} label="Select"/>
           </div>
           <div style={{marginRight: 30}}>
             <h2>Select Student</h2>
-            <SelectLabels label="Select"/>
+            <SelectLabels selector={selectors} label="Select"/>
           </div>
         </div>
         <div style={{display: "flex", justifyContent: "center"}}>
-          <StyledTable headers={headers} rows={rows}/>
+          <StyledFormTable headers={headers} rows={rows}/>
         </div>
         <div style={{display: "block"}}>
           <div style={{marginTop: 30, display: "flex", justifyContent: "right"}}>
-              <Button variant="contained">Add New Course</Button>
+              <Button onClick={() => setRows([
+                ...rows, [0, 0, 0, 0]
+              ])} variant="contained">Add New Course</Button>
           </div>
           <div style={{marginTop: 10, display: "flex", justifyContent: "right"}}>
             <Button variant="contained">Submit</Button>
