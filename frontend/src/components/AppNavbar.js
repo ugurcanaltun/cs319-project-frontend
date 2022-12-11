@@ -13,7 +13,7 @@ import MessageIcon from '@mui/icons-material/Message';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import {Link} from 'react-router-dom';
 import AccountMenu from './AccountMenu';
-import { useSelector } from 'react-redux'
+import { useSelector } from 'react-redux';
 
 const drawerWidth = 240;
 

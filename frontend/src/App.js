@@ -5,16 +5,16 @@ import LoginScreen from './screens/LoginScreen';
 import HomeScreen from './screens/HomeScreen';
 import AnnouncementsScreen from './screens/AnnouncementsScreen'
 import ApplicationScreen from './screens/ApplicationScreen'
-import ChecklistScreen from './screens/ChecklistScreen'
+import ChecklistScreen from './screens/Student/ChecklistScreen'
 import ContactsScreen from './screens/ContactsScreen'
 import CourseTransferScreen from './screens/CourseTransferScreen'
 import EvaluationsScreen from './screens/EvaluationsScreen'
 import ForumScreen from './screens/ForumScreen'
-import LearningAgreementScreen from './screens/LearningAgreementScreen'
+import LearningAgreementScreen from './screens/Student/LearningAgreementScreen'
 import MessageScreen from './screens/MessageScreen'
 import PreApprovalScreen from './screens/PreApprovalScreen'
 import ToDoListScreen from './screens/ToDoListScreen'
-import WishListScreen from './screens/WishListScreen'
+import WishListScreen from './screens/Student/WishListScreen'
 import PlacementScreen from './screens/Placements'
 import { store } from './redux/store';
 import { Provider } from 'react-redux';
