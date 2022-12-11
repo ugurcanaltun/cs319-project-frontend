@@ -44,7 +44,7 @@ function OperationSection() {
 
 export default function ToDoListScreen() {
     const headers = [
-        ["Work", "Deadline", "Status", "Operations"]
+        ["Task", "Deadline", "Status", "Operations"]
     ];
 
     const rows = [

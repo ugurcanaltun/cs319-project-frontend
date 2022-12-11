@@ -36,18 +36,18 @@ export default function CourseTransferDean() {
                 <h1>Course Transfer</h1>
             </Box>
             <div style={{display: "flex", justifyContent: "space-between",}}>
-            <div>
-                <h2>Select University</h2>
-                <SelectLabels selector={selectors} label="Select"/>
-            </div>
-            <div>
-                <h2>Select Semester</h2>
-                <SelectLabels selector={selectors} label="Select"/>
-            </div>
-            <div style={{marginRight: 30}}>
-                <h2>Select Student</h2>
-                <SelectLabels selector={selectors} label="Select"/>
-            </div>
+                <div>
+                    <h2>Select University</h2>
+                    <SelectLabels selector={selectors} label="Select"/>
+                </div>
+                <div>
+                    <h2>Select Semester</h2>
+                    <SelectLabels selector={selectors} label="Select"/>
+                </div>
+                <div style={{marginRight: 30}}>
+                    <h2>Select Student</h2>
+                    <SelectLabels selector={selectors} label="Select"/>
+                </div>
             </div>
             <Grid container>
                 <Grid item xs={12}>

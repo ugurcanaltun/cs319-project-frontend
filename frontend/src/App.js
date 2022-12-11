@@ -20,6 +20,7 @@ import { store } from './redux/store';
 import { Provider } from 'react-redux';
 import UploadTranscript from './screens/ISO/UploadTranscript';
 import UploadScoreTable from './screens/ISO/UploadScoreTable';
+import CourseProposals from './screens/CourseCoord/CourseProposals';
 
 function App() {
   return (
@@ -45,6 +46,7 @@ function App() {
             <Route path="wishlist" element={<WishListScreen/>}/>
             <Route path="scoreTable" element={<UploadScoreTable/>}/>
             <Route path="transcripts" element={<UploadTranscript/>}/>
+            <Route path="courseProposals" element={<CourseProposals/>}/>
           </Route>
         </Routes>
       </Router>
