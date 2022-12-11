@@ -44,7 +44,7 @@ export default function CustomizedTables(props) {
               <TableRow>
                 {row.map((cell) => {
                   return (
-                    <StyledTableCell align="left">{cell}</StyledTableCell>
+                    <StyledTableCell align="center">{cell}</StyledTableCell>
                   )
                 })}
               </TableRow>

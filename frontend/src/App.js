@@ -21,6 +21,7 @@ import { Provider } from 'react-redux';
 import UploadTranscript from './screens/ISO/UploadTranscript';
 import UploadScoreTable from './screens/ISO/UploadScoreTable';
 import CourseProposals from './screens/CourseCoord/CourseProposals';
+import Deadlines from './screens/AdmCoordinator/Deadlines';
 
 function App() {
   return (
@@ -47,6 +48,7 @@ function App() {
             <Route path="scoreTable" element={<UploadScoreTable/>}/>
             <Route path="transcripts" element={<UploadTranscript/>}/>
             <Route path="courseProposals" element={<CourseProposals/>}/>
+            <Route path="deadlines" element={<Deadlines/>}/>
           </Route>
         </Routes>
       </Router>
