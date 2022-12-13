@@ -4,24 +4,23 @@ import Box from '@mui/material/Box';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
-import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import CircleIcon from '@mui/icons-material/Circle';
-import TextField from '@mui/material/TextField';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import Button from '@mui/material/Button';
+import TextField from '@mui/material/TextField';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import CircleIcon from '@mui/icons-material/Circle';
+import Divider from '@mui/material/Divider';
 
-export default function AnnouncementsScreen() {
-    const announcements = ["Announcement 1", "Announcement 2", "Announcement 3"]
-    const [openDialog, setOpenDialog] = useState(false)
-    const [dialogTitle, setDialogTitle] = useState("")
+export default function CoordinatorsScreen() {
+    const [openDialog, setOpenDialog] = useState(false)    
+    const coordinators =["Can Alkan", "Aysegul Dundar"]
 
-    const handleClickDialog = (event) => {
-        setDialogTitle(event.target.textContent)
+    const handleOpenDialog = () => {
         setOpenDialog(true)
     }
 
@@ -31,23 +30,28 @@ export default function AnnouncementsScreen() {
 
     return (
         <Box sx={{flexGrow: 1}}>
-            <Box sx={{ flexGrow: 1 }}>
-            <h1>Announcements</h1>
+            <Box sx={{flexGrow: 1}}>
+                <h1>Coordinators</h1>
             </Box>
+            <Divider/>
+            <Box sx={{flexGrow: 1}}>
+                <h2>Click on Coordinator to Manage Workload</h2>
+            </Box>
+            <Divider/>
             <List>
-                {announcements.map((item, index) =>
+                {coordinators.map((coordinators, index) =>
                 <ListItem key={index} disablePadding>
-                    <ListItemButton onClick={handleClickDialog}>
+                    <ListItemButton onClick={handleOpenDialog}>
                         <ListItemIcon>
                             <CircleIcon/>
                         </ListItemIcon>
-                        <ListItemText primary={item}/>
+                        <ListItemText primary={coordinators}/>
                     </ListItemButton>
                 </ListItem>
                 )}
-            </List>     
+            </List>
             <Dialog open={openDialog} onClose={handleCloseDialog}>
-                <DialogTitle>{dialogTitle}</DialogTitle>
+                <DialogTitle>Work Distributon</DialogTitle>
                 <DialogContent>
                     <DialogContentText>
                         To subscribe to this website, please enter your email address here. We
@@ -67,7 +71,7 @@ export default function AnnouncementsScreen() {
                     <Button onClick={handleCloseDialog}>Cancel</Button>
                     <Button onClick={handleCloseDialog}>Subscribe</Button>
                 </DialogActions>
-            </Dialog>       
+            </Dialog>   
         </Box>
     )
 }

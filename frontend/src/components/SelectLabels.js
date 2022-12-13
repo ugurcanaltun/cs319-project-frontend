@@ -16,11 +16,9 @@ export default function SelectSmall(props) {
         <MenuItem value="">
           <em>None</em>
         </MenuItem>
-        {props.selector.map((row) => {
-          return (
-            <MenuItem>{row}</MenuItem>
-          )
-        })}
+        {props.selector.map((row,index) =>
+          <MenuItem key={index}>{row}</MenuItem>
+        )}
       </Select>
     </FormControl>
   );

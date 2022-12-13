@@ -4,7 +4,7 @@ import StyledFormTable from '../../components/StyledFormTable'
 import Button from '@mui/material/Button';
 
 export default function UploadTranscript() {
-  const [rows, setRows] = useState([[0, 0, 0, 0]]);
+  const [rows, setRows] = useState([[0, 1, 2, 3]]);
 
   const selectors = [
     "A",
@@ -32,7 +32,7 @@ export default function UploadTranscript() {
           </div>
         </div>
         <div style={{display: "flex", justifyContent: "center"}}>
-          <StyledFormTable headers={headers} rows={rows}/>
+          <StyledFormTable headers={headers} rows={rows} width={801}/>
         </div>
         <div style={{display: "block"}}>
           <div style={{marginTop: 30, display: "flex", justifyContent: "right"}}>

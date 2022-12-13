@@ -19,7 +19,6 @@ const rows = [
 
 function DownloadButton() {
     const onClick = () => {
-
     }
     return (
         <Button onClick={onClick}>

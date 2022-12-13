@@ -22,6 +22,8 @@ import UploadTranscript from './screens/ISO/UploadTranscript';
 import UploadScoreTable from './screens/ISO/UploadScoreTable';
 import CourseProposals from './screens/CourseCoord/CourseProposals';
 import Deadlines from './screens/AdmCoordinator/Deadlines';
+import CoordinatorsScreen from './screens/DepCoordinator/CoordinatorsDepCoordinator';
+import TransferrableCoursesScreen from './screens/FacAdmCoordinator/TransferrableCourses';
 
 function App() {
   return (
@@ -49,6 +51,8 @@ function App() {
             <Route path="transcripts" element={<UploadTranscript/>}/>
             <Route path="courseProposals" element={<CourseProposals/>}/>
             <Route path="deadlines" element={<Deadlines/>}/>
+            <Route path="coordinators" element={<CoordinatorsScreen/>}/>
+            <Route path="transferrableCourses" element={<TransferrableCoursesScreen/>}/>
           </Route>
         </Routes>
       </Router>

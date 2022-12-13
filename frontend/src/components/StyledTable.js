@@ -25,32 +25,24 @@ export default function CustomizedTables(props) {
       <Table aria-label="customized table">
         <TableHead>
           <TableRow>
-          {props.headers.map((row) => {
-            return (
-              row.map((cell) => {
-                return (
-                  <StyledTableCell align="center">{cell}</StyledTableCell>
-                )
-              }) 
-              )
-          })}
+            {props.headers.map((rows) =>
+            rows.map((row, index) =>
+            <StyledTableCell key={index} align="center">{row}</StyledTableCell>
+            )
+            )}
           </TableRow>
         </TableHead>
 
         <TableBody>
-        {props.rows.map((row) => {
-          return (
-            <>
-              <TableRow>
-                {row.map((cell) => {
-                  return (
-                    <StyledTableCell align="center">{cell}</StyledTableCell>
-                  )
-                })}
-              </TableRow>
-            </>
-          )
-        })}
+          {props.rows.map((row, index) =>
+          <TableRow key={index}>
+            {row.map((cell, index) => {
+              return (
+                <StyledTableCell key={index} align="center" component="th" scope="row">{cell}</StyledTableCell>
+              )
+            })}
+          </TableRow>
+          )}
         </TableBody>
       </Table>
     </TableContainer>
