@@ -115,7 +115,7 @@ export default function Chat() {
                         <ListItem key="3">
                             <Grid container>
                                 <Grid item xs={12}>
-                                    <ListItemText align="right" primary="Messi messi bir saplak sesi"></ListItemText>
+                                    <ListItemText align="right" primary="Messi messi"></ListItemText>
                                 </Grid>
                                 <Grid item xs={12}>
                                     <ListItemText align="right" secondary="10:30"></ListItemText>
