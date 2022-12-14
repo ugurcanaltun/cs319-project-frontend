@@ -218,9 +218,9 @@ export default function AppSidebar(props) {
       },
       {
         id: 2,
-        label: "Transcripts",
-        icon: (<TranscriptsIcon/>),
-        link: "transcripts",
+        label: "Preapproval",
+        icon: (<PreapprovalIcon/>),
+        link: "preapproval",
       },
       {
         id: 3,
