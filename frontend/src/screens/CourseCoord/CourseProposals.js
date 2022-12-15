@@ -14,54 +14,62 @@ const headers = [
 const intent = "i wanna see some ass"
 
 const rows = [
-    ["Uğur Can Altun", "CS319", "CMPE3131", <DownloadButton/>, <ScrollDialog intent={intent}/>, <OperationSection/>],
+    ["Uğur Can Altun", "CS319", "CMPE3131", <DownloadButton />, <ScrollDialogg />, <OperationSection />],
 ]
+
+function ScrollDialogg() {
+    return (
+        <div style={{ color: "#201F2B" }}>
+            <ScrollDialog intent={intent} />
+        </div>
+    )
+}
 
 function DownloadButton() {
     const onClick = () => {
     }
     return (
         <Button onClick={onClick}>
-            <DownloadIcon sx={{color: "#000"}}/>
+            <DownloadIcon sx={{ color: "#201F2B" }} />
         </Button>
     )
-    
+
 }
 
 function OperationSection() {
 
     const handleCheckButton = () => {
 
-    } 
+    }
 
 
     const handleCancelButton = () => {
 
     }
 
-    return(
+    return (
         <Grid container>
             <Grid item>
                 <Button onClick={handleCheckButton}>
-                    <CheckCircleIcon sx={{color: "#000"}}/>
+                    <CheckCircleIcon sx={{ color: "#201F2B" }} />
                 </Button>
             </Grid>
             <Grid item>
                 <Button onClick={handleCancelButton}>
-                    <CancelIcon sx={{color: "#000"}}/>
+                    <CancelIcon sx={{ color: "#201F2B" }} />
                 </Button>
             </Grid>
-        </Grid>        
+        </Grid>
     );
 }
 
 const width = 800
 
 export default function CourseProposals() {
-  return (
-    <div>
-        <h1>Course Proposals</h1>
-        <StyledTable width={width} headers={headers} rows={rows}/>
-    </div>
-  )
+    return (
+        <div>
+            <h1>Course Proposals</h1>
+            <StyledTable width={width} headers={headers} rows={rows} />
+        </div>
+    )
 }

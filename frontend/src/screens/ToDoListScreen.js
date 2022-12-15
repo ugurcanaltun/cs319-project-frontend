@@ -9,7 +9,7 @@ import AvTimerIcon from '@mui/icons-material/AvTimer';
 import {
     useGetTasksQuery,
     useUpdateTaskMutation,
-    useDeleteTaskMutation 
+    useDeleteTaskMutation
 } from '../redux/api/apiSlice';
 
 
@@ -24,7 +24,7 @@ function OperationSection(props) {
             deadline: props.deadline,
             status: "Completed"
         })
-    } 
+    }
 
     const handlePendingButton = () => {
         updateTask({
@@ -37,32 +37,32 @@ function OperationSection(props) {
 
     const handleCancelButton = () => {
         console.log(props.id)
-        deleteTask({id: props.id})
+        deleteTask({ id: props.id })
     }
 
-    return(
+    return (
         <Grid container justifyContent="center">
             <Grid item>
-                <Button sx={{color: 'black'}} onClick={handleCheckButton}>
-                    <CheckCircleIcon/>
+                <Button sx={{ color: "#201F2B" }} onClick={handleCheckButton}>
+                    <CheckCircleIcon />
                 </Button>
             </Grid>
             <Grid item>
-                <Button sx={{color: 'black'}} onClick={handlePendingButton}>
-                    <AvTimerIcon/>
+                <Button sx={{ color: "#201F2B" }} onClick={handlePendingButton}>
+                    <AvTimerIcon />
                 </Button>
             </Grid>
             <Grid item>
-                <Button sx={{color: 'black'}} onClick={handleCancelButton}>
-                    <CancelIcon/>
+                <Button sx={{ color: "#201F2B" }} onClick={handleCancelButton}>
+                    <CancelIcon />
                 </Button>
             </Grid>
-        </Grid>        
+        </Grid>
     );
 }
 
 export default function ToDoListScreen() {
-    const { data, error, isLoading, isFetching, isSuccess } = useGetTasksQuery() 
+    const { data, error, isLoading, isFetching, isSuccess } = useGetTasksQuery()
 
     const headers = [
         ["Task", "Deadline", "Status", "Operations"]
@@ -70,26 +70,26 @@ export default function ToDoListScreen() {
 
     let rows = [];
 
-    if(isSuccess) {
-        for(let i = 0; i < data.tasks.length; i++){
+    if (isSuccess) {
+        for (let i = 0; i < data.tasks.length; i++) {
             let props = []
             rows.push([])
-            for(const task in data.tasks[i]){
-                if(task !== "id"){
+            for (const task in data.tasks[i]) {
+                if (task !== "id") {
                     rows[i].push(data.tasks[i][task])
                 }
                 props.push(data.tasks[i][task])
             }
-            rows[i].push(<OperationSection id={props[0]} content={props[1]} deadline={props[2]} status={props[3]}/>)
+            rows[i].push(<OperationSection id={props[0]} content={props[1]} deadline={props[2]} status={props[3]} />)
         }
     }
 
     return (
         <Box sx={{ flexGrow: 1 }}>
             <h1>To Do List</h1>
-            <Grid container rowSpacing={1} columnSpacing={{ xs: 18}}>
+            <Grid container rowSpacing={1} columnSpacing={{ xs: 18 }}>
                 <Grid item xs={12}>
-                    <StyledTable headers={headers} rows={rows}/>
+                    <StyledTable headers={headers} rows={rows} />
                 </Grid>
             </Grid>
         </Box>

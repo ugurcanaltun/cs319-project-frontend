@@ -30,15 +30,15 @@ export default function UploadScoreTable() {
       <SelectLabels selector={selector} label="Department" edge="start" />
       <h2>Upload Here</h2>
       <div style={{ display: "flex" }}>
-        <Button sx={{ display: 'flex', width: 120, marginLeft: 1 }} edge="start" endIcon={<UploadIcon />} variant="contained" component="label">
+        <Button sx={{ display: 'flex', width: 120, marginLeft: 1, backgroundColor: "#201F2B" }} edge="start" endIcon={<UploadIcon />} variant="contained" component="label">
           Upload
           <input hidden accept="image/*" multiple type="file" />
         </Button>
-        <Button sx={{ display: 'flex', width: 120, marginLeft: 1 }} variant="contained">
+        <Button sx={{ display: 'flex', width: 120, marginLeft: 1, backgroundColor: "#201F2B" }} variant="contained">
           Submit
         </Button>
       </div>
       <StyledTable width={width} headers={headers} rows={rows} />
-    </div>
+    </div >
   )
 }

@@ -4,12 +4,12 @@ import SvgIcon from '@mui/material/SvgIcon';
 export default function ChecklistIcon(props) {
   return (
     <SvgIcon
-        {...props}
-        version="1.0" xmlns="http://www.w3.org/2000/svg"
-        width="30.000000pt" height="30.000000pt" viewBox="0 0 30.000000 30.000000"
-        preserveAspectRatio="xMidYMid meet"
+      {...props}
+      version="1.0" xmlns="http://www.w3.org/2000/svg"
+      width="30.000000pt" height="30.000000pt" viewBox="0 0 30.000000 30.000000"
+      preserveAspectRatio="xMidYMid meet"
     >
-        <g transform="translate(0.000000,30.000000) scale(0.100000,-0.100000)"
+      <g transform="translate(0.000000,30.000000) scale(0.100000,-0.100000)"
         fill="#646C9A" stroke="none">
         <path d="M40 230 c0 -30 1 -30 55 -30 54 0 55 0 55 30 0 30 -1 30 -55 30 -54
         0 -55 0 -55 -30z"/>
@@ -21,7 +21,7 @@ export default function ChecklistIcon(props) {
         <path d="M40 70 c0 -30 1 -30 55 -30 54 0 55 0 55 30 0 30 -1 30 -55 30 -54 0
         -55 0 -55 -30z m90 0 c0 -5 -16 -10 -35 -10 -19 0 -35 5 -35 10 0 6 16 10 35
         10 19 0 35 -4 35 -10z"/>
-        </g>
+      </g>
     </SvgIcon>
   );
 }

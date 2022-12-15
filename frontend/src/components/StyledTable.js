@@ -10,7 +10,7 @@ import Paper from '@mui/material/Paper';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
-    backgroundColor: theme.palette.common.black,
+    backgroundColor: "#201F2B",
     color: theme.palette.common.white,
   },
   [`&.${tableCellClasses.body}`]: {
@@ -21,27 +21,27 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
 
 export default function CustomizedTables(props) {
   return (
-    <TableContainer sx={{width: props.width, marginTop: 5, marginLeft: 1, }} component={Paper}>
+    <TableContainer sx={{ width: props.width, marginTop: 5, marginLeft: 1, }} component={Paper}>
       <Table aria-label="customized table">
         <TableHead>
           <TableRow>
             {props.headers.map((rows) =>
-            rows.map((row, index) =>
-            <StyledTableCell key={index} align="center">{row}</StyledTableCell>
-            )
+              rows.map((row, index) =>
+                <StyledTableCell key={index} align="center">{row}</StyledTableCell>
+              )
             )}
           </TableRow>
         </TableHead>
 
         <TableBody>
           {props.rows.map((row, index) =>
-          <TableRow key={index}>
-            {row.map((cell, index) => {
-              return (
-                <StyledTableCell key={index} align="center" component="th" scope="row">{cell}</StyledTableCell>
-              )
-            })}
-          </TableRow>
+            <TableRow key={index}>
+              {row.map((cell, index) => {
+                return (
+                  <StyledTableCell key={index} align="center" component="th" scope="row">{cell}</StyledTableCell>
+                )
+              })}
+            </TableRow>
           )}
         </TableBody>
       </Table>
