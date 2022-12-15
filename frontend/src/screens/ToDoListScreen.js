@@ -6,6 +6,12 @@ import Button from '@mui/material/Button';
 import CancelIcon from '@mui/icons-material/Cancel';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import AvTimerIcon from '@mui/icons-material/AvTimer';
+import {
+    useGetTasksQuery,
+    useAddTaskMutation,
+    useUpdateTaskMutation,
+    useDeleteTaskMutation 
+} from '../redux/api/apiSlice';
 
 function OperationSection() {
 
@@ -43,6 +49,15 @@ function OperationSection() {
 }
 
 export default function ToDoListScreen() {
+    const { data, error, isLoading, isFetching, isSuccess } = useGetTasksQuery()
+    const [addTask] = useAddTaskMutation()
+    const [updateTask] = useUpdateTaskMutation()
+    const [deleteTask] = useDeleteTaskMutation() 
+
+    const handleAddTodo = () => {
+
+    }
+
     const headers = [
         ["Task", "Deadline", "Status", "Operations"]
     ];
@@ -62,7 +77,7 @@ export default function ToDoListScreen() {
                 <Grid item xs={10}>
                 </Grid>
                 <Grid item xs={2}>
-                    <Button variant="contained">Add Todo</Button>
+                    <Button variant="contained" onClick={handleAddTodo}>Add Todo</Button>
                 </Grid>
             </Grid>
         </Box>

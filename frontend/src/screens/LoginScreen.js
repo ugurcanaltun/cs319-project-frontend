@@ -9,23 +9,22 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux'
-import { setUserTypeReducer } from '../redux/reducers/userTypeSlice';
-
+import { useGetUserQuery } from '../redux/api/apiSlice';
 const theme = createTheme();
 
 export default function LoginScreen() {
-    const dispatch = useDispatch();
+    const { data, error, isLoading, isFetching, isSuccess } = useGetUserQuery()
     const navigate = useNavigate();
     const handleSubmit = (event) => {
         event.preventDefault();
-        const data = new FormData(event.currentTarget);
+        const formData = new FormData(event.currentTarget);
         const userState = {
-            username: data.get('username'),
-            userType: data.get('userRole')
+            username: formData.get('username'),
+            userType: formData.get('userRole')
         }
-        dispatch(setUserTypeReducer(userState))
-        navigate("/home")
+        if(formData.get("username") === data.user.name) {
+            navigate("/home")
+        }
     };
 
     return (
