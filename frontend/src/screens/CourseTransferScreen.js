@@ -4,10 +4,11 @@ import CourseTransferDepCoordinator from "./DepCoordinator/CourseTransferDepCoor
 import CourseTransferDepChair from "./DepChair/CourseTransferDepChair"
 import CourseTransferDean from "./Dean/CourseTransferDean"
 import CourseTransferFaculty from "./FacAdmCoordinator/CourseTransferFaculty";
-import { useSelector } from 'react-redux';
+import { useGetUserQuery } from '../redux/api/apiSlice';
 
 export default function CourseTransferScreen() {
-    const userType = useSelector(state => state.userType.userType)
+    const { data, error, isLoading, isFetching, isSuccess } = useGetUserQuery()
+    const userType = data.users.role
     return(
         userType === "student" 
         ? <CourseTransferStudent/> : 

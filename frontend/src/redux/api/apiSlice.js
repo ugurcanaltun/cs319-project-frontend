@@ -2,7 +2,7 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 
 export const apiSlice = createApi({
   reducerPath: 'api',
-  baseQuery: fetchBaseQuery({ baseUrl: '/fakeApi' }),
+  baseQuery: fetchBaseQuery({ baseUrl: 'https://03b948e5-5fb2-429b-8548-99746fcd75e4.mock.pstmn.io' }),
   tagTypes: ['User', 'Tasks'],
   endpoints: (builder) => ({
     getUser: builder.query({

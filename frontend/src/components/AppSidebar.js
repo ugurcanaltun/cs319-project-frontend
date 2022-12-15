@@ -22,8 +22,7 @@ import ScoreTableIcon from '../assets/ScoreTableIcon';
 import TranscriptsIcon from '../assets/TranscriptsIcon';
 import TransferrableCoursesIcon from '../assets/TransferrableCoursesIcon';
 import {Link} from 'react-router-dom';
-import { useSelector } from 'react-redux'
-
+import { useGetUserQuery } from '../redux/api/apiSlice';
 
 const drawerWidth = 240;
 
@@ -78,8 +77,8 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 
 export default function AppSidebar(props) {
 
-  const username = useSelector(state => state.userType.username)
-  const userType = useSelector(state => state.userType.userType)
+  const { data, error, isLoading, isFetching, isSuccess } = useGetUserQuery()
+  const userType = data.users.role
 
   let sideBarItems;
 

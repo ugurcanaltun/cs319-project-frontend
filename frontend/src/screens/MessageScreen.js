@@ -12,7 +12,7 @@ import ListItemText from '@mui/material/ListItemText';
 import Fab from '@mui/material/Fab';
 import SendIcon from '@mui/icons-material/Send';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import { useSelector } from 'react-redux';
+import { useGetUserQuery } from '../redux/api/apiSlice';
 
 const useStyles = styled({
   table: {
@@ -36,8 +36,9 @@ const useStyles = styled({
 
 export default function Chat() {
     const classes = useStyles()
-    const username = useSelector(state => state.userType.username)
-    const userType = useSelector(state => state.userType.userType)
+    const { data, error, isLoading, isFetching, isSuccess } = useGetUserQuery()
+    const username = data.users.name
+    const userType = data.users.role
     const contacts = [
         {
             id: 0,

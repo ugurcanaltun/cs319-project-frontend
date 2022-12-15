@@ -18,11 +18,12 @@ export default function LoginScreen() {
     const handleSubmit = (event) => {
         event.preventDefault();
         const formData = new FormData(event.currentTarget);
+        console.log(data)
         const userState = {
             username: formData.get('username'),
             userType: formData.get('userRole')
         }
-        if(formData.get("username") === data.user.name) {
+        if(formData.get("username") === data.users.name) {
             navigate("/home")
         }
     };
