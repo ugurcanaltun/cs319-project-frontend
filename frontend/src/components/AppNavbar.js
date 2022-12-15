@@ -11,27 +11,28 @@ import ListItem from '@mui/material/ListItem';
 import ForumIcon from '@mui/icons-material/Forum';
 import MessageIcon from '@mui/icons-material/Message';
 import NotificationsIcon from '@mui/icons-material/Notifications';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import AccountMenu from './AccountMenu';
 import { useGetUserQuery } from '../redux/api/apiSlice';
+import Switch from './Switch'
 
 const drawerWidth = 240;
 
 const AppBar = styled(MuiAppBar, {
     shouldForwardProp: (prop) => prop !== 'open',
-  })(({ theme, open }) => ({
-      zIndex: theme.zIndex.drawer + 1,
-      transition: theme.transitions.create(['width', 'margin'], {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen,
+})(({ theme, open }) => ({
+    zIndex: theme.zIndex.drawer + 1,
+    transition: theme.transitions.create(['width', 'margin'], {
+        easing: theme.transitions.easing.sharp,
+        duration: theme.transitions.duration.leavingScreen,
     }),
     ...(open && {
-      marginLeft: drawerWidth,
-      width: `calc(100% - ${drawerWidth}px)`,
-      transition: theme.transitions.create(['width', 'margin'], {
-        easing: theme.transitions.easing.sharp,
-        duration: theme.transitions.duration.enteringScreen,
-      }),
+        marginLeft: drawerWidth,
+        width: `calc(100% - ${drawerWidth}px)`,
+        transition: theme.transitions.create(['width', 'margin'], {
+            easing: theme.transitions.easing.sharp,
+            duration: theme.transitions.duration.enteringScreen,
+        }),
     }),
 }));
 
@@ -41,72 +42,72 @@ export default function AppNavbar(props) {
     const userType = data.users.role
     let navBarItems;
 
-    if(userType === "student"){
+    if (userType === "student") {
         navBarItems = [
             {
-              id: 0,
-              button: (<Button size="large" color="inherit" sx={{textTransform: 'none'}}> Application </Button>),
-              link: "application",
+                id: 0,
+                button: (<Button size="large" color="inherit" sx={{ textTransform: 'none' }}> Application </Button>),
+                link: "application",
             },
             {
-              id: 1,
-              button: (<Button size="large" color="inherit" sx={{textTransform: 'none', textDecoration: 'none'}}> Contacts </Button>),
-              link: "contacts",
+                id: 1,
+                button: (<Button size="large" color="inherit" sx={{ textTransform: 'none', textDecoration: 'none' }}> Contacts </Button>),
+                link: "contacts",
             },
             {
-              id: 2,
-              button: (<Button size="large" color="inherit" sx={{textTransform: 'none'}}> Announcements </Button>),
-              link: "announcements",
+                id: 2,
+                button: (<Button size="large" color="inherit" sx={{ textTransform: 'none' }}> Announcements </Button>),
+                link: "announcements",
             },
             {
-              id: 3,
-              button: (<Button size="large" color="inherit" sx={{textTransform: 'none'}}> Evaluations </Button>),
-              link: "evaluations", 
+                id: 3,
+                button: (<Button size="large" color="inherit" sx={{ textTransform: 'none' }}> Evaluations </Button>),
+                link: "evaluations",
+            },
+        ]
+    }
+    else if (userType === "courseCoordinator" || userType === "iso" ||
+        userType === "admCoordinator" || userType === "dChair" ||
+        userType === "faCommittee" || userType === "dean") {
+        navBarItems = [
+            {
+                id: 1,
+                button: (<Button size="large" color="inherit" sx={{ textTransform: 'none', textDecoration: 'none' }}> Contacts </Button>),
+                link: "contacts",
+            },
+            {
+                id: 2,
+                button: (<Button size="large" color="inherit" sx={{ textTransform: 'none' }}> Announcements </Button>),
+                link: "announcements",
+            },
+            {
+                id: 3,
+                button: (<Button size="large" color="inherit" sx={{ textTransform: 'none' }}> Evaluations </Button>),
+                link: "evaluations",
             }
         ]
     }
-    else if(userType === "courseCoordinator" || userType === "iso" || 
-            userType === "admCoordinator" || userType === "dChair" || 
-            userType === "faCommittee" ||userType === "dean"){
+    else if (userType === "depCoordinator") {
         navBarItems = [
             {
                 id: 1,
-                button: (<Button size="large" color="inherit" sx={{textTransform: 'none', textDecoration: 'none'}}> Contacts </Button>),
-                link: "contacts",
-              },
-              {
-                id: 2,
-                button: (<Button size="large" color="inherit" sx={{textTransform: 'none'}}> Announcements </Button>),
-                link: "announcements",
-              },
-              {
-                id: 3,
-                button: (<Button size="large" color="inherit" sx={{textTransform: 'none'}}> Evaluations </Button>),
-                link: "evaluations", 
-              }
-        ]
-    }
-    else if(userType === "depCoordinator"){
-        navBarItems = [
-            {
-                id: 1,
-                button: (<Button size="large" color="inherit" sx={{textTransform: 'none', textDecoration: 'none'}}> Contacts </Button>),
+                button: (<Button size="large" color="inherit" sx={{ textTransform: 'none', textDecoration: 'none' }}> Contacts </Button>),
                 link: "contacts",
             },
             {
                 id: 1,
-                button: (<Button size="large" color="inherit" sx={{textTransform: 'none', textDecoration: 'none'}}> Coordinators </Button>),
+                button: (<Button size="large" color="inherit" sx={{ textTransform: 'none', textDecoration: 'none' }}> Coordinators </Button>),
                 link: "coordinators",
             },
             {
-            id: 2,
-            button: (<Button size="large" color="inherit" sx={{textTransform: 'none'}}> Announcements </Button>),
-            link: "announcements",
+                id: 2,
+                button: (<Button size="large" color="inherit" sx={{ textTransform: 'none' }}> Announcements </Button>),
+                link: "announcements",
             },
             {
-            id: 3,
-            button: (<Button size="large" color="inherit" sx={{textTransform: 'none'}}> Evaluations </Button>),
-            link: "evaluations", 
+                id: 3,
+                button: (<Button size="large" color="inherit" sx={{ textTransform: 'none' }}> Evaluations </Button>),
+                link: "evaluations",
             }
         ]
     }
@@ -116,7 +117,7 @@ export default function AppNavbar(props) {
     };
 
     return (
-        <AppBar position="fixed" open={props.open} sx={{backgroundColor: '#201F2B'}}>
+        <AppBar position="fixed" open={props.open} sx={{ backgroundColor: '#201F2B' }}>
             <Toolbar>
                 <IconButton
                     aria-label="open drawer"
@@ -125,56 +126,57 @@ export default function AppNavbar(props) {
                     edge="start"
                     color="inherit"
                     sx={{
-                    color: "#646C9A",
-                    marginRight: 5,
-                    ...(props.open && { display: 'none' }),
+                        color: "#646C9A",
+                        marginRight: 5,
+                        ...(props.open && { display: 'none' }),
                     }}
                 >
                     <MenuIcon />
                 </IconButton>
                 <Box>
-                    <List sx={{display: 'flex', flexDirection: 'row'}}>
+                    <List sx={{ display: 'flex', flexDirection: 'row' }}>
                         {navBarItems.map((item) => (
-                            <Link style={{color: '#C7C5D8', textDecoration: 'none'}} key={item.id} to={item.link}>
-                                <ListItem key={item.id} disablePadding sx={{display: 'block' }}>
+                            <Link style={{ color: '#C7C5D8', textDecoration: 'none' }} key={item.id} to={item.link}>
+                                <ListItem key={item.id} disablePadding sx={{ display: 'block' }}>
                                     {item.button}
-                                </ListItem>                            
+                                </ListItem>
                             </Link>
                         ))}
                     </List>
                 </Box>
-                <Box sx={{flexGrow: 1}} />
+                <Box sx={{ flexGrow: 1 }} />
+                <Switch />
                 <Box>
-                    <Link style={{color: '#646C9A'}} to="forum">
+                    <Link style={{ color: '#646C9A' }} to="forum">
                         <IconButton
-                        size="large"
-                        color="inherit"
+                            size="large"
+                            color="inherit"
                         >
-                            <ForumIcon/>
+                            <ForumIcon />
                         </IconButton>
                     </Link>
-                    <Link style={{color: '#646C9A'}} to="message">
+                    <Link style={{ color: '#646C9A' }} to="message">
                         <IconButton
-                        size="large"
-                        color="inherit"
+                            size="large"
+                            color="inherit"
                         >
-                            <MessageIcon/>
+                            <MessageIcon />
                         </IconButton>
                     </Link>
                     <IconButton
-                    size="large"
-                    color="inherit"
-                    sx={{color: '#646C9A'}}
+                        size="large"
+                        color="inherit"
+                        sx={{ color: '#646C9A' }}
                     >
-                        <NotificationsIcon/>
+                        <NotificationsIcon />
                     </IconButton>
                     <IconButton
-                    size="large"
-                    color="inherit"
-                    sx={{color: '#646C9A'}}
+                        size="large"
+                        color="inherit"
+                        sx={{ color: '#646C9A' }}
                     >
-                        <AccountMenu/>
-                    </IconButton>                    
+                        <AccountMenu />
+                    </IconButton>
                 </Box>
             </Toolbar>
         </AppBar>
