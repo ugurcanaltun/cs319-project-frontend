@@ -8,39 +8,52 @@ import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import AvTimerIcon from '@mui/icons-material/AvTimer';
 import {
     useGetTasksQuery,
-    useAddTaskMutation,
     useUpdateTaskMutation,
     useDeleteTaskMutation 
 } from '../redux/api/apiSlice';
 
-function OperationSection() {
+
+function OperationSection(props) {
+    const [updateTask] = useUpdateTaskMutation()
+    const [deleteTask] = useDeleteTaskMutation()
 
     const handleCheckButton = () => {
-
+        updateTask({
+            id: props.id,
+            content: props.content,
+            deadline: props.deadline,
+            status: "Completed"
+        })
     } 
 
     const handlePendingButton = () => {
-
+        updateTask({
+            id: props.id,
+            content: props.content,
+            deadline: props.deadline,
+            status: "Not Completed"
+        })
     }
 
     const handleCancelButton = () => {
-
+        console.log(props.id)
+        deleteTask({id: props.id})
     }
 
     return(
-        <Grid container>
+        <Grid container justifyContent="center">
             <Grid item>
-                <Button onClick={handleCheckButton}>
+                <Button sx={{color: 'black'}} onClick={handleCheckButton}>
                     <CheckCircleIcon/>
                 </Button>
             </Grid>
             <Grid item>
-                <Button onClick={handlePendingButton}>
+                <Button sx={{color: 'black'}} onClick={handlePendingButton}>
                     <AvTimerIcon/>
                 </Button>
             </Grid>
             <Grid item>
-                <Button onClick={handleCancelButton}>
+                <Button sx={{color: 'black'}} onClick={handleCancelButton}>
                     <CancelIcon/>
                 </Button>
             </Grid>
@@ -49,30 +62,25 @@ function OperationSection() {
 }
 
 export default function ToDoListScreen() {
-    const { data, error, isLoading, isFetching, isSuccess } = useGetTasksQuery()
-    const [addTask] = useAddTaskMutation()
-    const [updateTask] = useUpdateTaskMutation()
-    const [deleteTask] = useDeleteTaskMutation() 
-
-    const handleAddTodo = () => {
-
-    }
+    const { data, error, isLoading, isFetching, isSuccess } = useGetTasksQuery() 
 
     const headers = [
         ["Task", "Deadline", "Status", "Operations"]
     ];
 
-    let rows = [
-        ["Kaan Berk Kabadayi's Course Proposal", "N/A", "Not Completed", <OperationSection/>],
-        ["Ugur Can Altun's Preapproval", "N/A", "Not Completed", <OperationSection/>]
-    ];
+    let rows = [];
 
     if(isSuccess) {
         for(let i = 0; i < data.tasks.length; i++){
+            let props = []
             rows.push([])
             for(const task in data.tasks[i]){
-                console.log(task)
+                if(task !== "id"){
+                    rows[i].push(data.tasks[i][task])
+                }
+                props.push(data.tasks[i][task])
             }
+            rows[i].push(<OperationSection id={props[0]} content={props[1]} deadline={props[2]} status={props[3]}/>)
         }
     }
 
@@ -82,11 +90,6 @@ export default function ToDoListScreen() {
             <Grid container rowSpacing={1} columnSpacing={{ xs: 18}}>
                 <Grid item xs={12}>
                     <StyledTable headers={headers} rows={rows}/>
-                </Grid>
-                <Grid item xs={10}>
-                </Grid>
-                <Grid item xs={2}>
-                    <Button variant="contained" onClick={handleAddTodo}>Add Todo</Button>
                 </Grid>
             </Grid>
         </Box>
