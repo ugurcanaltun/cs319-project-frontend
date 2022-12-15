@@ -11,10 +11,7 @@ export const apiSlice = createApi({
     }),
     getTasks: builder.query({
         query: () => '/users/tasks',
-        providesTags: (result = [], error, arg) => [
-            'Tasks',
-            ...result.map(({ id }) => ({ type: 'Tasks', id })),
-          ],
+        providesTags: (result, error, arg) => [{ type: 'Tasks', id: arg }],
     }),
     addTask: builder.mutation({
         query: (task) => ({

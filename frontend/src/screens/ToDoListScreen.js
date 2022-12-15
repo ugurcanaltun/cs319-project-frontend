@@ -62,10 +62,19 @@ export default function ToDoListScreen() {
         ["Task", "Deadline", "Status", "Operations"]
     ];
 
-    const rows = [
+    let rows = [
         ["Kaan Berk Kabadayi's Course Proposal", "N/A", "Not Completed", <OperationSection/>],
         ["Ugur Can Altun's Preapproval", "N/A", "Not Completed", <OperationSection/>]
     ];
+
+    if(isSuccess) {
+        for(let i = 0; i < data.tasks.length; i++){
+            rows.push([])
+            for(const task in data.tasks[i]){
+                console.log(task)
+            }
+        }
+    }
 
     return (
         <Box sx={{ flexGrow: 1 }}>
