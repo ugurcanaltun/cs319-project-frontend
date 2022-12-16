@@ -5,7 +5,7 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 
 export default function SelectSmall(props) {
-  const [text, setText] = React.useState('');
+  const [text, setText] = React.useState('')
 
   const handleChange = (event) => {
     setText(event.target.value);
