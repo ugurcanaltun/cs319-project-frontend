@@ -13,13 +13,53 @@ import DialogContent from '@mui/material/DialogContent'
 import DialogTitle from '@mui/material/DialogTitle'
 import FilledCircleIcon from '@mui/icons-material/Circle'
 import OutlinedCircleIcon from '@mui/icons-material/CircleOutlined'
-import SelectLabels from '../../components/SelectLabels'
-import WishListAddNewCourses from '../../components/WishListAddNewCourse'
-import WishListAddPrevAccepted from '../../components/WishListAddPrevAccepted'
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
+import AddIcon from '@mui/icons-material/Add';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell, { tableCellClasses } from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import Paper from '@mui/material/Paper';
+import TextField from '@mui/material/TextField';
+import { styled } from '@mui/material/styles';
+
+const StyledTableCell = styled(TableCell)(({ theme }) => ({
+    [`&.${tableCellClasses.head}`]: {
+      backgroundColor: theme.palette.common.black,
+      color: theme.palette.common.white,
+    },
+    [`&.${tableCellClasses.body}`]: {
+      fontSize: 14,
+    },
+}));
 
 export default function WishListScreen() {
     const [openDialog, setOpenDialog] = useState(false)
     const [isPrevAccepted, setIsPrevAccepted] = useState(true)
+    const [rows, setRows] = useState([])
+    const [courseTypeLabel, setCourseTypeLabel] = useState("")
+    const [bilkentCourseTransferred, setBilkentCourseTransferred] = useState("")
+    const [courseCode, setCourseCode] = useState("")
+    const [courseName, setCourseName] = useState("")
+    const [ECTS, setECTS] = useState("")
+    const [intent, setIntent] = useState("")
+    const addNewCourseHeaders = [
+        ["Course Code", "Course Name", "ECTS", "Intent"]
+    ]
+
+    const handleCourseTypeLabel = (event) => {
+        setCourseTypeLabel(event.target.value)
+    }
+
+    const handleBilkentCourseTransferred = (event) => {
+        setBilkentCourseTransferred(event.target.value)
+    }
+
     function SyllabusButton() {
         const onClick = () => {
 
@@ -40,17 +80,12 @@ export default function WishListScreen() {
             </Button>
         )
     }
-    const selectorsCourseType = ["Mandatory", "Elective"]
+    const selectorsCourseType = ["Mandatory", "Elective", "Additional"]
     const selectorsCourses = ["EEE391", "ENG401", "CS319"]
     const headers = [
         ["Course Code", "Course Name", "ECTS", "Course Code", "Course Name", "ECTS", "Course Type", "Syllabus", "Intent", "Status"]
     ]
-    const rows = [
-        ["CMPE3131", "Learning 31", 5, "CS202", "Leetcode fln", 5, "Mandatory", <SyllabusButton />, <IntentButton />, "N/A"],
-        ["SEXED69", "Learning Seks", 4, "ENG102", "Kizlarla Takilmaca", 4, "Mandatory", <SyllabusButton />, <IntentButton />, "N/A"],
-        ["YAR520", "YaradaniSev", 4, "HUM111", "Gilgamis Enkidu Gay Seks", 4, "Mandatory", <SyllabusButton />, <IntentButton />, "N/A"],
-        ["ENG420", "Kari Avlama Sanati", 7, "ENG401", ":D", 7, "Mandatory", <SyllabusButton />, <IntentButton />, "N/A"]
-    ]
+
     const handleCloseDialog = () => {
         setOpenDialog(false)
     }
@@ -61,10 +96,35 @@ export default function WishListScreen() {
     const handleClickPreviouslyAccepted = () => {
         setIsPrevAccepted(true)
     }
-
     const handleClickNewCourses = () => {
         setIsPrevAccepted(false)
     }
+    const handleSubmitNewCourse = () => {
+        let row = ["","","",courseCode, courseName, ECTS, courseTypeLabel, <SyllabusButton/>, <IntentButton/>, "Not Approved"]
+        setRows([...rows, row])
+        setOpenDialog(false)
+    }
+
+    function SelectButton() {
+        const onClick = () =>
+        {
+
+        }
+        return (
+            <Button onClick={onClick}>
+                <AddIcon sx={{color: "#000"}}/>
+            </Button>
+        )
+    }
+    const prevAcceptedHeaders = [
+        ["Course Code", "Course Name", "ECTS", "Select"]
+    ]
+    const prevAcceptedRows = [
+        ["EEE391","Signals", 5, <SelectButton/>],
+        ["EEE391","Signals", 5, <SelectButton/>],
+        ["EEE391","Signals", 5, <SelectButton/>],
+    ]
+
     return (
         <Box sx={{ flexGrow: 1 }}>
             <Box sx={{ flexGrow: 1 }}>
@@ -100,9 +160,7 @@ export default function WishListScreen() {
             </Grid>
             <Dialog open={openDialog} onClose={handleCloseDialog} fullWidth={true} maxWidth={"xl"}>
                 <DialogTitle>
-                    <Typography sx={{ color: "#201F2B" }} variant="h3" gutterBottom align="center">
-                        <strong>Add New Course</strong>
-                    </Typography>
+                <strong>Add New Course</strong>
                 </DialogTitle>
                 <DialogContent>
                     <Grid container>
@@ -132,18 +190,138 @@ export default function WishListScreen() {
                             <Typography sx={{ ml: 8, mt: 1 }} variant="body1" gutterBottom>
                                 <strong>Course Type</strong>
                             </Typography>
-                            <SelectLabels selector={selectorsCourseType} label="Select Course Type" />
+                            <FormControl sx={{ m: 1, width: 240, height: 50 }} size="small">
+                                <InputLabel id="demo-select-small">Course Type</InputLabel>
+                                <Select
+                                    labelId="demo-select-small"
+                                    id="demo-select-small"
+                                    value={courseTypeLabel}
+                                    label="Course Type"
+                                    onChange={handleCourseTypeLabel}
+                                >
+                                    <MenuItem value="">
+                                    <em>None</em>
+                                    </MenuItem>
+                                    {selectorsCourseType.map((row, index) =>
+                                    <MenuItem value={index} key={index}>{row}</MenuItem>
+                                    )}
+                                </Select>
+                            </FormControl>
                         </Grid>
                         <Grid item xs={6}>
                             <Typography sx={{ ml: 3, mt: 1 }} variant="body1" gutterBottom>
                                 <strong>Bilkent Course Transferred</strong>
                             </Typography>
-                            <SelectLabels selector={selectorsCourses} label="Select Bilkent Course Transferred" />
+                            <FormControl sx={{ m: 1, width: 240, height: 50 }} size="small">
+                                <InputLabel id="demo-select-small">Bilkent Course Transferred</InputLabel>
+                                <Select
+                                    labelId="demo-select-small"
+                                    id="demo-select-small"
+                                    value={bilkentCourseTransferred}
+                                    label="Bilkent Course Transferred"
+                                    onChange={handleBilkentCourseTransferred}
+                                >
+                                    <MenuItem value="">
+                                    <em>None</em>
+                                    </MenuItem>
+                                    {selectorsCourses.map((row, index) =>
+                                    <MenuItem value={index} key={index}>{row}</MenuItem>
+                                    )}
+                                </Select>
+                            </FormControl>
                         </Grid>
                     </Grid>
                     {isPrevAccepted
-                        ? <WishListAddPrevAccepted /> :
-                        <WishListAddNewCourses />}
+                        ? 
+                        <Box sx={{flexGrow: 1}}>
+                            <Box sx={{flexGrow: 1}}>
+                                <h2>Host University Course Transferred</h2>
+                            </Box>
+                            <Grid container>
+                                <Grid xs={12} item>
+                                    <StyledTable headers={prevAcceptedHeaders} rows={prevAcceptedRows}/>
+                                </Grid>
+                            </Grid>
+                        </Box>
+                        :
+                        <>
+                        <Box sx={{ ml: 18 }}>
+                        <TableContainer sx={{ width: 801, marginTop: 5, marginLeft: 1, }} component={Paper}>
+                            <Table aria-label="customized table">
+                                <TableHead>
+                                <TableRow sx={{ width: 200 }}>
+                                    {addNewCourseHeaders.map((rows) =>
+                                    rows.map((row, index) =>
+                                        <StyledTableCell key={index} sx={{ width: 200 }} align="left">{row}</StyledTableCell>
+                                    )
+                                    )}
+                                </TableRow>
+                                </TableHead>
+            
+                                <TableBody>
+                                    <TableRow sx={{display: "flex", width: 200 }}>
+                                    <td style={{ display: "flex", width: 200 }}>
+                                        <div style={{ width: 200 }}>
+                                            <TextField 
+                                            value={courseCode} 
+                                            sx={{ width: 200 }} 
+                                            id="standard-basic" 
+                                            label="Enter" 
+                                            variant="standard"
+                                            onChange={(event) => {setCourseCode(event.target.value)}} />
+                                        </div>
+                                    </td>
+                                    <td style={{ display: "flex", width: 200 }}>
+                                        <div style={{ width: 200 }}>
+                                            <TextField 
+                                            value={courseName}  
+                                            sx={{ width: 200 }} 
+                                            id="standard-basic" 
+                                            label="Enter" 
+                                            variant="standard" 
+                                            onChange={(event) => {setCourseName(event.target.value)}}/>
+                                        </div>
+                                    </td>
+                                    <td style={{ display: "flex", width: 200 }}>
+                                        <div style={{ width: 200 }}>
+                                            <TextField 
+                                            value={ECTS} 
+                                            sx={{ width: 200 }} 
+                                            id="standard-basic" 
+                                            label="Enter" 
+                                            variant="standard" 
+                                            onChange={(event) => {setECTS(event.target.value)}}/>
+                                        </div>
+                                    </td>
+                                    <td style={{ display: "flex", width: 200 }}>
+                                        <div style={{ width: 200 }}>
+                                            <TextField 
+                                            value={intent} 
+                                            sx={{ width: 200 }} 
+                                            id="standard-basic" 
+                                            label="Enter" 
+                                            variant="standard"
+                                            onChange={(event) => {setIntent(event.target.value)}} />
+                                        </div>
+                                    </td>
+                                    </TableRow>
+                                </TableBody>
+                            </Table>
+                        </TableContainer>
+                        </Box>
+                        <Grid container sx={{ mt: 6 }}>
+                            <Grid item xs={6}>
+                                <Button sx={{ backgroundColor: "#201F2B" }} variant="contained">Upload Syllabus</Button>
+                            </Grid>
+                            <Grid item xs={6}>
+                                <Button 
+                                sx={{ backgroundColor: "#201F2B" }} 
+                                variant="contained"
+                                onClick={handleSubmitNewCourse}>Submit New Course</Button>
+                            </Grid>
+                        </Grid>
+                        </>
+                        }
                 </DialogContent>
             </Dialog>
         </Box>
