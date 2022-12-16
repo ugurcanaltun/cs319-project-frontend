@@ -24,26 +24,26 @@ export default function CustomizedTables(props) {
     <TableContainer sx={{ width: props.width, marginTop: 5, marginLeft: 1, }} component={Paper}>
       <Table aria-label="customized table">
         <TableHead>
-          <TableRow sx={{width: 200}}>
+          <TableRow sx={{ width: 200 }}>
             {props.headers.map((rows) =>
-            rows.map((row,index) => 
-            <StyledTableCell key={index} sx={{width: 200}} align="left">{row}</StyledTableCell>
-            )
+              rows.map((row, index) =>
+                <StyledTableCell key={index} sx={{ width: 200 }} align="left">{row}</StyledTableCell>
+              )
             )}
           </TableRow>
         </TableHead>
 
         <TableBody>
           {props.rows.map((row, index) =>
-          <TableRow key={index} sx={{width: 200}}>
-          <td style={{display: "flex", width: 200}}>
-            {row.map((index) =>
-            <div key={index} style={{width: 200}}>
-                <TextField sx={{width: 200}} id="standard-basic" label="Enter" variant="standard" />
-            </div>
-            )}
-          </td>
-          </TableRow>
+            <TableRow key={index} sx={{ width: 200 }}>
+              <td style={{ display: "flex", width: 200 }}>
+                {row.map((index) =>
+                  <div key={index} style={{ width: 200 }}>
+                    <TextField sx={{ width: 200 }} id="standard-basic" label="Enter" variant="standard" />
+                  </div>
+                )}
+              </td>
+            </TableRow>
           )}
         </TableBody>
       </Table>

@@ -21,7 +21,7 @@ import PlacementsIcon from '../assets/PlacementsIcon';
 import ScoreTableIcon from '../assets/ScoreTableIcon';
 import TranscriptsIcon from '../assets/TranscriptsIcon';
 import TransferrableCoursesIcon from '../assets/TransferrableCoursesIcon';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useGetUserQuery } from '../redux/api/apiSlice';
 
 const drawerWidth = 240;
@@ -35,7 +35,7 @@ const openedMixin = (theme) => ({
   }),
   overflowX: 'hidden',
 });
-  
+
 const closedMixin = (theme) => ({
   transition: theme.transitions.create('width', {
     easing: theme.transitions.easing.sharp,
@@ -82,193 +82,193 @@ export default function AppSidebar(props) {
 
   let sideBarItems;
 
-  if(userType === "student"){
+  if (userType === "student") {
     sideBarItems = [
       {
         id: 0,
         label: "To Do List",
-        icon: (<PlaylistAddCheckIcon sx={{color: '#646C9A'}}/>),
+        icon: (<PlaylistAddCheckIcon sx={{ color: '#646C9A' }} />),
         link: "todo",
       },
       {
         id: 1,
         label: "Checklist",
-        icon: (<ChecklistIcon/>),
+        icon: (<ChecklistIcon />),
         link: "checklist",
       },
       {
         id: 2,
         label: "Wish List",
-        icon: (<WishListIcon/>),
+        icon: (<WishListIcon />),
         link: "wishlist",
       },
       {
         id: 3,
         label: "Preapproval",
-        icon: (<PreapprovalIcon/>),
+        icon: (<PreapprovalIcon />),
         link: "preapproval",
       },
       {
         id: 4,
         label: "Learning Agreement",
-        icon: (<LearningAgreementIcon/>),
+        icon: (<LearningAgreementIcon />),
         link: "learningAgreement",
       },
       {
         id: 5,
         label: "Course Transfer",
-        icon: (<SwapHorizIcon sx={{color: '#646C9A'}}/>),
+        icon: (<SwapHorizIcon sx={{ color: '#646C9A' }} />),
         link: "courseTransfer",
-  
+
       }
     ]
   }
-  else if(userType === "depCoordinator"){
+  else if (userType === "depCoordinator") {
     sideBarItems = [
       {
         id: 0,
         label: "To Do List",
-        icon: (<PlaylistAddCheckIcon sx={{color: '#646C9A'}}/>),
+        icon: (<PlaylistAddCheckIcon sx={{ color: '#646C9A' }} />),
         link: "todo",
       },
       {
         id: 1,
         label: "Placements",
-        icon: (<PlacementsIcon/>),
+        icon: (<PlacementsIcon />),
         link: "placements",
       },
       {
         id: 2,
         label: "Preapproval",
-        icon: (<PreapprovalIcon/>),
+        icon: (<PreapprovalIcon />),
         link: "preapproval",
       },
       {
         id: 3,
         label: "Course Proposals",
-        icon: (<CourseProposalsIcon/>),
+        icon: (<CourseProposalsIcon />),
         link: "courseProposals",
       },
       {
         id: 4,
         label: "Course Transfer",
-        icon: (<SwapHorizIcon sx={{color: '#646C9A'}}/>),
+        icon: (<SwapHorizIcon sx={{ color: '#646C9A' }} />),
         link: "courseTransfer",
       }
     ]
   }
-  else if(userType === "courseCoordinator"){
+  else if (userType === "courseCoordinator") {
     sideBarItems = [
       {
         id: 0,
         label: "To Do List",
-        icon: (<PlaylistAddCheckIcon sx={{color: '#646C9A'}}/>),
+        icon: (<PlaylistAddCheckIcon sx={{ color: '#646C9A' }} />),
         link: "todo",
       },
       {
         id: 1,
         label: "Course Proposals",
-        icon: (<CourseProposalsIcon/>),
+        icon: (<CourseProposalsIcon />),
         link: "courseProposals",
       }
-    ]   
+    ]
   }
-  else if(userType === "iso"){
+  else if (userType === "iso") {
     sideBarItems = [
       {
         id: 0,
         label: "To Do List",
-        icon: (<PlaylistAddCheckIcon sx={{color: '#646C9A'}}/>),
+        icon: (<PlaylistAddCheckIcon sx={{ color: '#646C9A' }} />),
         link: "todo",
       },
       {
         id: 1,
         label: "Placements",
-        icon: (<PlacementsIcon/>),
+        icon: (<PlacementsIcon />),
         link: "placements",
       },
       {
         id: 2,
         label: "Score Table",
-        icon: (<ScoreTableIcon/>),
+        icon: (<ScoreTableIcon />),
         link: "scoreTable",
       },
       {
         id: 3,
         label: "Transcripts",
-        icon: (<TranscriptsIcon/>),
+        icon: (<TranscriptsIcon />),
         link: "transcripts",
       }
-    ]  
+    ]
   }
-  else if(userType === "admCoordinator") {
+  else if (userType === "admCoordinator") {
     sideBarItems = [
       {
         id: 0,
         label: "To Do List",
-        icon: (<PlaylistAddCheckIcon sx={{color: '#646C9A'}}/>),
+        icon: (<PlaylistAddCheckIcon sx={{ color: '#646C9A' }} />),
         link: "todo",
       },
       {
         id: 1,
         label: "Placements",
-        icon: (<PlacementsIcon/>),
+        icon: (<PlacementsIcon />),
         link: "placements",
       },
       {
         id: 2,
         label: "Preapproval",
-        icon: (<PreapprovalIcon/>),
+        icon: (<PreapprovalIcon />),
         link: "preapproval",
       },
       {
         id: 3,
         label: "Deadlines",
-        icon: (<DeadlinesIcon/>),
+        icon: (<DeadlinesIcon />),
         link: "deadlines",
       }
-    ]      
+    ]
   }
-  else if(userType === "dChair" || userType === "dean"){
+  else if (userType === "dChair" || userType === "dean") {
     sideBarItems = [
       {
         id: 0,
         label: "To Do List",
-        icon: (<PlaylistAddCheckIcon sx={{color: '#646C9A'}}/>),
+        icon: (<PlaylistAddCheckIcon sx={{ color: '#646C9A' }} />),
         link: "todo",
       },
       {
         id: 1,
         label: "Course Transfer",
-        icon: (<SwapHorizIcon sx={{color: '#646C9A'}}/>),
+        icon: (<SwapHorizIcon sx={{ color: '#646C9A' }} />),
         link: "courseTransfer",
       }
-    ] 
+    ]
   }
-  else if(userType === "faCommittee"){
+  else if (userType === "faCommittee") {
     sideBarItems = [
       {
         id: 0,
         label: "To Do List",
-        icon: (<PlaylistAddCheckIcon sx={{color: '#646C9A'}}/>),
+        icon: (<PlaylistAddCheckIcon sx={{ color: '#646C9A' }} />),
         link: "todo",
       },
       {
         id: 1,
         label: "Preapproval",
-        icon: (<PreapprovalIcon/>),
+        icon: (<PreapprovalIcon />),
         link: "preapproval",
       },
       {
         id: 2,
         label: "Transferrable Courses",
-        icon: (<TransferrableCoursesIcon/>),
+        icon: (<TransferrableCoursesIcon />),
         link: "transferrableCourses",
       },
       {
         id: 3,
         label: "Course Transfer",
-        icon: (<SwapHorizIcon sx={{color: '#646C9A'}}/>),
+        icon: (<SwapHorizIcon sx={{ color: '#646C9A' }} />),
         link: "courseTransfer",
       }
     ]
@@ -281,27 +281,27 @@ export default function AppSidebar(props) {
   return (
     <Drawer variant="permanent" open={props.open}>
       <DrawerHeader>
-        <IconButton style={{color: '#C7C5D8'}} onClick={handleDrawerClose}>
+        <IconButton style={{ color: '#C7C5D8' }} onClick={handleDrawerClose}>
           {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
         </IconButton>
       </DrawerHeader>
-      <List sx={{height: 700, backgroundColor: "#282733"}}>
+      <List sx={{ height: 700, backgroundColor: "#282733" }}>
         {sideBarItems.map((item) => (
-          <Link style={{color: '#C7C5D8', textDecoration: 'none'}} key={item.id} to={item.link}>
+          <Link style={{ color: '#C7C5D8', textDecoration: 'none' }} key={item.id} to={item.link}>
             <ListItem key={item.id} disablePadding sx={{ display: 'block' }}>
               <ListItemButton
-              sx={{
-              minHeight: 48,
-              justifyContent: props.open ? 'initial' : 'center',
-              px: 2.5,
-              }}
+                sx={{
+                  minHeight: 48,
+                  justifyContent: props.open ? 'initial' : 'center',
+                  px: 2.5,
+                }}
               >
                 <ListItemIcon
-                sx={{
+                  sx={{
                     minWidth: 0,
                     mr: props.open ? 3 : 'auto',
                     justifyContent: 'center',
-                }}
+                  }}
                 >
                   {item.icon}
                 </ListItemIcon>
@@ -311,6 +311,6 @@ export default function AppSidebar(props) {
           </Link>
         ))}
       </List>
-    </Drawer>    
+    </Drawer>
   );
 }

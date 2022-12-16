@@ -7,10 +7,8 @@ import DownloadIcon from '@mui/icons-material/Download';
 import DoneIcon from '@mui/icons-material/Done';
 
 export default function CourseTransfer() {
-    const statusHeader = [["Host University", "Status", "Details"]];
-    const statusRows = [["AGH University", <DoneIcon/>, <Button variant="contained">Details</Button>]];
-    const transcriptHeader = [["Host University", "Status", "File"]];
-    const transcriptRows = [["AGH University", "Not Downloaded", <DownloadIcon/>]]
+    const statusHeader = [["Host University", "Status"]];
+    const statusRows = [["AGH University", <DoneIcon sx={{ color: "#201F2B" }} />]];
     return (
         <Box sx={{ flexGrow: 1 }}>
             <Box>
@@ -19,20 +17,7 @@ export default function CourseTransfer() {
             <Box>
                 <h2>Course Transfer Status</h2>
             </Box>
-            <StyledTable headers={statusHeader} rows={statusRows}/>
-            <Box>
-                <h2>Transcript Status</h2>
-            </Box>
-            <StyledTable headers={transcriptHeader} rows={transcriptRows}/>
-            <Grid container sx={{mt: 4}}>
-                <Grid item xs={10}>
-                </Grid>
-                <Grid item xs={2} >
-                    <Button variant="contained">
-                        Upload Transcript
-                    </Button>
-                </Grid>
-            </Grid>
+            <StyledTable headers={statusHeader} rows={statusRows} />
         </Box>
     )
 } 

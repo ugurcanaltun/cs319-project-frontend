@@ -15,23 +15,23 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { useGetUserQuery } from '../redux/api/apiSlice';
 
 const useStyles = styled({
-  table: {
-    minWidth: 650,
-  },
-  chatSection: {
-    width: '100%',
-    height: '80vh'
-  },
-  headBG: {
-      backgroundColor: '#e0e0e0'
-  },
-  borderRight500: {
-      borderRight: '1px solid #e0e0e0'
-  },
-  messageArea: {
-    height: '70vh',
-    overflowY: 'auto'
-  }
+    table: {
+        minWidth: 650,
+    },
+    chatSection: {
+        width: '100%',
+        height: '80vh'
+    },
+    headBG: {
+        backgroundColor: '#e0e0e0'
+    },
+    borderRight500: {
+        borderRight: '1px solid #e0e0e0'
+    },
+    messageArea: {
+        height: '70vh',
+        overflowY: 'auto'
+    }
 });
 
 export default function Chat() {
@@ -58,7 +58,7 @@ export default function Chat() {
     ]
     return (
         <div>
-            <Grid container sx={{mb: 4}}>
+            <Grid container sx={{ mb: 4 }}>
                 <Grid item xs={12} >
                     <Typography variant="h5" className="header-message">Messaging</Typography>
                 </Grid>
@@ -68,26 +68,26 @@ export default function Chat() {
                     <List>
                         <ListItem>
                             <ListItemIcon>
-                            <AccountCircleIcon/>
+                                <AccountCircleIcon />
                             </ListItemIcon>
-                            <ListItemText primary={username}/>
-                            <ListItemText secondary={userType} align="right"/>
+                            <ListItemText primary={username} />
+                            <ListItemText secondary={userType} align="right" />
                         </ListItem>
                     </List>
                     <Divider />
-                    <Grid item xs={12} style={{padding: '10px'}}>
+                    <Grid item xs={12} style={{ padding: '10px' }}>
                         <TextField id="outlined-basic-email" label="Search" variant="outlined" fullWidth />
                     </Grid>
                     <Divider />
                     <List>
                         {contacts.map((contact) =>
-                        <ListItem key={contact.id}>
-                            <ListItemIcon>
-                            <AccountCircleIcon/>
-                            </ListItemIcon>
-                            <ListItemText primary={contact.name}/>
-                            <ListItemText secondary={contact.userType} align="right"/>
-                        </ListItem>
+                            <ListItem key={contact.id}>
+                                <ListItemIcon>
+                                    <AccountCircleIcon />
+                                </ListItemIcon>
+                                <ListItemText primary={contact.name} />
+                                <ListItemText secondary={contact.userType} align="right" />
+                            </ListItem>
                         )}
                     </List>
                 </Grid>
@@ -125,12 +125,12 @@ export default function Chat() {
                         </ListItem>
                     </List>
                     <Divider />
-                    <Grid container style={{padding: '20px'}}>
+                    <Grid container style={{ padding: '20px' }}>
                         <Grid item xs={11}>
                             <TextField id="outlined-basic-email" label="Type Something" fullWidth />
                         </Grid>
                         <Grid xs={1} align="right">
-                            <Fab color="primary" aria-label="add"><SendIcon /></Fab>
+                            <Fab sx={{ color: "#201F2B" }} aria-label="add"><SendIcon /></Fab>
                         </Grid>
                     </Grid>
                 </Grid>

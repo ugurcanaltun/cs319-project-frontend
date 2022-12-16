@@ -28,7 +28,7 @@ export default function PreApprovalDepCoordinator() {
             setOpenDialog(true)
         }
         return (
-            <Button style={{ color: "#000" }} onClick={onClick}>
+            <Button style={{ color: "#201F2B" }} onClick={onClick}>
                 <VisibilityIcon />
             </Button>
         )

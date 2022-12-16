@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {useState} from 'react';
+import { useState } from 'react';
 import Box from '@mui/material/Box';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
@@ -43,24 +43,24 @@ export default function EvaluationsScreen() {
     return (
         <Box sx={{ flexGrow: 1 }}>
             <Box sx={{ flexGrow: 1 }}>
-            <h1>Evaluations</h1>
+                <h1>Evaluations</h1>
             </Box>
-            <Box sx={{flexGrow: 1}}>
-            <h2>Select University</h2>
+            <Box sx={{ flexGrow: 1 }}>
+                <h2>Select University</h2>
             </Box>
-            <Box sx={{flexGrow: 1}}>
-            <SelectLabels label="Select University" selector={selectors}/>
+            <Box sx={{ flexGrow: 1 }}>
+                <SelectLabels label="Select University" selector={selectors} />
             </Box>
             <List>
                 {semesters.map((item, index) =>
-                <ListItem disablePadding key={index}>
-                    <ListItemButton onClick={handleClickSemester}>
-                        <ListItemIcon>
-                            <CircleIcon/>
-                        </ListItemIcon>
-                        <ListItemText primary={item}/>
-                    </ListItemButton>
-                </ListItem>
+                    <ListItem disablePadding key={index}>
+                        <ListItemButton onClick={handleClickSemester}>
+                            <ListItemIcon>
+                                <CircleIcon />
+                            </ListItemIcon>
+                            <ListItemText primary={item} />
+                        </ListItemButton>
+                    </ListItem>
                 )}
             </List>
             <Dialog open={openDialog} onClose={handleCloseDialog}>
@@ -86,14 +86,14 @@ export default function EvaluationsScreen() {
                 </DialogActions>
             </Dialog>
             {isMobilityFinished === true ?
-            (<Grid container sx={{mt: 12}}>
-                <Grid item>
-                    <Button variant="contained" onClick={handleClickAddEval}>
-                        Add Evaluation
-                    </Button>
-                </Grid>
-            </Grid>) :
-            <div/>}
+                (<Grid container sx={{ mt: 12 }}>
+                    <Grid item>
+                        <Button sx={{ backgroundColor: "#201F2B" }} variant="contained" onClick={handleClickAddEval}>
+                            Add Evaluation
+                        </Button>
+                    </Grid>
+                </Grid>) :
+                <div />}
         </Box>
     )
 }

@@ -6,10 +6,10 @@ import MenuItem from '@mui/material/MenuItem';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import Divider from '@mui/material/Divider';
 import Tooltip from '@mui/material/Tooltip';
-import PersonAdd from '@mui/icons-material/PersonAdd';
-import Settings from '@mui/icons-material/Settings';
 import Logout from '@mui/icons-material/Logout';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import { Link } from 'react-router-dom';
+
 
 export default function AccountMenu() {
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -22,12 +22,12 @@ export default function AccountMenu() {
   };
   return (
     <React.Fragment>
-      <Box>
+      <Box >
         <Tooltip title="Account settings">
           <AccountCircleIcon
             onClick={handleClick}
             size="small"
-            sx={{padding: 0, ml: -1, mt: 0.5}}
+            sx={{ padding: 0, ml: -1, mt: 0.5 }}
             aria-controls={open ? 'account-menu' : undefined}
             aria-haspopup="true"
             aria-expanded={open ? 'true' : undefined}
@@ -71,29 +71,19 @@ export default function AccountMenu() {
         anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
       >
         <MenuItem>
-          <Avatar /> Profile
-        </MenuItem>
-        <MenuItem>
-          <Avatar /> My account
+          <Avatar sx={{ backgroundColor: '#282733' }} /> My Profile
         </MenuItem>
         <Divider />
-        <MenuItem>
-          <ListItemIcon>
-            <PersonAdd fontSize="small" />
-          </ListItemIcon>
-          Add another account
-        </MenuItem>
-        <MenuItem>
-          <ListItemIcon>
-            <Settings fontSize="small" />
-          </ListItemIcon>
-          Settings
-        </MenuItem>
-        <MenuItem>
-          <ListItemIcon>
-            <Logout fontSize="small" />
-          </ListItemIcon>
-          Logout
+
+        <MenuItem sx={{ width: 150 }}>
+          <Link style={{ color: '#282733', textDecoration: 'none' }} to="/">
+            <ListItemIcon>
+              <div style={{ display: "flex", color: "#282733" }}>
+                <Logout sx={{ color: '#282733' }} fontSize="small" />
+                Logout
+              </div>
+            </ListItemIcon>
+          </Link>
         </MenuItem>
       </Menu>
     </React.Fragment>
