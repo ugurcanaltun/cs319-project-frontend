@@ -40,6 +40,8 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
 
 export default function WishListScreen() {
     const [openDialog, setOpenDialog] = useState(false)
+    const [openIntentDialog, setOpenIntentDialog] = useState(false)
+    const [intentDialogText, setIntentDialogText] = useState("")
     const [isPrevAccepted, setIsPrevAccepted] = useState(true)
     const [rows, setRows] = useState([])
     const [courseTypeLabel, setCourseTypeLabel] = useState("")
@@ -70,9 +72,10 @@ export default function WishListScreen() {
             </Button>
         )
     }
-    function IntentButton() {
+    function IntentButton(props) {
         const onClick = () => {
-
+            setIntentDialogText(props.intent)
+            setOpenIntentDialog(true)
         }
         return (
             <Button onClick={onClick}>
@@ -82,9 +85,30 @@ export default function WishListScreen() {
     }
     const selectorsCourseType = ["Mandatory", "Elective", "Additional"]
     const selectorsCourses = ["EEE391", "ENG401", "CS319"]
+    const coursesData = [
+        {
+            courseCode: "EEE391",
+            courseName: "Basic Signals and Systems",
+            courseECTS: 5,
+        },
+        {
+            courseCode: "ENG401",
+            courseName: "English and Composition",
+            courseECTS: 4
+        },
+        {
+            courseCode: "CS319",
+            courseName: "Object Oriented Software Engineering",
+            courseECTS: 4
+        }
+    ]
     const headers = [
         ["Course Code", "Course Name", "ECTS", "Course Code", "Course Name", "ECTS", "Course Type", "Syllabus", "Intent", "Status"]
     ]
+
+    const handleCloseIntentDialog = () => {
+        setOpenIntentDialog(false)
+    }
 
     const handleCloseDialog = () => {
         setOpenDialog(false)
@@ -100,7 +124,7 @@ export default function WishListScreen() {
         setIsPrevAccepted(false)
     }
     const handleSubmitNewCourse = () => {
-        let row = ["","","",courseCode, courseName, ECTS, courseTypeLabel, <SyllabusButton/>, <IntentButton/>, "Not Approved"]
+        let row = [coursesData[bilkentCourseTransferred].courseCode,coursesData[bilkentCourseTransferred].courseName,coursesData[bilkentCourseTransferred].courseECTS,courseCode, courseName, ECTS, courseTypeLabel, <SyllabusButton/>, <IntentButton intent={intent}/>, "Not Approved"]
         setRows([...rows, row])
         setOpenDialog(false)
     }
@@ -203,7 +227,7 @@ export default function WishListScreen() {
                                     <em>None</em>
                                     </MenuItem>
                                     {selectorsCourseType.map((row, index) =>
-                                    <MenuItem value={index} key={index}>{row}</MenuItem>
+                                    <MenuItem value={row} key={index}>{row}</MenuItem>
                                     )}
                                 </Select>
                             </FormControl>
@@ -217,7 +241,7 @@ export default function WishListScreen() {
                                 <Select
                                     labelId="demo-select-small"
                                     id="demo-select-small"
-                                    value={bilkentCourseTransferred}
+                                    vawlue={bilkentCourseTransferred}
                                     label="Bilkent Course Transferred"
                                     onChange={handleBilkentCourseTransferred}
                                 >
@@ -322,6 +346,14 @@ export default function WishListScreen() {
                         </Grid>
                         </>
                         }
+                </DialogContent>
+            </Dialog>
+            <Dialog open={openIntentDialog} onClose={handleCloseIntentDialog}>
+                <DialogTitle>Intent</DialogTitle>
+                <DialogContent>
+                    <Typography variant="body1" gutterBottom>
+                        {intentDialogText}
+                    </Typography>
                 </DialogContent>
             </Dialog>
         </Box>
