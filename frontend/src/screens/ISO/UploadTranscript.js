@@ -15,7 +15,7 @@ import { useAddTranscriptMutation } from '../../redux/api/apiSlice';
 
 export default function UploadTranscript() {
   const [openDialog, setOpenDialog] = useState(false)
-  const [rows,setRows] = useState([])
+  const [rows, setRows] = useState([])
   const [university, setUniversity] = useState("")
   const [semester, setSemester] = useState("")
   const [student, setStudent] = useState("")
@@ -48,7 +48,7 @@ export default function UploadTranscript() {
   const handleStudentLabel = (event) => {
     setStudent(event.target.value)
   }
-  
+
   const handleSubmit = () => {
     const courses = []
     for (let i = 0; i < rows.length; i++) {
@@ -82,86 +82,83 @@ export default function UploadTranscript() {
 
   return (
     <div>
-        <h1>Transcripts</h1>
-        <div style={{display: "flex", justifyContent: "space-between",}}>
-          <div>
-            <h2>Select University</h2>
-            <FormControl sx={{ m: 1, width: 240, height: 50 }} size="small">
-              <InputLabel id="demo-select-small">University</InputLabel>
-              <Select
-                labelId="demo-select-small"
-                id="demo-select-small"
-                value={university}
-                label="University"
-                onChange={handleUniversityLabel}
-              >
-                <MenuItem value="">
-                  <em>None</em>
-                </MenuItem>
-                {universitySelectors.map((row, index) =>
-                  <MenuItem value={row} key={index}>{row}</MenuItem>
-                )}
-              </Select>
+      <h1>Transcripts</h1>
+      <div style={{ display: "flex", justifyContent: "space-between", }}>
+        <div>
+          <h2>Select University</h2>
+          <FormControl sx={{ m: 1, width: 240, height: 50 }} size="small">
+            <InputLabel id="demo-select-small">University</InputLabel>
+            <Select
+              labelId="demo-select-small"
+              id="demo-select-small"
+              value={university}
+              label="University"
+              onChange={handleUniversityLabel}
+            >
+              <MenuItem value="">
+                <em>None</em>
+              </MenuItem>
+              {universitySelectors.map((row, index) =>
+                <MenuItem value={row} key={index}>{row}</MenuItem>
+              )}
+            </Select>
           </FormControl>
-          </div>
-          <div>
-            <h2>Select Semester</h2>
-            <FormControl sx={{ m: 1, width: 240, height: 50 }} size="small">
-                <InputLabel id="demo-select-small">Semester</InputLabel>
-                <Select
-                  labelId="demo-select-small"
-                  id="demo-select-small"
-                  value={semester}
-                  label="Semester"
-                  onChange={handleSemesterLabel}
-                >
-                  <MenuItem value="">
-                    <em>None</em>
-                  </MenuItem>
-                  {semesterSelector.map((row, index) =>
-                    <MenuItem value={row} key={index}>{row}</MenuItem>
-                  )}
-                </Select>
-            </FormControl>
-          </div>
-          <div style={{ marginRight: 30 }}>
-            <h2>Select Student</h2>
-            <FormControl sx={{ m: 1, width: 240, height: 50 }} size="small">
-                <InputLabel id="demo-select-small">Student</InputLabel>
-                <Select
-                  labelId="demo-select-small"
-                  id="demo-select-small"
-                  value={student}
-                  label="Student"
-                  onChange={handleStudentLabel}
-                >
-                  <MenuItem value="">
-                    <em>None</em>
-                  </MenuItem>
-                  {studentsSelector.map((row, index) =>
-                    <MenuItem value={row} key={index}>{row}</MenuItem>
-                  )}
-                </Select>
-            </FormControl>
-          </div>
         </div>
-        <div style={{ display: "flex", justifyContent: "center" }}>
-          <StyledTable headers={headers} rows={rows} width={801} />
+        <div>
+          <h2>Select Semester</h2>
+          <FormControl sx={{ m: 1, width: 240, height: 50 }} size="small">
+            <InputLabel id="demo-select-small">Semester</InputLabel>
+            <Select
+              labelId="demo-select-small"
+              id="demo-select-small"
+              value={semester}
+              label="Semester"
+              onChange={handleSemesterLabel}
+            >
+              <MenuItem value="">
+                <em>None</em>
+              </MenuItem>
+              {semesterSelector.map((row, index) =>
+                <MenuItem value={row} key={index}>{row}</MenuItem>
+              )}
+            </Select>
+          </FormControl>
         </div>
-        <div style={{ display: "block" }}>
-          <div style={{ marginTop: 30, display: "flex", justifyContent: "right" }}>
-            <Button sx={{ backgroundColor: "#201F2B" }} onClick={() => setOpenDialog(true)} variant="contained">Add New Course</Button>
-          </div>
-          <div style={{ marginTop: 10, display: "flex", justifyContent: "right" }}>
-            <Button sx={{ backgroundColor: "#201F2B" }} variant="contained" type="submit">Submit</Button>
-          </div>
-          <div style={{marginTop: 10, display: "flex", justifyContent: "right"}}>
-            <Button variant="contained" type="submit" onClick={handleSubmit}>Submit</Button>
-          </div> 
+        <div style={{ marginRight: 30 }}>
+          <h2>Select Student</h2>
+          <FormControl sx={{ m: 1, width: 240, height: 50 }} size="small">
+            <InputLabel id="demo-select-small">Student</InputLabel>
+            <Select
+              labelId="demo-select-small"
+              id="demo-select-small"
+              value={student}
+              label="Student"
+              onChange={handleStudentLabel}
+            >
+              <MenuItem value="">
+                <em>None</em>
+              </MenuItem>
+              {studentsSelector.map((row, index) =>
+                <MenuItem value={row} key={index}>{row}</MenuItem>
+              )}
+            </Select>
+          </FormControl>
         </div>
-        <Dialog open={openDialog} onClose={handleCloseDialog}>
-          <DialogTitle>Add New Course</DialogTitle>
-          <DialogContent>
+      </div>
+      <div style={{ display: "flex", justifyContent: "center" }}>
+        <StyledTable headers={headers} rows={rows} width={801} />
+      </div>
+      <div style={{ display: "block" }}>
+        <div style={{ marginTop: 30, display: "flex", justifyContent: "right" }}>
+          <Button sx={{ backgroundColor: "#201F2B" }} onClick={() => setOpenDialog(true)} variant="contained">Add New Course</Button>
+        </div>
+        <div style={{ marginTop: 10, display: "flex", justifyContent: "right" }}>
+          <Button variant="contained" sx={{ backgroundColor: "#201F2B" }} type="submit" onClick={handleSubmit}>Submit</Button>
+        </div>
+      </div>
+      <Dialog open={openDialog} onClose={handleCloseDialog}>
+        <DialogTitle>Add New Course</DialogTitle>
+        <DialogContent>
           <Box component="form" onSubmit={handleAddCourse} noValidate sx={{ mt: 1 }}>
             <TextField
               margin="normal"
