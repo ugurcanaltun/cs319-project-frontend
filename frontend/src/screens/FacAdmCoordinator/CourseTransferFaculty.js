@@ -74,13 +74,13 @@ export default function CourseTransferFaculty() {
                     <Typography variant="body1" gutterBottom>
                         Download Form
                     </Typography>
-                    <Button sx={{ color: "#201F2B" }} variant="contained">Download</Button>
+                    <Button sx={{ backgroundColor: "#201F2B" }} variant="contained">Download</Button>
                 </Grid>
                 <Grid item xs={3} sx={{ mt: 4 }}>
                     <Typography variant="body1" gutterBottom>
                         Upload Form With Signature
                     </Typography>
-                    <Button variant="contained">Upload</Button>
+                    <Button sx={{ backgroundColor: "#201F2B" }} variant="contained">Upload</Button>
                 </Grid>
             </Grid>
         </Box>

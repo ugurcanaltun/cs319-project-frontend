@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {useState} from 'react';
+import { useState } from 'react';
 import Box from '@mui/material/Box';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
@@ -56,34 +56,34 @@ export default function AnnouncementsScreen() {
     }
 
     return (
-        <Box sx={{flexGrow: 1}}>
+        <Box sx={{ flexGrow: 1 }}>
             <Box sx={{ flexGrow: 1 }}>
-            <h1>Discussion Forum</h1>
+                <h1>Discussion Forum</h1>
             </Box>
             <List>
                 {discussions.map((discussion) =>
-                <>
-                <ListItem key={discussion.id} disablePadding>
-                    <ListItemButton onClick={handleClickDialog}>
-                        <ListItemIcon>
-                            <AccountCircleIcon/>
-                        </ListItemIcon>
-                        <ListItemText primary={discussion.discussionName} secondary={discussion.openedBy}/>
-                    </ListItemButton>
-                </ListItem>
-                <Divider/>
-                </>
+                    <>
+                        <ListItem key={discussion.id} disablePadding>
+                            <ListItemButton onClick={handleClickDialog}>
+                                <ListItemIcon>
+                                    <AccountCircleIcon />
+                                </ListItemIcon>
+                                <ListItemText primary={discussion.discussionName} secondary={discussion.openedBy} />
+                            </ListItemButton>
+                        </ListItem>
+                        <Divider />
+                    </>
                 )}
-            </List> 
+            </List>
             {userType === "student" ?
-            (<Grid container sx={{mt: 12}}>
-                <Grid item>
-                    <Button variant="contained" onClick={handleOpenDiscussion}>
-                        Open Discussion
-                    </Button>
-                </Grid>
-            </Grid>) :
-            <div/>}    
+                (<Grid container sx={{ mt: 12 }}>
+                    <Grid item>
+                        <Button sx={{ backgroundColor: "#201F2B" }} variant="contained" onClick={handleOpenDiscussion}>
+                            Open Discussion
+                        </Button>
+                    </Grid>
+                </Grid>) :
+                <div />}
             <Dialog open={openDialog} onClose={handleCloseDialog}>
                 <DialogTitle>{dialogTitle}</DialogTitle>
                 <DialogContent>
@@ -105,7 +105,7 @@ export default function AnnouncementsScreen() {
                     <Button onClick={handleCloseDialog}>Cancel</Button>
                     <Button onClick={handleCloseDialog}>Subscribe</Button>
                 </DialogActions>
-            </Dialog>       
+            </Dialog>
         </Box>
     )
 }
