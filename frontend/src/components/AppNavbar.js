@@ -39,7 +39,7 @@ const AppBar = styled(MuiAppBar, {
 export default function AppNavbar(props) {
 
     const { data, error, isLoading, isFetching, isSuccess } = useGetUserQuery()
-    const userType = data.users.role
+    const userType = data.role
     let navBarItems;
 
     if (userType === "student") {

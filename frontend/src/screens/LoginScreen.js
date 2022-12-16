@@ -22,9 +22,8 @@ export default function LoginScreen() {
             username: formData.get('username'),
             userType: formData.get('userRole')
         }
-        if (formData.get("username") === data.users.name) {
-            navigate("/home")
-        }
+        console.log(data)
+        navigate("/home")
     };
 
     return (

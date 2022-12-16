@@ -71,14 +71,15 @@ export default function ToDoListScreen() {
     let rows = [];
 
     if (isSuccess) {
-        for (let i = 0; i < data.tasks.length; i++) {
+        console.log(data)
+        for (let i = 0; i < data.length; i++) {
             let props = []
             rows.push([])
-            for (const task in data.tasks[i]) {
+            for (const task in data[i]) {
                 if (task !== "id") {
-                    rows[i].push(data.tasks[i][task])
+                    rows[i].push(data[i][task])
                 }
-                props.push(data.tasks[i][task])
+                props.push(data[i][task])
             }
             rows[i].push(<OperationSection id={props[0]} content={props[1]} deadline={props[2]} status={props[3]} />)
         }
