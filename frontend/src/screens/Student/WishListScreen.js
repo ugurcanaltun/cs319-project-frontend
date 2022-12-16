@@ -94,8 +94,8 @@ export default function WishListScreen() {
                 <Grid item xs={5}></Grid>
                 <Grid item xs={5}></Grid>
                 <Grid item xs={2} container direction="column" spacing={2}>
-                    <Grid item><Button sx={{ backgroundColor: "#201F2B" }} variant="contained" onClick={handleAddNewCourse}>Add New Course</Button></Grid>
-                    <Grid item><Button sx={{ backgroundColor: "#201F2B" }} variant="contained">Submit</Button></Grid>
+                    <Grid item><Button sx={{ backgroundColor: "#201F2B", marginLeft: 10 }} variant="contained" onClick={handleAddNewCourse}>Add New Course</Button></Grid>
+                    <Grid item><Button sx={{ backgroundColor: "#201F2B", marginLeft: 20 }} variant="contained">Submit</Button></Grid>
                 </Grid>
             </Grid>
             <Dialog open={openDialog} onClose={handleCloseDialog} fullWidth={true} maxWidth={"xl"}>
