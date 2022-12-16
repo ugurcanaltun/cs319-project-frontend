@@ -30,11 +30,11 @@ import { styled } from '@mui/material/styles';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
-      backgroundColor: theme.palette.common.black,
-      color: theme.palette.common.white,
+        backgroundColor: theme.palette.common.black,
+        color: theme.palette.common.white,
     },
     [`&.${tableCellClasses.body}`]: {
-      fontSize: 14,
+        fontSize: 14,
     },
 }));
 
@@ -53,6 +53,8 @@ export default function WishListScreen() {
     const addNewCourseHeaders = [
         ["Course Code", "Course Name", "ECTS", "Intent"]
     ]
+
+    const wishListApproved = false;
 
     const handleCourseTypeLabel = (event) => {
         setCourseTypeLabel(event.target.value)
@@ -130,13 +132,12 @@ export default function WishListScreen() {
     }
 
     function SelectButton() {
-        const onClick = () =>
-        {
+        const onClick = () => {
 
         }
         return (
             <Button onClick={onClick}>
-                <AddIcon sx={{color: "#000"}}/>
+                <AddIcon sx={{ color: "#201F2B" }} />
             </Button>
         )
     }
@@ -144,10 +145,14 @@ export default function WishListScreen() {
         ["Course Code", "Course Name", "ECTS", "Select"]
     ]
     const prevAcceptedRows = [
-        ["EEE391","Signals", 5, <SelectButton/>],
-        ["EEE391","Signals", 5, <SelectButton/>],
-        ["EEE391","Signals", 5, <SelectButton/>],
+        ["EEE391", "Signals", 5, <SelectButton />],
+        ["EEE391", "Signals", 5, <SelectButton />],
+        ["EEE391", "Signals", 5, <SelectButton />],
     ]
+
+    let submitButton;
+    if (wishListApproved) submitButton = <Button sx={{ backgroundColor: "#201F2B", marginLeft: 20 }} variant="contained">Submit</Button>
+    else submitButton = <Button disabled sx={{ backgroundColor: "#201F2B", marginLeft: 20 }} variant="contained">Submit</Button>
 
     return (
         <Box sx={{ flexGrow: 1 }}>
@@ -179,12 +184,12 @@ export default function WishListScreen() {
                 <Grid item xs={5}></Grid>
                 <Grid item xs={2} container direction="column" spacing={2}>
                     <Grid item><Button sx={{ backgroundColor: "#201F2B", marginLeft: 10 }} variant="contained" onClick={handleAddNewCourse}>Add New Course</Button></Grid>
-                    <Grid item><Button sx={{ backgroundColor: "#201F2B", marginLeft: 20 }} variant="contained">Submit</Button></Grid>
+                    <Grid item>{submitButton}</Grid>
                 </Grid>
             </Grid>
             <Dialog open={openDialog} onClose={handleCloseDialog} fullWidth={true} maxWidth={"xl"}>
                 <DialogTitle>
-                <strong>Add New Course</strong>
+                    <strong>Add New Course</strong>
                 </DialogTitle>
                 <DialogContent>
                     <Grid container>
@@ -224,7 +229,7 @@ export default function WishListScreen() {
                                     onChange={handleCourseTypeLabel}
                                 >
                                     <MenuItem value="">
-                                    <em>None</em>
+                                        <em>None</em>
                                     </MenuItem>
                                     {selectorsCourseType.map((row, index) =>
                                     <MenuItem value={row} key={index}>{row}</MenuItem>
@@ -246,106 +251,106 @@ export default function WishListScreen() {
                                     onChange={handleBilkentCourseTransferred}
                                 >
                                     <MenuItem value="">
-                                    <em>None</em>
+                                        <em>None</em>
                                     </MenuItem>
                                     {selectorsCourses.map((row, index) =>
-                                    <MenuItem value={index} key={index}>{row}</MenuItem>
+                                        <MenuItem value={index} key={index}>{row}</MenuItem>
                                     )}
                                 </Select>
                             </FormControl>
                         </Grid>
                     </Grid>
                     {isPrevAccepted
-                        ? 
-                        <Box sx={{flexGrow: 1}}>
-                            <Box sx={{flexGrow: 1}}>
+                        ?
+                        <Box sx={{ flexGrow: 1 }}>
+                            <Box sx={{ flexGrow: 1 }}>
                                 <h2>Host University Course Transferred</h2>
                             </Box>
                             <Grid container>
                                 <Grid xs={12} item>
-                                    <StyledTable headers={prevAcceptedHeaders} rows={prevAcceptedRows}/>
+                                    <StyledTable headers={prevAcceptedHeaders} rows={prevAcceptedRows} />
                                 </Grid>
                             </Grid>
                         </Box>
                         :
                         <>
-                        <Box sx={{ ml: 18 }}>
-                        <TableContainer sx={{ width: 801, marginTop: 5, marginLeft: 1, }} component={Paper}>
-                            <Table aria-label="customized table">
-                                <TableHead>
-                                <TableRow sx={{ width: 200 }}>
-                                    {addNewCourseHeaders.map((rows) =>
-                                    rows.map((row, index) =>
-                                        <StyledTableCell key={index} sx={{ width: 200 }} align="left">{row}</StyledTableCell>
-                                    )
-                                    )}
-                                </TableRow>
-                                </TableHead>
-            
-                                <TableBody>
-                                    <TableRow sx={{display: "flex", width: 200 }}>
-                                    <td style={{ display: "flex", width: 200 }}>
-                                        <div style={{ width: 200 }}>
-                                            <TextField 
-                                            value={courseCode} 
-                                            sx={{ width: 200 }} 
-                                            id="standard-basic" 
-                                            label="Enter" 
-                                            variant="standard"
-                                            onChange={(event) => {setCourseCode(event.target.value)}} />
-                                        </div>
-                                    </td>
-                                    <td style={{ display: "flex", width: 200 }}>
-                                        <div style={{ width: 200 }}>
-                                            <TextField 
-                                            value={courseName}  
-                                            sx={{ width: 200 }} 
-                                            id="standard-basic" 
-                                            label="Enter" 
-                                            variant="standard" 
-                                            onChange={(event) => {setCourseName(event.target.value)}}/>
-                                        </div>
-                                    </td>
-                                    <td style={{ display: "flex", width: 200 }}>
-                                        <div style={{ width: 200 }}>
-                                            <TextField 
-                                            value={ECTS} 
-                                            sx={{ width: 200 }} 
-                                            id="standard-basic" 
-                                            label="Enter" 
-                                            variant="standard" 
-                                            onChange={(event) => {setECTS(event.target.value)}}/>
-                                        </div>
-                                    </td>
-                                    <td style={{ display: "flex", width: 200 }}>
-                                        <div style={{ width: 200 }}>
-                                            <TextField 
-                                            value={intent} 
-                                            sx={{ width: 200 }} 
-                                            id="standard-basic" 
-                                            label="Enter" 
-                                            variant="standard"
-                                            onChange={(event) => {setIntent(event.target.value)}} />
-                                        </div>
-                                    </td>
-                                    </TableRow>
-                                </TableBody>
-                            </Table>
-                        </TableContainer>
-                        </Box>
-                        <Grid container sx={{ mt: 6 }}>
-                            <Grid item xs={6}>
-                                <Button sx={{ backgroundColor: "#201F2B" }} variant="contained">Upload Syllabus</Button>
+                            <Box sx={{ ml: 18 }}>
+                                <TableContainer sx={{ width: 801, marginTop: 5, marginLeft: 1, }} component={Paper}>
+                                    <Table aria-label="customized table">
+                                        <TableHead>
+                                            <TableRow sx={{ width: 200 }}>
+                                                {addNewCourseHeaders.map((rows) =>
+                                                    rows.map((row, index) =>
+                                                        <StyledTableCell key={index} sx={{ width: 200 }} align="left">{row}</StyledTableCell>
+                                                    )
+                                                )}
+                                            </TableRow>
+                                        </TableHead>
+
+                                        <TableBody>
+                                            <TableRow sx={{ display: "flex", width: 200 }}>
+                                                <td style={{ display: "flex", width: 200 }}>
+                                                    <div style={{ width: 200 }}>
+                                                        <TextField
+                                                            value={courseCode}
+                                                            sx={{ width: 200 }}
+                                                            id="standard-basic"
+                                                            label="Enter"
+                                                            variant="standard"
+                                                            onChange={(event) => { setCourseCode(event.target.value) }} />
+                                                    </div>
+                                                </td>
+                                                <td style={{ display: "flex", width: 200 }}>
+                                                    <div style={{ width: 200 }}>
+                                                        <TextField
+                                                            value={courseName}
+                                                            sx={{ width: 200 }}
+                                                            id="standard-basic"
+                                                            label="Enter"
+                                                            variant="standard"
+                                                            onChange={(event) => { setCourseName(event.target.value) }} />
+                                                    </div>
+                                                </td>
+                                                <td style={{ display: "flex", width: 200 }}>
+                                                    <div style={{ width: 200 }}>
+                                                        <TextField
+                                                            value={ECTS}
+                                                            sx={{ width: 200 }}
+                                                            id="standard-basic"
+                                                            label="Enter"
+                                                            variant="standard"
+                                                            onChange={(event) => { setECTS(event.target.value) }} />
+                                                    </div>
+                                                </td>
+                                                <td style={{ display: "flex", width: 200 }}>
+                                                    <div style={{ width: 200 }}>
+                                                        <TextField
+                                                            value={intent}
+                                                            sx={{ width: 200 }}
+                                                            id="standard-basic"
+                                                            label="Enter"
+                                                            variant="standard"
+                                                            onChange={(event) => { setIntent(event.target.value) }} />
+                                                    </div>
+                                                </td>
+                                            </TableRow>
+                                        </TableBody>
+                                    </Table>
+                                </TableContainer>
+                            </Box>
+                            <Grid container sx={{ mt: 6 }}>
+                                <Grid item xs={6}>
+                                    <Button sx={{ backgroundColor: "#201F2B" }} variant="contained">Upload Syllabus</Button>
+                                </Grid>
+                                <Grid item xs={6}>
+                                    <Button
+                                        sx={{ backgroundColor: "#201F2B" }}
+                                        variant="contained"
+                                        onClick={handleSubmitNewCourse}>Submit New Course</Button>
+                                </Grid>
                             </Grid>
-                            <Grid item xs={6}>
-                                <Button 
-                                sx={{ backgroundColor: "#201F2B" }} 
-                                variant="contained"
-                                onClick={handleSubmitNewCourse}>Submit New Course</Button>
-                            </Grid>
-                        </Grid>
                         </>
-                        }
+                    }
                 </DialogContent>
             </Dialog>
             <Dialog open={openIntentDialog} onClose={handleCloseIntentDialog}>

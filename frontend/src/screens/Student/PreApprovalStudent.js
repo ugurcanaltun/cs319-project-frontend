@@ -25,6 +25,12 @@ export default function PreApprovalStudent() {
     [6, " ", " ", " ", " ", " ", " "]];
     const headerSignatures = [["Approved by", "Name", "Signture", "Date"]];
     const rowsSignatures = [[" ", " ", " ", " "]];
+
+    const preAppOK = false;
+
+    let submitButton;
+    if (preAppOK) submitButton = <Button sx={{ backgroundColor: "#201F2B", marginLeft: 20 }} variant="contained">Submit</Button>
+    else submitButton = <Button disabled sx={{ backgroundColor: "#201F2B", marginLeft: 20 }} variant="contained">Submit</Button>
     return (
         <Box sx={{ flexGrow: 1 }}>
             <Box sx={{ flexGrow: 1, mb: -4 }}>
@@ -53,11 +59,9 @@ export default function PreApprovalStudent() {
                 </Grid>
                 <Grid item xs={10}>
                 </Grid>
-                <Box sx={{ flexGrow: 1, mt: 4, ml: 16 }}>
+                <Box sx={{ flexGrow: 1, mt: 4, marginLeft: 190 }}>
                     <Grid item xs={2}>
-                        <Button sx={{ backgroundColor: "#201F2B" }} variant="contained">
-                            Submit
-                        </Button>
+                        {submitButton}
                     </Grid>
                 </Box>
             </Grid>
