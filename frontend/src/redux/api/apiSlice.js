@@ -11,15 +11,15 @@ export const apiSlice = createApi({
     }),
     getTasks: builder.query({
       query: () => '/erasmus/1/getAllTasks',
-      providesTags: (result, error, arg) => [{ type: 'Tasks', id: arg }],
+      providesTags: ['Tasks'],
     }),
     updateTask: builder.mutation({
       query: (task) => ({
-        url: `/users/tasks/${task.id}`,
+        url: `/erasmus/1/tasks/update/${task.id}`,
         method: 'PUT',
         body: task
       }),
-      invalidatesTags: (result, error, arg) => [{ type: 'Tasks', id: arg.id }],
+      invalidatesTags: ['Tasks'],
     }),
     deleteTask: builder.mutation({
       query: ({ id }) => ({

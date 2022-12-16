@@ -18,6 +18,7 @@ function OperationSection(props) {
     const [deleteTask] = useDeleteTaskMutation()
 
     const handleCheckButton = () => {
+        console.log(props.id)
         updateTask({
             id: props.id,
             content: props.content,
@@ -36,7 +37,6 @@ function OperationSection(props) {
     }
 
     const handleCancelButton = () => {
-        console.log(props.id)
         deleteTask({ id: props.id })
     }
 
@@ -71,17 +71,16 @@ export default function ToDoListScreen() {
     let rows = [];
 
     if (isSuccess) {
-        console.log(data)
         for (let i = 0; i < data.length; i++) {
             let props = []
             rows.push([])
-            for (const task in data[i]) {
-                if (task !== "id") {
-                    rows[i].push(data[i][task])
+            for (const x in data[i]) {
+                if (x !== "id") {
+                    rows[i].push(data[i][x])
                 }
-                props.push(data[i][task])
+                props.push(data[i][x])
             }
-            rows[i].push(<OperationSection id={props[0]} content={props[1]} deadline={props[2]} status={props[3]} />)
+            rows[i].push(<OperationSection content={props[0]} deadline={props[1]} id={props[3]} status={props[2]} />)
         }
     }
 
