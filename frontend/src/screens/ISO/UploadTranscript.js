@@ -15,15 +15,11 @@ import { useAddTranscriptMutation } from '../../redux/api/apiSlice';
 
 export default function UploadTranscript() {
   const [openDialog, setOpenDialog] = useState(false)
-<<<<<<< HEAD
   const [rows,setRows] = useState([])
   const [university, setUniversity] = useState("")
   const [semester, setSemester] = useState("")
   const [student, setStudent] = useState("")
   const [addTranscript] = useAddTranscriptMutation()
-=======
-  const [rows, setRows] = useState([])
->>>>>>> 1d2546c9c38ae0df3ae508bf2e255fcb62b12c1f
 
   const handleCloseDialog = () => {
     setOpenDialog(false)
@@ -41,7 +37,6 @@ export default function UploadTranscript() {
     setOpenDialog(false)
   }
 
-<<<<<<< HEAD
   const handleUniversityLabel = (event) => {
     setUniversity(event.target.value)
   }
@@ -55,11 +50,6 @@ export default function UploadTranscript() {
   }
   
   const handleSubmit = () => {
-=======
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const formData = new FormData(event.currentTarget);
->>>>>>> 1d2546c9c38ae0df3ae508bf2e255fcb62b12c1f
     const courses = []
     for (let i = 0; i < rows.length; i++) {
       courses.push(
