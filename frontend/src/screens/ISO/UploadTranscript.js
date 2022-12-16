@@ -136,7 +136,6 @@ export default function UploadTranscript() {
           </div>
           <div style={{ marginRight: 30 }}>
             <h2>Select Student</h2>
-<<<<<<< HEAD
             <FormControl sx={{ m: 1, width: 240, height: 50 }} size="small">
                 <InputLabel id="demo-select-small">Student</InputLabel>
                 <Select
@@ -154,9 +153,6 @@ export default function UploadTranscript() {
                   )}
                 </Select>
             </FormControl>
-=======
-            <SelectLabels id="student" selector={selectors} label="Select" />
->>>>>>> 1d2546c9c38ae0df3ae508bf2e255fcb62b12c1f
           </div>
         </div>
         <div style={{ display: "flex", justifyContent: "center" }}>
@@ -169,7 +165,6 @@ export default function UploadTranscript() {
           <div style={{ marginTop: 10, display: "flex", justifyContent: "right" }}>
             <Button sx={{ backgroundColor: "#201F2B" }} variant="contained" type="submit">Submit</Button>
           </div>
-<<<<<<< HEAD
           <div style={{marginTop: 10, display: "flex", justifyContent: "right"}}>
             <Button variant="contained" type="submit" onClick={handleSubmit}>Submit</Button>
           </div> 
@@ -177,13 +172,6 @@ export default function UploadTranscript() {
         <Dialog open={openDialog} onClose={handleCloseDialog}>
           <DialogTitle>Add New Course</DialogTitle>
           <DialogContent>
-=======
-        </div>
-      </Box>
-      <Dialog open={openDialog} onClose={handleCloseDialog}>
-        <DialogTitle >Add New Course</DialogTitle>
-        <DialogContent>
->>>>>>> 1d2546c9c38ae0df3ae508bf2e255fcb62b12c1f
           <Box component="form" onSubmit={handleAddCourse} noValidate sx={{ mt: 1 }}>
             <TextField
               margin="normal"
