@@ -7,7 +7,7 @@ export const apiSlice = createApi({
   endpoints: (builder) => ({
     getUser: builder.query({
       query: () => '/erasmus/getUser/1',
-      providesTags: (result, error, arg) => [{ type: 'User', id: arg }],
+      providesTags: ['User'],
     }),
     getTasks: builder.query({
       query: () => '/erasmus/1/getAllTasks',
@@ -23,7 +23,7 @@ export const apiSlice = createApi({
     }),
     deleteTask: builder.mutation({
       query: ({ id }) => ({
-        url: `users/tasks/${id}`,
+        url: `/erasmus/1/tasks/remove/${id}`,
         method: 'DELETE',
         body: id
       }),
