@@ -53,8 +53,7 @@ export default function WishListScreen() {
     const addNewCourseHeaders = [
         ["Course Code", "Course Name", "ECTS", "Intent"]
     ]
-
-    const wishListApproved = false;
+    const [wishListApproved,setWishListApproved] = useState(false)
 
     const handleCourseTypeLabel = (event) => {
         setCourseTypeLabel(event.target.value)
@@ -65,8 +64,8 @@ export default function WishListScreen() {
     }
 
     function SyllabusButton() {
-        const onClick = () => {
-
+        const onClick = (event) => {
+            console.log(event)
         }
         return (
             <Button onClick={onClick}>
@@ -126,14 +125,22 @@ export default function WishListScreen() {
         setIsPrevAccepted(false)
     }
     const handleSubmitNewCourse = () => {
-        let row = [coursesData[bilkentCourseTransferred].courseCode,coursesData[bilkentCourseTransferred].courseName,coursesData[bilkentCourseTransferred].courseECTS,courseCode, courseName, ECTS, courseTypeLabel, <SyllabusButton/>, <IntentButton intent={intent}/>, "Not Approved"]
+        let row = [courseCode, courseName, ECTS, coursesData[bilkentCourseTransferred].courseCode,
+        coursesData[bilkentCourseTransferred].courseName, coursesData[bilkentCourseTransferred].courseECTS, 
+        courseTypeLabel, <SyllabusButton/>, <IntentButton intent={intent}/>, "Not Approved"]
         setRows([...rows, row])
         setOpenDialog(false)
     }
 
-    function SelectButton() {
+    function SelectButton(props) {
+        const index = props.rowIndex
         const onClick = () => {
-
+            let row = [prevAcceptedRows[index][0], prevAcceptedRows[index][1], 
+            prevAcceptedRows[index][2], coursesData[bilkentCourseTransferred].courseCode,
+            coursesData[bilkentCourseTransferred].courseName, coursesData[bilkentCourseTransferred].courseECTS, courseTypeLabel, 
+            <SyllabusButton/>, <IntentButton intent={intent}/>, "Not Approved"]
+            setRows([...rows, row])
+            setOpenDialog(false)
         }
         return (
             <Button onClick={onClick}>
@@ -145,9 +152,9 @@ export default function WishListScreen() {
         ["Course Code", "Course Name", "ECTS", "Select"]
     ]
     const prevAcceptedRows = [
-        ["EEE391", "Signals", 5, <SelectButton />],
-        ["EEE391", "Signals", 5, <SelectButton />],
-        ["EEE391", "Signals", 5, <SelectButton />],
+        ["EEE391", "Signals", 5, <SelectButton rowIndex={0}/>],
+        ["EEE381", "Signals", 5, <SelectButton rowIndex={1}/>],
+        ["EEE391", "Signals", 5, <SelectButton rowIndex={2}/>],
     ]
 
     let submitButton;
