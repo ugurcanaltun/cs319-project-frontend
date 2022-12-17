@@ -47,10 +47,9 @@ export default function WishListScreen() {
     const [isPrevAccepted, setIsPrevAccepted] = useState(true)
     const [rows, setRows] = useState([])
     useEffect(() => {
-        console.log("ahmet")
         if (isSuccess) {
             for (let i = 0; i < data.length; i++) {
-                let row = []
+                var row = []
                 row.push(data[i].courseToCountAsBilkentCourse.courseCode)
                 row.push(data[i].courseToCountAsBilkentCourse.hostCourseName)
                 row.push(data[i].courseToCountAsBilkentCourse.ects_credit)
@@ -64,11 +63,12 @@ export default function WishListScreen() {
                     row.push("Approved")
                 }
                 else { row.push("Not Approved") }
-                setRows(...rows, row)
+                setRows([...rows, row])
+                console.log(data)
+                console.log(rows)
             }
         }
-
-    }, [data])
+    }, [data, isSuccess])
     const [courseTypeLabel, setCourseTypeLabel] = useState("")
     const [bilkentCourseTransferred, setBilkentCourseTransferred] = useState("")
     const [courseCode, setCourseCode] = useState("")
