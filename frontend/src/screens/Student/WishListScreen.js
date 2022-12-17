@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Button from '@mui/material/Button'
 import Box from '@mui/material/Box'
 import Grid from '@mui/material/Grid'
@@ -27,6 +27,7 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import TextField from '@mui/material/TextField';
 import { styled } from '@mui/material/styles';
+import { useGetAllWishesQuery } from '../../redux/api/apiSlice'
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
@@ -39,11 +40,34 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
 }));
 
 export default function WishListScreen() {
+    const { data, error, isLoading, isFetching, isSuccess } = useGetAllWishesQuery()
     const [openDialog, setOpenDialog] = useState(false)
     const [openIntentDialog, setOpenIntentDialog] = useState(false)
     const [intentDialogText, setIntentDialogText] = useState("")
     const [isPrevAccepted, setIsPrevAccepted] = useState(true)
     const [rows, setRows] = useState([])
+    useEffect(() => {
+        if (isSuccess) {
+            for (let i = 0; i < data.length; i++) {
+                let row = []
+                row.push(data[i].courseToCountAsBilkentCourse.courseCode)
+                row.push(data[i].courseToCountAsBilkentCourse.hostCourseName)
+                row.push(data[i].courseToCountAsBilkentCourse.ects_credit)
+                row.push(data[i].bilkentCourse.courseCode)
+                row.push(data[i].bilkentCourse.nameOfCourse)
+                row.push(data[i].bilkentCourse.ects_credit)
+                row.push(data[i].bilkentCourse.courseType)
+                row.push(<SyllabusButton />)
+                row.push(<IntentButton intent={data[i].intent} />)
+                if (data[i].courseToCountAsBilkentCourse.approved) {
+                    row.push("Approved")
+                }
+                else { row.push("Not Approved") }
+                setRows(...rows, row)
+            }
+            console.log(rows)
+        }
+    }, [])
     const [courseTypeLabel, setCourseTypeLabel] = useState("")
     const [bilkentCourseTransferred, setBilkentCourseTransferred] = useState("")
     const [courseCode, setCourseCode] = useState("")
@@ -53,7 +77,7 @@ export default function WishListScreen() {
     const addNewCourseHeaders = [
         ["Course Code", "Course Name", "ECTS", "Intent"]
     ]
-    const [wishListApproved,setWishListApproved] = useState(false)
+    const [wishListApproved, setWishListApproved] = useState(false)
 
     const handleCourseTypeLabel = (event) => {
         setCourseTypeLabel(event.target.value)
@@ -212,8 +236,8 @@ export default function WishListScreen() {
     }
     const handleSubmitNewCourse = () => {
         let row = [courseCode, courseName, ECTS, coursesData[bilkentCourseTransferred].courseCode,
-        coursesData[bilkentCourseTransferred].courseName, coursesData[bilkentCourseTransferred].courseECTS, 
-        courseTypeLabel, <SyllabusButton/>, <IntentButton intent={intent}/>, "Not Approved"]
+            coursesData[bilkentCourseTransferred].courseName, coursesData[bilkentCourseTransferred].courseECTS,
+            courseTypeLabel, <SyllabusButton />, <IntentButton intent={intent} />, "Not Approved"]
         setRows([...rows, row])
         setOpenDialog(false)
     }
@@ -221,10 +245,10 @@ export default function WishListScreen() {
     function SelectButton(props) {
         const index = props.rowIndex
         const onClick = () => {
-            let row = [prevAcceptedRows[index][0], prevAcceptedRows[index][1], 
+            let row = [prevAcceptedRows[index][0], prevAcceptedRows[index][1],
             prevAcceptedRows[index][2], coursesData[bilkentCourseTransferred].courseCode,
-            coursesData[bilkentCourseTransferred].courseName, coursesData[bilkentCourseTransferred].courseECTS, courseTypeLabel, 
-            <SyllabusButton/>, <IntentButton intent={intent}/>, "Not Approved"]
+            coursesData[bilkentCourseTransferred].courseName, coursesData[bilkentCourseTransferred].courseECTS, courseTypeLabel,
+            <SyllabusButton />, <IntentButton intent={intent} />, "Not Approved"]
             setRows([...rows, row])
             setOpenDialog(false)
         }
@@ -238,9 +262,9 @@ export default function WishListScreen() {
         ["Course Code", "Course Name", "ECTS", "Select"]
     ]
     const prevAcceptedRows = [
-        ["EEE391", "Signals", 5, <SelectButton rowIndex={0}/>],
-        ["EEE381", "Signals", 5, <SelectButton rowIndex={1}/>],
-        ["EEE391", "Signals", 5, <SelectButton rowIndex={2}/>],
+        ["EEE391", "Signals", 5, <SelectButton rowIndex={0} />],
+        ["EEE381", "Signals", 5, <SelectButton rowIndex={1} />],
+        ["EEE391", "Signals", 5, <SelectButton rowIndex={2} />],
     ]
 
     let submitButton;
@@ -325,7 +349,7 @@ export default function WishListScreen() {
                                         <em>None</em>
                                     </MenuItem>
                                     {selectorsCourseType.map((row, index) =>
-                                    <MenuItem value={row} key={index}>{row}</MenuItem>
+                                        <MenuItem value={row} key={index}>{row}</MenuItem>
                                     )}
                                 </Select>
                             </FormControl>
@@ -346,10 +370,10 @@ export default function WishListScreen() {
                                     <MenuItem value="">
                                         <em>None</em>
                                     </MenuItem>
-                                    {coursesData.filter(obj => 
-                                    (obj.courseType === courseTypeLabel || courseTypeLabel === "Additional")).map(obj => obj.courseCode).map((row, index) =>
-                                        <MenuItem value={index} key={index}>{row}</MenuItem>
-                                    )}
+                                    {coursesData.filter(obj =>
+                                        (obj.courseType === courseTypeLabel || courseTypeLabel === "Additional")).map(obj => obj.courseCode).map((row, index) =>
+                                            <MenuItem value={index} key={index}>{row}</MenuItem>
+                                        )}
                                 </Select>
                             </FormControl>
                         </Grid>

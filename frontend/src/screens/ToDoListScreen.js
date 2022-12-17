@@ -22,14 +22,14 @@ import Paper from '@mui/material/Paper';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
-      backgroundColor: "#201F2B",
-      color: theme.palette.common.white,
+        backgroundColor: "#201F2B",
+        color: theme.palette.common.white,
     },
     [`&.${tableCellClasses.body}`]: {
-      fontSize: 14,
+        fontSize: 14,
     },
-  }));
-  
+}));
+
 
 
 function OperationSection(props) {
@@ -108,36 +108,36 @@ export default function ToDoListScreen() {
             <h1>To Do List</h1>
             <Grid container rowSpacing={1} columnSpacing={{ xs: 18 }}>
                 <Grid item xs={12}>
-                    <TableContainer sx={{cmarginTop: 5, marginLeft: 1, }} component={Paper}>
+                    <TableContainer sx={{ cmarginTop: 5, marginLeft: 1, }} component={Paper}>
                         <Table aria-label="customized table">
                             <TableHead>
-                            <TableRow>
-                                {headers.map((rows) =>
-                                rows.map((row, index) =>
-                                    <StyledTableCell key={index} align="center">{row}</StyledTableCell>
-                                )
-                                )}
-                            </TableRow>
+                                <TableRow>
+                                    {headers.map((rows) =>
+                                        rows.map((row, index) =>
+                                            <StyledTableCell key={index} align="center">{row}</StyledTableCell>
+                                        )
+                                    )}
+                                </TableRow>
                             </TableHead>
 
                             <TableBody>
-                            {rows.map((row, index) =>
-                                row[2] === "Completed" 
-                                ? <TableRow sx={{backgroundColor: "#39ff14"}} key={index}>
-                                {row.map((cell, index) => {
-                                    return (
-                                    <StyledTableCell key={index} align="center" component="th" scope="row">{cell}</StyledTableCell>
-                                    )
-                                })}
-                                </TableRow> :
-                                <TableRow sx={{backgroundColor: "#ffffe0"}} key={index}>
-                                {row.map((cell, index) => {
-                                    return (
-                                    <StyledTableCell key={index} align="center" component="th" scope="row">{cell}</StyledTableCell>
-                                    )
-                                })}
-                                </TableRow>
-                            )}
+                                {rows.map((row, index) =>
+                                    row[2] === "Completed"
+                                        ? <TableRow sx={{ backgroundColor: "#39ff14" }} key={index}>
+                                            {row.map((cell, index) => {
+                                                return (
+                                                    <StyledTableCell key={index} align="center" component="th" scope="row">{cell}</StyledTableCell>
+                                                )
+                                            })}
+                                        </TableRow> :
+                                        <TableRow sx={{ backgroundColor: "#ffffe0" }} key={index}>
+                                            {row.map((cell, index) => {
+                                                return (
+                                                    <StyledTableCell key={index} align="center" component="th" scope="row">{cell}</StyledTableCell>
+                                                )
+                                            })}
+                                        </TableRow>
+                                )}
                             </TableBody>
                         </Table>
                     </TableContainer>
