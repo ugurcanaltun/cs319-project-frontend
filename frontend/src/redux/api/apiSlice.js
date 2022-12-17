@@ -3,11 +3,11 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 export const apiSlice = createApi({
   reducerPath: 'api',
   baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:8080' }),
-  tagTypes: ['User', 'Tasks', 'Transcripts'],
+  tagTypes: ['User', 'Tasks', 'Transcripts', 'Syllabus'],
   endpoints: (builder) => ({
     getUser: builder.query({
       query: () => '/erasmus/getUser/1',
-      providesTags: (result, error, arg) => [{ type: 'User', id: arg }],
+      providesTags: ['User'],
     }),
     getTasks: builder.query({
       query: () => '/erasmus/1/getAllTasks',
@@ -22,21 +22,29 @@ export const apiSlice = createApi({
       invalidatesTags: ['Tasks'],
     }),
     deleteTask: builder.mutation({
-      query: ({ id }) => ({
+      query: (id) => ({
         url: `users/tasks/${id}`,
         method: 'DELETE',
         body: id
       }),
       invalidatesTags: ['Tasks'],
     }),
-    addTranscript: builder.mutation({
+    submitTranscript: builder.mutation({
       query: (transcript) => ({
         url: `transcripts`,
         method: 'POST',
         body: transcript
       }),
       invalidatesTags: ['Transcripts'],
-    })
+    }),
+    uploadSyllabus: builder.mutation({
+      query: (syllabus) => ({
+        url: `uploadSyllabus/`,
+        method: 'POST',
+        body: syllabus
+      }),
+      invalidatesTags: ['Syllabus'],
+    }),
   }),
 })
 
@@ -45,5 +53,6 @@ export const {
   useGetTasksQuery,
   useUpdateTaskMutation,
   useDeleteTaskMutation,
-  useAddTranscriptMutation
+  useSubmitTranscriptMutation,
+  useUploadSyllabus,
 } = apiSlice
