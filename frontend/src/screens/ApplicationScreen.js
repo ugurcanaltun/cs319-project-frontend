@@ -1,8 +1,12 @@
 import * as React from 'react';
 import StyledTable from '../components/StyledTable';
 import Button from '@mui/material/Button';
+import { useGetApplicationQuery } from '../redux/api/apiSlice';
 
 export default function ApplicationsScreen() {
+    const { data, error, isLoading, isFetching, isSuccess } = useGetApplicationQuery(1)
+    if (isSuccess) console.log(data);
+
     const appHeaders = [
         ["#", "Host University", "Semester", "Semester Start Date", "Semester End Date",
             "Status", "Application Status", "Form Code", "Operations"]
