@@ -190,7 +190,7 @@ export default function WishListScreen() {
         },
     ]
     const headers = [
-        ["Course Code ", "Course Name", "ECTS", "Course Code", "Course Name", "ECTS", "Course Type", "Syllabus", "Intent", "Status"]
+        ["Course Code", "Course Name", "ECTS", "Course Code", "Course Name", "ECTS", "Course Type", "Syllabus", "Intent", "Status"]
     ]
 
     const handleCloseIntentDialog = () => {
