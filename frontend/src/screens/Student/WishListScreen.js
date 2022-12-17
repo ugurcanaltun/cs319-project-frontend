@@ -347,7 +347,7 @@ export default function WishListScreen() {
                                         <em>None</em>
                                     </MenuItem>
                                     {coursesData.filter(obj => 
-                                    obj.courseType === courseTypeLabel).map(obj => obj.courseCode).map((row, index) =>
+                                    (obj.courseType === courseTypeLabel || courseTypeLabel === "Additional")).map(obj => obj.courseCode).map((row, index) =>
                                         <MenuItem value={index} key={index}>{row}</MenuItem>
                                     )}
                                 </Select>
