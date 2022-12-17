@@ -84,24 +84,110 @@ export default function WishListScreen() {
             </Button>
         )
     }
-    const selectorsCourseType = ["Mandatory", "Elective", "Additional"]
-    const selectorsCourses = ["EEE391", "ENG401", "CS319"]
+    const selectorsCourseType = ["Mandatory", "Arts Core Electives", "General Elective", "Technical Elective", "Additional"]
     const coursesData = [
         {
-            courseCode: "EEE391",
-            courseName: "Basic Signals and Systems",
+            courseCode: "CS 342",
+            courseName: "Operating Systems",
+            courseECTS: 6.5,
+            courseType: "Mandatory",
+        },
+        {
+            courseCode: "CS 353",
+            courseName: "Operating Systems",
             courseECTS: 5,
+            courseType: "Mandatory",
         },
         {
-            courseCode: "ENG401",
-            courseName: "English and Composition",
-            courseECTS: 4
+            courseCode: "EEE 391",
+            courseName: "Basics of Signals and Systems",
+            courseECTS: 5,
+            courseType: "Mandatory",
         },
         {
-            courseCode: "CS319",
-            courseName: "Object Oriented Software Engineering",
-            courseECTS: 4
-        }
+            courseCode: "GE 301",
+            courseName: "Science Technology and Society",
+            courseECTS: 3.5,
+            courseType: "Mandatory",
+        },
+        {
+            courseCode: "ADA 265",
+            courseName: "How Houses Build People",
+            courseECTS: 5,
+            courseType: "Arts Core Electives",
+        },
+        {
+            courseCode: "COMD 203",
+            courseName: "Media Studies I",
+            courseECTS: 5,
+            courseType: "Arts Core Electives",
+        },
+        {
+            courseCode: "HART 117",
+            courseName: "Ways of Seeing: Approaches to Art and Architectural History",
+            courseECTS: 5,
+            courseType: "Arts Core Electives",
+        },
+        {
+            courseCode: "FA 171",
+            courseName: "Introduction to Art, Design and Culture I",
+            courseECTS: 5,
+            courseType: "Arts Core Electives",
+        },
+        {
+            courseCode: "MSC 110",
+            courseName: "The Culture and Basics of Music Making",
+            courseECTS: 5,
+            courseType: "Arts Core Electives",
+        },
+        {
+            courseCode: "THR 110",
+            courseName: "Introduction to Theatre",
+            courseECTS: 5,
+            courseType: "Arts Core Electives",
+        },
+        {
+            courseCode: "CS 473",
+            courseName: "Algorithms I",
+            courseECTS: 3.5,
+            courseType: "Mandatory",
+        },
+        {
+            courseCode: "IE 400",
+            courseName: "Principles of Engineering Management",
+            courseECTS: 3.5,
+            courseType: "Mandatory",
+        },
+        {
+            courseCode: "LNG 111",
+            courseName: "Spanish I",
+            courseECTS: 5,
+            courseType: "General Elective",
+        },
+        {
+            courseCode: "CS 411",
+            courseName: "Software Architecture Design",
+            courseECTS: 5,
+            courseType: "Technical Elective",
+        },
+        {
+            courseCode: "CS 411",
+            courseName: "Software Architecture Design",
+            courseECTS: 5,
+            courseType: "Technical Elective",
+        },
+        {
+            courseCode: "CS 413",
+            courseName: "Software Engineering Project Management",
+            courseECTS: 5,
+            courseType: "Technical Elective",
+        },
+        {
+            courseCode: "CS 415",
+            courseName: "Software Product Line Engineering",
+            courseECTS: 5,
+            courseType: "Technical Elective",
+        },
     ]
     const headers = [
         ["Course Code", "Course Name", "ECTS", "Course Code", "Course Name", "ECTS", "Course Type", "Syllabus", "Intent", "Status"]
@@ -260,7 +346,8 @@ export default function WishListScreen() {
                                     <MenuItem value="">
                                         <em>None</em>
                                     </MenuItem>
-                                    {selectorsCourses.map((row, index) =>
+                                    {coursesData.filter(obj => 
+                                    obj.courseType === courseTypeLabel).map(obj => obj.courseCode).map((row, index) =>
                                         <MenuItem value={index} key={index}>{row}</MenuItem>
                                     )}
                                 </Select>
