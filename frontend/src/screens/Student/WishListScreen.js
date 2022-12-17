@@ -47,6 +47,7 @@ export default function WishListScreen() {
     const [isPrevAccepted, setIsPrevAccepted] = useState(true)
     const [rows, setRows] = useState([])
     useEffect(() => {
+        console.log("ahmet")
         if (isSuccess) {
             for (let i = 0; i < data.length; i++) {
                 let row = []
@@ -65,9 +66,9 @@ export default function WishListScreen() {
                 else { row.push("Not Approved") }
                 setRows(...rows, row)
             }
-            console.log(rows)
         }
-    }, [])
+
+    }, [data])
     const [courseTypeLabel, setCourseTypeLabel] = useState("")
     const [bilkentCourseTransferred, setBilkentCourseTransferred] = useState("")
     const [courseCode, setCourseCode] = useState("")
