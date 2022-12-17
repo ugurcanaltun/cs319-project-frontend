@@ -56,7 +56,7 @@ function OperationSection(props) {
     }
 
     const handleCancelButton = () => {
-        deleteTask({ id: props.id })
+        deleteTask(props.id)
     }
 
     return (
