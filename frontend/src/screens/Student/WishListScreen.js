@@ -343,22 +343,16 @@ export default function WishListScreen() {
         // formData.append("wish", wish)
         // console.log(formData)
         const obj = {
-            bilkentCourse: {
-                courseCode: row[3],
-                courseType: row[6],
-                ects_credit: row[5],
-            },
-            courseToCountAsBilkentCourse: {
-                approved: true,
-                courseCode: row[0],
-                ects_credit: row[2],
-                nameOfCourse: row[1],
-            },
-            wish: {
-                standing: "",
-                syllabus: "",
-                intent: "",
-            }
+            bilkentCourseCode: row[3],
+            bilkentCourseType: row[6],
+            bilkentEcts_credit: row[5],
+            approved: true,
+            hostCourseCode: row[0],
+            hostEcts_credit: row[2],
+            hostNameOfCourse: row[1],
+            standing: "",
+            syllabus: "",
+            intent: ""
         }
         console.log(obj)
         addWish(obj)
