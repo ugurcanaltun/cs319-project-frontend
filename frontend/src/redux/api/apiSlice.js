@@ -3,7 +3,7 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 export const apiSlice = createApi({
   reducerPath: 'api',
   baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:8080' }),
-  tagTypes: ['User', 'Tasks', 'Transcripts', 'Syllabus', 'ScoreTable', 'Wish', 'WishList', 'PreApproval', 'Application', 'File'],
+  tagTypes: ['User', 'Tasks', 'Transcripts', 'Syllabus', 'ScoreTable', 'Wish', 'WishList', 'PreApproval', 'Application', 'File', 'Excels'],
   endpoints: (builder) => ({
     getUser: builder.query({
       query: () => '/erasmus/getUser/1',
@@ -157,8 +157,16 @@ export const apiSlice = createApi({
         body: fileName,
       }),
       invalidatesTags: ['File'],
-    })
+    }),
 
+    getDataFromExcel: builder.mutation({
+      query: (excel) => ({
+        url: '/getDataFromExcel',
+        method: 'POST',
+        body: excel,
+      }),
+      invalidatesTags: ['Excels'],
+    })
 
   }),
 })
@@ -172,7 +180,7 @@ export const {
   useGetApplicationQuery,
   useGetAllWishesQuery,
   useUploadFileMutation,
-  useAddWishMutation
-
+  useAddWishMutation,
+  useGetDataFromExcelMutation
   // useUploadSyllabus,
 } = apiSlice
