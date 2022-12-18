@@ -7,6 +7,8 @@ import Box from '@mui/material/Box';
 import { useState } from 'react'
 import { useUploadFileMutation } from '../../redux/api/apiSlice';
 import axios from 'axios'
+import UploadIcon from '@mui/icons-material/Upload';
+import Divider from '@mui/material/Divider';
 
 export default function LearningAgreementScreen() {
     const [uploadFile] = useUploadFileMutation()
@@ -142,17 +144,21 @@ export default function LearningAgreementScreen() {
                 </Grid>
             </Grid>
             <Box sx={{ m: 3 }} />
-            <Grid container direction="row" alignItems="center" spacing={2} wrap="nowrap" justifyContent="center">
-                <Grid item>
-                    <Button sx={{ backgroundColor: "#201F2B" }} variant="contained" onClick={handleUploadButton}>
-                        Upload
-                        <input onChange={onFileChange} hidden name="file1" accept="application/pdf" multiple type="file" />
-                    </Button>
+            <Grid container direction="row" alignItems="center" spacing={2} wrap="nowrap">
+                <Grid item >
+                <Button sx={{ display: 'flex', width: 120, marginLeft: 1, backgroundColor: "#201F2B" }} edge="start" endIcon={<UploadIcon />} variant="contained" component="label">
+                    Upload
+                    <input onChange={onFileChange} hidden name="file1" accept="application/pdf" multiple type="file" />
+                </Button>
                 </Grid>
                 <Grid item>
-                    <Button sx={{ backgroundColor: "#201F2B" }} variant="contained" onClick={handleDownloadButton}>Download</Button>
+                <Button onClick={handleUploadButton} sx={{ display: 'flex', width: 120, marginLeft: 1, backgroundColor: "#201F2B" }} edge="start" variant="contained" component="label">
+                    Submit
+                </Button>
                 </Grid>
             </Grid>
+            <Divider sx={{mt: 2}}/>
+            <Button sx={{ backgroundColor: "#201F2B", mt: 2, ml: 1 }} variant="contained" onClick={handleDownloadButton}>Download</Button>
         </>
     )
 }
