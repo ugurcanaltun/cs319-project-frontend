@@ -31,6 +31,7 @@ import { useGetAllWishesQuery, useAddWishMutation } from '../../redux/api/apiSli
 import { useUploadFileMutation } from '../../redux/api/apiSlice';
 import UploadIcon from '@mui/icons-material/Upload';
 import DownloadIcon from '@mui/icons-material/Download';
+import axios from 'axios'
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
@@ -70,6 +71,29 @@ export default function WishListScreen() {
             uploadFile(formData)
         }
     }
+
+    const handleDownloadButton = () => {
+        axios({
+            url: `http://localhost:8080/downloadFile/${file.name}`, //your url
+            method: 'GET',
+            responseType: 'blob', // important
+        }).then((response) => {
+            // create file link in browser's memory
+            const href = URL.createObjectURL(response.data);
+        
+            // create "a" HTML element with href to file & click
+            const link = document.createElement('a');
+            link.href = href;
+            link.setAttribute('download', 'learningAgreement.pdf'); //or any other extension
+            document.body.appendChild(link);
+            link.click();
+        
+            // clean up "a" element & remove ObjectURL
+            document.body.removeChild(link);
+            URL.revokeObjectURL(href);
+        });
+    } 
+
     const [addWish] = useAddWishMutation()
 
 
@@ -117,9 +141,27 @@ export default function WishListScreen() {
         setBilkentCourseTransferred(event.target.value)
     }
 
-    function SyllabusButton() {
-        const onClick = (event) => {
-            console.log(event)
+    function SyllabusButton(props) {
+        const onClick = () => {
+            axios({
+                url: `http://localhost:8080/downloadFile/${props.syllabusTitle}`, //your url
+                method: 'GET',
+                responseType: 'blob', // important
+            }).then((response) => {
+                // create file link in browser's memory
+                const href = URL.createObjectURL(response.data);
+            
+                // create "a" HTML element with href to file & click
+                const link = document.createElement('a');
+                link.href = href;
+                link.setAttribute('download', `${props.syllabusTitle}.pdf`); //or any other extension
+                document.body.appendChild(link);
+                link.click();
+            
+                // clean up "a" element & remove ObjectURL
+                document.body.removeChild(link);
+                URL.revokeObjectURL(href);
+            });
         }
         return (
             <Button onClick={onClick}>
@@ -270,7 +312,7 @@ export default function WishListScreen() {
         // const formData = new FormData(document.getElementById("aa"))
         let row = [courseCode, courseName, ECTS, coursesData[bilkentCourseTransferred].courseCode,
             coursesData[bilkentCourseTransferred].courseName, coursesData[bilkentCourseTransferred].courseECTS,
-            courseTypeLabel, <SyllabusButton />, <IntentButton intent={intent} />, "Not Approved"]
+            courseTypeLabel, <SyllabusButton syllabusTitle={fileName}/>, <IntentButton intent={intent} />, "Not Approved"]
         setRows([...rows, row])
         // const bilkentCourse = {
         //     bilkentCourse: {
@@ -569,7 +611,7 @@ export default function WishListScreen() {
                             }           
                             </Grid>
                             <Grid item>
-                            <Button sx={{ display: 'flex', marginLeft: 1, backgroundColor: "#201F2B" }} edge="start" variant="contained" component="label">
+                            <Button onClick={handleDownloadButton} sx={{ display: 'flex', marginLeft: 1, backgroundColor: "#201F2B" }} edge="start" variant="contained" component="label">
                                 <DownloadIcon/>
                             </Button>
                             </Grid>
