@@ -123,7 +123,7 @@ export default function ToDoListScreen() {
                             <TableBody>
                                 {rows.map((row, index) =>
                                     row[2] === "Completed"
-                                        ? <TableRow sx={{ backgroundColor: "#39ff14" }} key={index}>
+                                        ? <TableRow sx={{ backgroundColor: "#5EFF89" }} key={index}>
                                             {row.map((cell, index) => {
                                                 return (
                                                     <StyledTableCell key={index} align="center" component="th" scope="row">{cell}</StyledTableCell>

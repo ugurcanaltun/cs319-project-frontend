@@ -1,39 +1,56 @@
 import * as React from 'react';
 import StyledTable from '../components/StyledTable';
 import Button from '@mui/material/Button';
-import { useGetApplicationQuery } from '../redux/api/apiSlice';
+import { useGetApplicationQuery, useGetUserQuery } from '../redux/api/apiSlice';
 
 export default function ApplicationsScreen() {
-    const { data, error, isLoading, isFetching, isSuccess } = useGetApplicationQuery(1)
-    if (isSuccess) console.log(data);
+    const { data, error, isLoading, isFetching, isSuccess } = useGetApplicationQuery()
+
+    let hasApplication = false
+    const invHeaders = [
+        ["#", "Host University", "Semester", "Semester Start Date", "Semester End Date"]
+    ];
 
     const appHeaders = [
         ["#", "Host University", "Semester", "Semester Start Date", "Semester End Date",
-            "Status", "Application Status", "Form Code", "Operations"]
+            "Application Status"]
     ];
 
-    const invHeaders = [
-        ["#", "Host University", "Semester", "Semester Start Date", "Semester End Date",]
+    let appRows = [
+        ["1", "vrij", "spring", "january", "june", "-"]
     ];
 
-    const appRows = [
-        ["1"]
+    let invRows = [
+        ["1", "vrij", "spring", "january", "june"]
     ];
+    let headers = []
+    let rows = []
 
-    const invRows = [
-        ["1"]
-    ];
+    if (isSuccess) {
+        if (data.placed) {
+            headers = appHeaders
+            rows = appRows;
+            hasApplication = true
+        }
+        else {
+            headers = invHeaders
+            rows = invRows;
+            hasApplication = false
+        }
+        console.log(data);
+    }
+
 
     // API
-    const hasApplication = true;
 
     const width = 1200;
 
     function ApplicationComp() {
+
         return (
             <div>
                 <h2>Erasmus Program (KA103)</h2>
-                <StyledTable width={width} headers={appHeaders} rows={appRows} />
+                <StyledTable width={width} headers={headers} rows={rows} />
                 <Button sx={{ backgroundColor: "#751C08", marginTop: 3, marginLeft: 127 }} align="right" variant="contained">Cancel Application</Button>
             </div>
         )
@@ -43,7 +60,7 @@ export default function ApplicationsScreen() {
         return (
             <div>
                 <h2>Erasmus Program (KA103) Invitation</h2>
-                <StyledTable width={width} headers={invHeaders} rows={invRows} />
+                <StyledTable width={width} headers={headers} rows={rows} />
                 <Button sx={{ backgroundColor: "#035206", marginTop: 3, marginLeft: 107 }} align="right" variant="contained">Accept Invitation</Button>
                 <Button sx={{ backgroundColor: "#751C08", marginTop: 3, marginLeft: 1 }} align="right" variant="contained">Reject Invitation</Button>
             </div>

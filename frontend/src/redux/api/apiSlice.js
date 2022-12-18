@@ -25,7 +25,7 @@ export const apiSlice = createApi({
     }),
     deleteTask: builder.mutation({
       query: (id) => ({
-        url: `users/tasks/${id}`,
+        url: `erasmus/1/tasks/remove/${id}`,
         method: 'DELETE',
         body: id
       }),
@@ -145,7 +145,7 @@ export const apiSlice = createApi({
 
     // Application
     getApplication: builder.query({
-      query: (id) => `erasmus/${id}/application/getByType/0`,
+      query: (id) => `erasmus/1/application/getByType/0`,
       providesTags: ['Application'],
     }),
 
