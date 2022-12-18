@@ -4,14 +4,51 @@ import CircleIcon from '@mui/icons-material/Circle';
 import { Grid } from '@mui/material';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
+import { useState } from 'react'
+import { useUploadFileMutation } from '../../redux/api/apiSlice';
+import axios from 'axios'
 
 export default function LearningAgreementScreen() {
-    const handleUploadButton = () => {
-        
+    const [uploadFile] = useUploadFileMutation()
+    const [file, setFile] = useState()
+
+    const onFileChange = (event) => {
+        setFile(event.target.files[0])
+    }
+
+    const handleUploadButton = (event) => {
+        if(file){
+            event.preventDefault()
+            const formData = new FormData()
+            formData.append("file", file)
+            formData.append("fileName", file.name)
+            formData.append("fileDownloadUri", `http://localhost:8080/downloadFile/${file.name}`)
+            formData.append("fileType", file.type)
+            formData.append("size", file.size)
+            uploadFile(formData)
+        }
     }
 
     const handleDownloadButton = () => {
-        console.log("downloadButtonClicked")
+        axios({
+            url: `http://localhost:8080/downloadFile/${file.name}`, //your url
+            method: 'GET',
+            responseType: 'blob', // important
+        }).then((response) => {
+            // create file link in browser's memory
+            const href = URL.createObjectURL(response.data);
+        
+            // create "a" HTML element with href to file & click
+            const link = document.createElement('a');
+            link.href = href;
+            link.setAttribute('download', 'learningAgreement.pdf'); //or any other extension
+            document.body.appendChild(link);
+            link.click();
+        
+            // clean up "a" element & remove ObjectURL
+            document.body.removeChild(link);
+            URL.revokeObjectURL(href);
+        });
     }
 
     return (
@@ -107,7 +144,10 @@ export default function LearningAgreementScreen() {
             <Box sx={{ m: 3 }} />
             <Grid container direction="row" alignItems="center" spacing={2} wrap="nowrap" justifyContent="center">
                 <Grid item>
-                    <Button sx={{ backgroundColor: "#201F2B" }} variant="contained" onClick={handleUploadButton}>Upload</Button>
+                    <Button sx={{ backgroundColor: "#201F2B" }} variant="contained" onClick={handleUploadButton}>
+                        Upload
+                        <input onChange={onFileChange} hidden name="file1" accept="application/pdf" multiple type="file" />
+                    </Button>
                 </Grid>
                 <Grid item>
                     <Button sx={{ backgroundColor: "#201F2B" }} variant="contained" onClick={handleDownloadButton}>Download</Button>
