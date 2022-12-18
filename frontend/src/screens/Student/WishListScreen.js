@@ -27,7 +27,7 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import TextField from '@mui/material/TextField';
 import { styled } from '@mui/material/styles';
-import { useGetAllWishesQuery } from '../../redux/api/apiSlice'
+import { useGetAllWishesQuery, useAddWishMutation } from '../../redux/api/apiSlice'
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
@@ -46,10 +46,16 @@ export default function WishListScreen() {
     const [intentDialogText, setIntentDialogText] = useState("")
     const [isPrevAccepted, setIsPrevAccepted] = useState(true)
     const [rows, setRows] = useState([])
+
+    const [addWish] = useAddWishMutation()
+
+
     useEffect(() => {
         if (isSuccess) {
+            console.log(data)
+            let aa = []
             for (let i = 0; i < data.length; i++) {
-                var row = []
+                let row = []
                 row.push(data[i].courseToCountAsBilkentCourse.courseCode)
                 row.push(data[i].courseToCountAsBilkentCourse.hostCourseName)
                 row.push(data[i].courseToCountAsBilkentCourse.ects_credit)
@@ -63,10 +69,9 @@ export default function WishListScreen() {
                     row.push("Approved")
                 }
                 else { row.push("Not Approved") }
-                setRows([...rows, row])
-                console.log(data)
-                console.log(rows)
+                aa.push(row)
             }
+            setRows([...rows, ...aa])
         }
     }, [data, isSuccess])
     const [courseTypeLabel, setCourseTypeLabel] = useState("")
@@ -75,6 +80,7 @@ export default function WishListScreen() {
     const [courseName, setCourseName] = useState("")
     const [ECTS, setECTS] = useState("")
     const [intent, setIntent] = useState("")
+
     const addNewCourseHeaders = [
         ["Course Code", "Course Name", "ECTS", "Intent"]
     ]
@@ -235,11 +241,33 @@ export default function WishListScreen() {
     const handleClickNewCourses = () => {
         setIsPrevAccepted(false)
     }
-    const handleSubmitNewCourse = () => {
+    function HandleSubmitNewCourse(event) {
+        event.preventDefault(event.currentTarget)
+        const formData = new FormData(document.getElementById("new-course-button"))
         let row = [courseCode, courseName, ECTS, coursesData[bilkentCourseTransferred].courseCode,
             coursesData[bilkentCourseTransferred].courseName, coursesData[bilkentCourseTransferred].courseECTS,
             courseTypeLabel, <SyllabusButton />, <IntentButton intent={intent} />, "Not Approved"]
         setRows([...rows, row])
+        const obj = {
+            bilkentCourse: {
+                courseCode: row[3],
+                courseType: row[6],
+                ects_credit: row[5],
+            },
+            courseToCountAsBilkentCourse: {
+                approved: true,
+                courseCode: row[0],
+                ects_credit: row[2],
+                nameOfCourse: row[1],
+            },
+            wish: {
+                standing: "",
+                syllabus: "",
+                intent: "",
+            }
+        }
+        formData.append(obj)
+        addWish(formData)
         setOpenDialog(false)
     }
 
@@ -252,6 +280,7 @@ export default function WishListScreen() {
             <SyllabusButton />, <IntentButton intent={intent} />, "Not Approved"]
             setRows([...rows, row])
             setOpenDialog(false)
+            console.log(row)
         }
         return (
             <Button onClick={onClick}>
@@ -465,7 +494,8 @@ export default function WishListScreen() {
                                     <Button
                                         sx={{ backgroundColor: "#201F2B" }}
                                         variant="contained"
-                                        onClick={handleSubmitNewCourse}>Submit New Course</Button>
+                                        onClick={HandleSubmitNewCourse}
+                                        id="new-course-button">Submit New Course</Button>
                                 </Grid>
                             </Grid>
                         </>

@@ -59,14 +59,14 @@ export const apiSlice = createApi({
     //   }),
     //   invalidatesTags: ['Syllabus'],
     // }),
-    // addWish: builder.mutation({
-    //   query: (wish) => ({
-    //     url: `addWish`,
-    //     method: 'POST',
-    //     body: wish,
-    //   }),
-    //   invalidatesTags: ["Wish"],
-    // }),
+    addWish: builder.mutation({
+      query: (wish) => ({
+        url: `/erasmus/1/courseWishList/add/1`,
+        method: 'POST',
+        body: wish,
+      }),
+      invalidatesTags: ["Wish"],
+    }),
     // submitWishList: builder.mutation({
     //   query: (wishList) => ({
     //     url: `submitWishList`,
@@ -164,7 +164,7 @@ export const apiSlice = createApi({
       invalidatesTags: ['File'],
     })
 
-    
+
   }),
 })
 
@@ -177,7 +177,8 @@ export const {
   useGetApplicationQuery,
   useGetAllWishesQuery,
   useDownloadFileQuery,
-  useUploadFileMutation
+  useUploadFileMutation,
+  useAddWishMutation
 
   // useUploadSyllabus,
 } = apiSlice
