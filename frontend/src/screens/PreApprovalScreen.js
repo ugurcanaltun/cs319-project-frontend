@@ -3,7 +3,7 @@ import PreApprovalStudent from "./Student/PreApprovalStudent";
 import PreApprovalDepCoordinator from "./DepCoordinator/PreApprovalDepCoordinator";
 import PreApprovalAdmCoordinator from "./AdmCoordinator/PreApprovalAdmCoordinator";
 import PreApprovalFacAdmCoordinator from "./FacAdmCoordinator/PreApprovalFaculty";
-import { useGetUserQuery } from '../redux/api/apiSlice';
+import { useGetUserQuery, useGetAllWishesQuery } from '../redux/api/apiSlice';
 
 export default function PreApprovalScreen() {
     const { data, error, isLoading, isFetching, isSuccess } = useGetUserQuery()

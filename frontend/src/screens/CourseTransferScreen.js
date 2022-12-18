@@ -8,7 +8,7 @@ import { useGetUserQuery } from '../redux/api/apiSlice';
 
 export default function CourseTransferScreen() {
     const { data, error, isLoading, isFetching, isSuccess } = useGetUserQuery()
-    const userType = data.users.role
+    const userType = data.role
     return(
         userType === "student" 
         ? <CourseTransferStudent/> : 

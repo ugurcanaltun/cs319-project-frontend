@@ -16,31 +16,31 @@ const headers = [
 ]
 
 const placementsRows = [
-    ["a",
-    "a",
-    "a",
-    "a",
-    "a",
-    "a",
-    "a",
-    "a",
-    "a",
-    "a",
-    "a",]
+    ["1",
+    "Ugur Can",
+    "Altun",
+    "22002701",
+    "90",
+    "2022-2023 Spring",
+    "EPFL",
+    "Vrije",
+    "AGH",
+    "Kingston",
+    "Saarland"]
 ]
 
 const binRows = [
-    ["a",
-    "a",
-    "a",
-    "a",
-    "a",
-    "a",
-    "a",
-    "a",
-    "a",
-    "a",
-    "a",]
+  ["1",
+  "Samet",
+  "Aybaba",
+  "22002562",
+  "40",
+  "2022-2023 Spring",
+  "EPFL",
+  "Vrije",
+  "AGH",
+  "Kingston",
+  "Saarland"]
 ]
 
 const width = 1200;

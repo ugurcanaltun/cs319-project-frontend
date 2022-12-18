@@ -37,8 +37,8 @@ const useStyles = styled({
 export default function Chat() {
     const classes = useStyles()
     const { data, error, isLoading, isFetching, isSuccess } = useGetUserQuery()
-    const username = data.users.name
-    const userType = data.users.role
+    const username = data.name
+    const userType = data.role
     const contacts = [
         {
             id: 0,
@@ -96,7 +96,7 @@ export default function Chat() {
                         <ListItem key="1">
                             <Grid container>
                                 <Grid item xs={12}>
-                                    <ListItemText align="right" primary="Messi goat ya"></ListItemText>
+                                    <ListItemText align="right" primary="Hocam can you view my preapproval"></ListItemText>
                                 </Grid>
                                 <Grid item xs={12}>
                                     <ListItemText align="right" secondary="09:30"></ListItemText>
@@ -106,7 +106,7 @@ export default function Chat() {
                         <ListItem key="2">
                             <Grid container>
                                 <Grid item xs={12}>
-                                    <ListItemText align="left" primary="Goatullah valla"></ListItemText>
+                                    <ListItemText align="left" primary="Sure"></ListItemText>
                                 </Grid>
                                 <Grid item xs={12}>
                                     <ListItemText align="left" secondary="09:31"></ListItemText>
@@ -116,7 +116,7 @@ export default function Chat() {
                         <ListItem key="3">
                             <Grid container>
                                 <Grid item xs={12}>
-                                    <ListItemText align="right" primary="Messi messi"></ListItemText>
+                                    <ListItemText align="right" primary="Thanks hocam"></ListItemText>
                                 </Grid>
                                 <Grid item xs={12}>
                                     <ListItemText align="right" secondary="10:30"></ListItemText>

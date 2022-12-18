@@ -60,7 +60,7 @@ export default function LoginScreen() {
                             required
                             fullWidth
                             name="userRole"
-                            label="User Role"
+                            label="Password"
                             id="userRole"
                             autoComplete="user-role"
                         />
