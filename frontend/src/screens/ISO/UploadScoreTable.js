@@ -7,7 +7,6 @@ import DownloadIcon from '@mui/icons-material/Download';
 import DoneIcon from '@mui/icons-material/Done';
 import { useState } from 'react'
 import { useUploadFileMutation } from '../../redux/api/apiSlice';
-import { useDownloadFileQuery } from '../../redux/api/apiSlice';
 
 const headers = [
   ["File", "File Format", "Status", "Download"]
@@ -37,7 +36,7 @@ export default function UploadScoreTable() {
   const handleSubmitButton = (event) => {
     event.preventDefault()
     const formData = new FormData()
-    formData.append("button", event.target)
+    formData.append("file", file)
     formData.append("fileName", file.name)
     formData.append("fileDownloadUri", `http://localhost:8080/downloadFile/${file.name}`)
     formData.append("fileType", file.type)

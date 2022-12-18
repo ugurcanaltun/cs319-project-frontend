@@ -149,12 +149,7 @@ export const apiSlice = createApi({
       providesTags: ['Application'],
     }),
 
-    //Upload / Download File
-    downloadFile: builder.query({
-      query: (fileName) => `/downloadFile/${fileName}`,
-      providesTags: ['File'],
-    }),
-
+    //Upload
     uploadFile: builder.mutation({
       query: (fileName) => ({
         url: '/uploadFile',
@@ -176,7 +171,6 @@ export const {
   useAddTranscriptMutation,
   useGetApplicationQuery,
   useGetAllWishesQuery,
-  useDownloadFileQuery,
   useUploadFileMutation,
   useAddWishMutation
 
