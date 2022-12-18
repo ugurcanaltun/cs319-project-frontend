@@ -43,6 +43,16 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
     },
 }));
 
+const StyledTableCellTwo = styled(TableCell)(({ theme }) => ({
+    [`&.${tableCellClasses.head}`]: {
+      backgroundColor: "#201F2B",
+      color: theme.palette.common.white,
+    },
+    [`&.${tableCellClasses.body}`]: {
+      fontSize: 14,
+    },
+  }));
+
 export default function WishListScreen() {
     const { data, error, isLoading, isFetching, isSuccess } = useGetAllWishesQuery()
     const [openDialog, setOpenDialog] = useState(false)
@@ -432,7 +442,48 @@ export default function WishListScreen() {
                     </Typography>
                 </Grid>
             </Grid>
-            <StyledTable rows={rows} headers={headers} />
+            <TableContainer sx={{ marginTop: 5, marginLeft: 1, }} component={Paper}>
+            <Table aria-label="customized table">
+                <TableHead>
+                <TableRow>
+                    {headers.map((rows) =>
+                    rows.map((row, index) =>
+                        <StyledTableCellTwo key={index} align="center">{row}</StyledTableCellTwo>
+                    )
+                    )}
+                </TableRow>
+                </TableHead>
+
+                <TableBody>
+                {rows.map((row, index) =>
+                    row[row.length - 1] === "Approved" ?
+                    <TableRow sx={{ backgroundColor: "#5eff89" }} key={index}>
+                    {row.map((cell, index) => {
+                        return (
+                        <StyledTableCellTwo key={index} align="center" component="th" scope="row">{cell}</StyledTableCellTwo>
+                        )
+                    })}
+                    </TableRow>
+                    : row[row.length - 1] === "Declined" ?
+                    <TableRow sx={{ backgroundColor: "#ff0000" }} key={index}>
+                    {row.map((cell, index) => {
+                        return (
+                        <StyledTableCellTwo key={index} align="center" component="th" scope="row">{cell}</StyledTableCellTwo>
+                        )
+                    })}
+                    </TableRow>
+                    : 
+                    <TableRow sx={{ backgroundColor: "#ffffe0" }} key={index}>
+                    {row.map((cell, index) => {
+                        return (
+                        <StyledTableCellTwo key={index} align="center" component="th" scope="row">{cell}</StyledTableCellTwo>
+                        )
+                    })}
+                    </TableRow>
+                )}
+                </TableBody>
+            </Table>
+            </TableContainer>
             <Grid container sx={{ mt: 5 }}>
                 <Grid item xs={5}></Grid>
                 <Grid item xs={5}></Grid>
