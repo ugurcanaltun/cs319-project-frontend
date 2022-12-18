@@ -243,11 +243,38 @@ export default function WishListScreen() {
     }
     function HandleSubmitNewCourse(event) {
         event.preventDefault(event.currentTarget)
-        const formData = new FormData(document.getElementById("new-course-button"))
+        // console.log(document.getElementById("aa"))
+        // const formData = new FormData(document.getElementById("aa"))
         let row = [courseCode, courseName, ECTS, coursesData[bilkentCourseTransferred].courseCode,
             coursesData[bilkentCourseTransferred].courseName, coursesData[bilkentCourseTransferred].courseECTS,
             courseTypeLabel, <SyllabusButton />, <IntentButton intent={intent} />, "Not Approved"]
         setRows([...rows, row])
+        // const bilkentCourse = {
+        //     bilkentCourse: {
+        //         courseCode: row[3],
+        //         courseType: row[6],
+        //         ects_credit: row[5],
+        //     }
+        // }
+        // const courseToCountAsBilkentCourse = {
+        //     courseToCountAsBilkentCourse: {
+        //         approved: true,
+        //         courseCode: row[0],
+        //         ects_credit: row[2],
+        //         nameOfCourse: row[1],
+        //     }
+        // }
+        // const wish = {
+        //     wish: {
+        //         standing: "",
+        //         syllabus: "",
+        //         intent: "",
+        //     }
+        // }
+        // formData.append("bilkentCourse", bilkentCourse)
+        // formData.append("courseToCountAsBilkentCourse", courseToCountAsBilkentCourse)
+        // formData.append("wish", wish)
+        // console.log(formData)
         const obj = {
             bilkentCourse: {
                 courseCode: row[3],
@@ -266,8 +293,8 @@ export default function WishListScreen() {
                 intent: "",
             }
         }
-        formData.append(obj)
-        addWish(formData)
+        console.log(obj)
+        addWish(obj)
         setOpenDialog(false)
     }
 
@@ -280,7 +307,26 @@ export default function WishListScreen() {
             <SyllabusButton />, <IntentButton intent={intent} />, "Not Approved"]
             setRows([...rows, row])
             setOpenDialog(false)
-            console.log(row)
+            const obj = {
+                bilkentCourse: {
+                    courseCode: row[3],
+                    courseType: row[6],
+                    ects_credit: row[5],
+                },
+                courseToCountAsBilkentCourse: {
+                    approved: true,
+                    courseCode: row[0],
+                    ects_credit: row[2],
+                    nameOfCourse: row[1],
+                },
+                wish: {
+                    standing: "",
+                    syllabus: "",
+                    intent: "",
+                }
+            }
+            console.log(obj)
+            addWish(obj)
         }
         return (
             <Button onClick={onClick}>
@@ -491,11 +537,14 @@ export default function WishListScreen() {
                                     <Button sx={{ backgroundColor: "#201F2B" }} variant="contained">Upload Syllabus</Button>
                                 </Grid>
                                 <Grid item xs={6}>
-                                    <Button
-                                        sx={{ backgroundColor: "#201F2B" }}
-                                        variant="contained"
-                                        onClick={HandleSubmitNewCourse}
-                                        id="new-course-button">Submit New Course</Button>
+                                    <form id="aa">
+                                        <Button
+                                            sx={{ backgroundColor: "#201F2B" }}
+                                            variant="contained"
+                                            onClick={HandleSubmitNewCourse}
+                                            id="new-course-button">Submit New Course</Button>
+                                    </form>
+
                                 </Grid>
                             </Grid>
                         </>
