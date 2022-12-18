@@ -3,7 +3,7 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 export const apiSlice = createApi({
   reducerPath: 'api',
   baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:8080' }),
-  tagTypes: ['User', 'Tasks', 'Transcripts', 'Syllabus', 'ScoreTable', 'Wish', 'WishList', 'PreApproval', 'Application'],
+  tagTypes: ['User', 'Tasks', 'Transcripts', 'Syllabus', 'ScoreTable', 'Wish', 'WishList', 'PreApproval', 'Application', 'File'],
   endpoints: (builder) => ({
     getUser: builder.query({
       query: () => '/erasmus/getUser/1',
@@ -76,7 +76,7 @@ export const apiSlice = createApi({
     //   invalidatesTags: ["WishList"],
     // }),
     getAllWishes: builder.query({
-      query: () => `erasmus/1/courseWishList/getAll/1`,
+      query: () => `erasmus/1/courseWishList/getAllWishes/1`,
       providesTags: ['WishList']
     }),
 
@@ -147,9 +147,24 @@ export const apiSlice = createApi({
     getApplication: builder.query({
       query: (id) => `erasmus/${id}/application/getByType/0`,
       providesTags: ['Application'],
+    }),
+
+    //Upload / Download File
+    downloadFile: builder.query({
+      query: (fileName) => `/downloadFile/${fileName}`,
+      providesTags: ['File'],
+    }),
+
+    uploadFile: builder.mutation({
+      query: (fileName) => ({
+        url: '/uploadFile',
+        method: 'POST',
+        body: fileName,
+      }),
+      invalidatesTags: ['File'],
     })
 
-
+    
   }),
 })
 
@@ -160,6 +175,9 @@ export const {
   useDeleteTaskMutation,
   useAddTranscriptMutation,
   useGetApplicationQuery,
-  useGetAllWishesQuery
+  useGetAllWishesQuery,
+  useDownloadFileQuery,
+  useUploadFileMutation
+
   // useUploadSyllabus,
 } = apiSlice

@@ -7,7 +7,7 @@ import Box from '@mui/material/Box';
 
 export default function LearningAgreementScreen() {
     const handleUploadButton = () => {
-        console.log("uploadButtonClicked")
+        
     }
 
     const handleDownloadButton = () => {
