@@ -13,9 +13,11 @@ import Divider from '@mui/material/Divider';
 export default function LearningAgreementScreen() {
     const [uploadFile] = useUploadFileMutation()
     const [file, setFile] = useState()
+    const [fileName, setFileName] = useState("Upload")
 
     const onFileChange = (event) => {
         setFile(event.target.files[0])
+        setFileName(event.target.files[0].name)
     }
 
     const handleUploadButton = (event) => {
@@ -146,10 +148,17 @@ export default function LearningAgreementScreen() {
             <Box sx={{ m: 3 }} />
             <Grid container direction="row" alignItems="center" spacing={2} wrap="nowrap">
                 <Grid item >
-                <Button sx={{ display: 'flex', width: 120, marginLeft: 1, backgroundColor: "#201F2B" }} edge="start" endIcon={<UploadIcon />} variant="contained" component="label">
-                    Upload
+                {file ?
+                <Button sx={{ display: 'flex', marginLeft: 1, backgroundColor: "#008000" }} edge="start" endIcon={<UploadIcon />} variant="contained" component="label">
+                    {fileName}
                     <input onChange={onFileChange} hidden name="file1" accept="application/pdf" multiple type="file" />
                 </Button>
+                :
+                <Button sx={{ display: 'flex', marginLeft: 1, backgroundColor: "#201F2B" }} edge="start" endIcon={<UploadIcon />} variant="contained" component="label">
+                    {fileName}
+                    <input onChange={onFileChange} hidden name="file1" accept="application/pdf" multiple type="file" />
+                </Button>
+                }
                 </Grid>
                 <Grid item>
                 <Button onClick={handleUploadButton} sx={{ display: 'flex', width: 120, marginLeft: 1, backgroundColor: "#201F2B" }} edge="start" variant="contained" component="label">
