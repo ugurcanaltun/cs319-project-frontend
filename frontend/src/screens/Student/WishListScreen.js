@@ -28,6 +28,8 @@ import Paper from '@mui/material/Paper';
 import TextField from '@mui/material/TextField';
 import { styled } from '@mui/material/styles';
 import { useGetAllWishesQuery, useAddWishMutation } from '../../redux/api/apiSlice'
+import { useUploadFileMutation } from '../../redux/api/apiSlice';
+import UploadIcon from '@mui/icons-material/Upload';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
@@ -46,7 +48,25 @@ export default function WishListScreen() {
     const [intentDialogText, setIntentDialogText] = useState("")
     const [isPrevAccepted, setIsPrevAccepted] = useState(true)
     const [rows, setRows] = useState([])
+    const [uploadFile] = useUploadFileMutation()
+    const [file, setFile] = useState()
 
+    const onFileChange = (event) => {
+        setFile(event.target.files[0])
+    }
+
+    const handleUploadButton = (event) => {
+        if(file){
+            event.preventDefault()
+            const formData = new FormData()
+            formData.append("file", file)
+            formData.append("fileName", file.name)
+            formData.append("fileDownloadUri", `http://localhost:8080/downloadFile/${file.name}`)
+            formData.append("fileType", file.type)
+            formData.append("size", file.size)
+            uploadFile(formData)
+        }
+    }
     const [addWish] = useAddWishMutation()
 
 
@@ -532,20 +552,27 @@ export default function WishListScreen() {
                                     </Table>
                                 </TableContainer>
                             </Box>
-                            <Grid container sx={{ mt: 6 }}>
-                                <Grid item xs={6}>
-                                    <Button sx={{ backgroundColor: "#201F2B" }} variant="contained">Upload Syllabus</Button>
-                                </Grid>
-                                <Grid item xs={6}>
-                                    <form id="aa">
-                                        <Button
-                                            sx={{ backgroundColor: "#201F2B" }}
-                                            variant="contained"
-                                            onClick={HandleSubmitNewCourse}
-                                            id="new-course-button">Submit New Course</Button>
-                                    </form>
-
-                                </Grid>
+                            <Grid container sx={{ mt: 6 }} spacing={2}>
+                            <Grid item >
+                            <Button sx={{ display: 'flex',  marginLeft: 1, backgroundColor: "#201F2B" }} edge="start" endIcon={<UploadIcon />} variant="contained" component="label">
+                                Upload Syllabus
+                                <input onChange={onFileChange} hidden name="file1" accept="application/pdf" multiple type="file" />
+                            </Button>
+                            </Grid>
+                            <Grid item>
+                            <Button onClick={handleUploadButton} sx={{ display: 'flex', width: 120, marginLeft: 1, backgroundColor: "#201F2B" }} edge="start" variant="contained" component="label">
+                                Submit
+                            </Button>
+                            </Grid>
+                            <Grid item sx={{ml: 64}}>
+                                <form id="aa">
+                                    <Button
+                                        sx={{ backgroundColor: "#201F2B" }}
+                                        variant="contained"
+                                        onClick={HandleSubmitNewCourse}
+                                        id="new-course-button">Submit New Course</Button>
+                                </form>
+                            </Grid>
                             </Grid>
                         </>
                     }
