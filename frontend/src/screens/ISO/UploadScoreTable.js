@@ -52,7 +52,7 @@ export default function UploadScoreTable() {
       <div style={{ display: "flex" }}>
         <Button sx={{ display: 'flex', width: 120, marginLeft: 1, backgroundColor: "#201F2B" }} edge="start" endIcon={<UploadIcon />} variant="contained" component="label">
           Upload
-          <input onChange={onFileChange} hidden name="file1" accept="application/pdf" multiple type="file" />
+          <input onChange={onFileChange} hidden name="file1" accept="application/pdf" type="file" />
         </Button>
         <Button onClick={handleSubmitButton} sx={{ display: 'flex', width: 120, marginLeft: 1, backgroundColor: "#201F2B" }} variant="contained">
           Submit

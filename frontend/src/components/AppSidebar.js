@@ -78,7 +78,7 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 export default function AppSidebar(props) {
 
   const { data, error, isLoading, isFetching, isSuccess } = useGetUserQuery()
-  const userType = data.role
+  const userType = "iso"
 
   let sideBarItems;
 
