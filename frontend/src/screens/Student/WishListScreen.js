@@ -69,6 +69,7 @@ export default function WishListScreen() {
             formData.append("fileType", file.type)
             formData.append("size", file.size)
             uploadFile(formData)
+            setIsSubmitFilled(true)
         }
     }
 
@@ -132,6 +133,7 @@ export default function WishListScreen() {
         ["Course Code", "Course Name", "ECTS", "Intent"]
     ]
     const [wishListApproved, setWishListApproved] = useState(false)
+    const [isSubmitFilled, setIsSubmitFilled] = useState(false)
 
     const handleCourseTypeLabel = (event) => {
         setCourseTypeLabel(event.target.value)
@@ -626,7 +628,8 @@ export default function WishListScreen() {
                             sx={{ backgroundColor: "#201F2B" }}
                             variant="contained"
                             onClick={HandleSubmitNewCourse}
-                            id="new-course-button">Submit New Course
+                            id="new-course-button"
+                            disabled={!isSubmitFilled}>Submit New Course
                             </Button>
                             </form>
                             </Grid>
