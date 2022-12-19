@@ -123,10 +123,11 @@ export default function WishListScreen() {
                 row.push(data.wishes[i].bilkentCourse.courseType)
                 row.push(<SyllabusButton />)
                 row.push(<IntentButton intent={data.wishes[i].intent} />)
-                if (data.wishes[i].courseToCountAsBilkentCourse.approved) {
-                    row.push("Approved")
-                }
-                else { row.push("Not Approved") }
+                // if (data.wishes[i].courseToCountAsBilkentCourse.standing) {
+                //     row.push("Approved")
+                // }
+                // else { row.push("Not Approved") }
+                row.push("Approved")
                 aa.push(row)
             }
             setRows([...rows, ...aa])
@@ -379,9 +380,9 @@ export default function WishListScreen() {
         ["Course Code", "Course Name", "ECTS", "Select"]
     ]
     const prevAcceptedRows = [
-        ["EEE391", "Signals", 5, <SelectButton rowIndex={0} />],
-        ["EEE381", "Signals", 5, <SelectButton rowIndex={1} />],
-        ["EEE391", "Signals", 5, <SelectButton rowIndex={2} />],
+        ["CS4851", "Software Engineering", 5, <SelectButton rowIndex={0} />],
+        ["CS445", "Operating Systems", 5, <SelectButton rowIndex={1} />],
+        ["CS391", "Data Managament for Computer Scientists", 5, <SelectButton rowIndex={2} />],
     ]
 
     let submitButton

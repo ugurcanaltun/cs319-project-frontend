@@ -14,20 +14,20 @@ export const apiSlice = createApi({
   tagTypes: ['User', 'Tasks', 'Transcripts', 'Syllabus', 'ScoreTable', 'Wish', 'WishList', 'PreApproval', 'Application', 'File'],
   endpoints: (builder) => ({
     getUser: builder.query({
-      query: () => '/erasmus/getUser/1',
+      query: () => '/erasmus/getUser',
       providesTags: ['User'],
     }),
 
     // TASK
     getTasks: builder.query({
       query: () => ({
-        url: '/erasmus/1/getAllTasks',
+        url: '/erasmus/getAllTasks',
       }),
       providesTags: ['Tasks'],
     }),
     updateTask: builder.mutation({
       query: (task) => ({
-        url: `/erasmus/1/tasks/update/${task.id}`,
+        url: `/erasmus/tasks/update/${task.id}`,
         method: 'PUT',
         body: task
       }),
@@ -35,7 +35,7 @@ export const apiSlice = createApi({
     }),
     deleteTask: builder.mutation({
       query: (id) => ({
-        url: `erasmus/1/tasks/remove/${id}`,
+        url: `erasmus/tasks/remove/${id}`,
         method: 'DELETE',
         body: id
       }),
@@ -71,7 +71,7 @@ export const apiSlice = createApi({
     // }),
     addWish: builder.mutation({
       query: (wish) => ({
-        url: `/erasmus/1/courseWishList/add/2`,
+        url: `/erasmus/courseWishList/add/2`,
         method: 'POST',
         body: wish,
       }),
@@ -86,7 +86,7 @@ export const apiSlice = createApi({
     //   invalidatesTags: ["WishList"],
     // }),
     getAllWishes: builder.query({
-      query: () => `/erasmus/1/application/getWishList/0`,
+      query: () => `/erasmus/application/getWishList/0`,
       providesTags: ['WishList']
     }),
 
@@ -155,7 +155,7 @@ export const apiSlice = createApi({
 
     // Application
     getApplication: builder.query({
-      query: (id) => `/erasmus/1/application/getByType/0`,
+      query: (id) => `/erasmus/application/getByType/0`,
       providesTags: ['Application'],
     }),
 
