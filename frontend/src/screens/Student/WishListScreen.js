@@ -152,6 +152,7 @@ export default function WishListScreen() {
 
     const handleBilkentCourseTransferred = (event) => {
         setBilkentCourseTransferred(event.target.value)
+        console.log(bilkentCourseTransferred)
     }
 
     function SyllabusButton(props) {
@@ -280,12 +281,6 @@ export default function WishListScreen() {
             courseType: "Technical Elective",
         },
         {
-            courseCode: "CS 411",
-            courseName: "Software Architecture Design",
-            courseECTS: 5,
-            courseType: "Technical Elective",
-        },
-        {
             courseCode: "CS 413",
             courseName: "Software Engineering Project Management",
             courseECTS: 5,
@@ -349,9 +344,9 @@ export default function WishListScreen() {
     function SelectButton(props) {
         const index = props.rowIndex
         const onClick = () => {
-            let row = [prevAcceptedRows[index][0], prevAcceptedRows[index][1],
-            prevAcceptedRows[index][2], coursesData[bilkentCourseTransferred].courseCode,
-            coursesData[bilkentCourseTransferred].courseName, coursesData[bilkentCourseTransferred].courseECTS, courseTypeLabel,
+            let row = [prevAcceptedRows[index].courseCode, prevAcceptedRows[index].courseName,
+            prevAcceptedRows[index].courseECTS, prevAcceptedRows[index].bilkentCourse,
+            prevAcceptedRows[index].bilkentCourseName, prevAcceptedRows[index].bilkentCourseECTS, courseTypeLabel,
             <SyllabusButton />, <IntentButton intent={intent} />, "Not Approved"]
             setRows([...rows, row])
             setOpenDialog(false)
@@ -361,8 +356,8 @@ export default function WishListScreen() {
                 bilkent_Ects_credit: row[5],
                 approved: true,
                 hostCourseCode: row[0],
-                host_Ects_credit: row[2],
-                hostNameOfCourse: row[1],
+                hostEcts_credit: row[2],
+                hostCourseName: row[1],
                 standing: "",
                 syllabus: "",
                 intent: ""
@@ -380,9 +375,198 @@ export default function WishListScreen() {
         ["Course Code", "Course Name", "ECTS", "Select"]
     ]
     const prevAcceptedRows = [
-        ["CS4851", "Software Engineering", 5, <SelectButton rowIndex={0} />],
-        ["CS445", "Operating Systems", 5, <SelectButton rowIndex={1} />],
-        ["CS391", "Data Managament for Computer Scientists", 5, <SelectButton rowIndex={2} />],
+        {
+            courseCode: "CMPE 320",
+            courseName: "Operating Systems of Computers",
+            courseECTS: 6.5,
+            bilkentCourse: "CS 342",
+            bilkentCourseName: "Operating Systems",
+            bilkentCourseECTS: 6.5,
+            courseType: "Mandatory",
+            syllabus: <SyllabusButton />,
+            intent: <IntentButton />,
+            status: <SelectButton rowIndex={0} />
+        },
+        {
+            courseCode: "CMPE 350",
+            courseName: "Operating Systems",
+            courseECTS: 5,
+            bilkentCourse: "CS 353",
+            bilkentCourseName: "Operating Systems",
+            bilkentCourseECTS: 5,
+            courseType: "Mandatory",
+            syllabus: <SyllabusButton />,
+            intent: <IntentButton />,
+            status: <SelectButton rowIndex={1} />
+        },
+        {
+            courseCode: "EEE 391",
+            courseName: "Basics of Signals and Systems",
+            courseECTS: 5,
+            bilkentCourse: "EEE 391",
+            bilkentCourseName: "Basics of Signals and Systems",
+            bilkentCourseECTS: 5,
+            courseType: "Mandatory",
+            syllabus: <SyllabusButton />,
+            intent: <IntentButton />,
+            status: <SelectButton rowIndex={2} />
+        },
+        {
+            courseCode: "GE 301",
+            courseName: "Science Technology and Society",
+            courseECTS: 3.5,
+            bilkentCourse: "GE301",
+            bilkentCourseName: "Science Technology and Society",
+            bilkentCourseECTS: 3.5,
+            courseType: "Mandatory",
+            syllabus: <SyllabusButton />,
+            intent: <IntentButton />,
+            status: <SelectButton rowIndex={3} />
+        },
+        {
+            courseCode: "ADA 265",
+            courseName: "How Houses Build People",
+            courseECTS: 5,
+            bilkentCourse: "ADA 265",
+            bilkentCourseName: "How Houses Build People",
+            bilkentCourseECTS: 5,
+            courseType: "Arts Core Electives",
+            syllabus: <SyllabusButton />,
+            intent: <IntentButton />,
+            status: <SelectButton rowIndex={4} />
+        },
+        {
+            courseCode: "COMD 203",
+            courseName: "Media Studies I",
+            courseECTS: 5,
+            bilkentCourse: "COMD 203",
+            bilkentCourseName: "Media Studies I",
+            bilkentCourseECTS: 5,
+            courseType: "Arts Core Electives",
+            syllabus: <SyllabusButton />,
+            intent: <IntentButton />,
+            status: <SelectButton rowIndex={5} />
+        },
+        {
+            courseCode: "HART 117",
+            courseName: "Ways of Seeing: Approaches to Art and Architectural History",
+            courseECTS: 5,
+            bilkentCourse: "HART 117",
+            bilkentCourseName: "Ways of Seeing: Approaches to Art and Architectural History",
+            bilkentCourseECTS: 5,
+            courseType: "Arts Core Electives",
+            syllabus: <SyllabusButton />,
+            intent: <IntentButton />,
+            status: <SelectButton rowIndex={6} />
+        },
+        {
+            courseCode: "FA 171",
+            courseName: "Introduction to Art, Design and Culture I",
+            courseECTS: 5,
+            bilkentCourse: "FA 171",
+            bilkentCourseName: "Introduction to Art, Design and Culture I",
+            bilkentCourseECTS: 5,
+            courseType: "Arts Core Electives",
+            syllabus: <SyllabusButton />,
+            intent: <IntentButton />,
+            status: <SelectButton rowIndex={7} />
+        },
+        {
+            courseCode: "MSC 110",
+            courseName: "The Culture and Basics of Music Making",
+            courseECTS: 5,
+            bilkentCourse: "MSC 110",
+            bilkentCourseName: "The Culture and Basics of Music Making",
+            bilkentCourseECTS: 5,
+            courseType: "Arts Core Electives",
+            syllabus: <SyllabusButton />,
+            intent: <IntentButton />,
+            status: <SelectButton rowIndex={8} />
+        },
+        {
+            courseCode: "THR 110",
+            courseName: "Introduction to Theatre",
+            courseECTS: 5,
+            bilkentCourse: "THR 110",
+            bilkentCourseName: "Introduction to Theatre",
+            bilkentCourseECTS: 5,
+            courseType: "Arts Core Electives",
+            syllabus: <SyllabusButton />,
+            intent: <IntentButton />,
+            status: <SelectButton rowIndex={9} />
+        },
+        {
+            courseCode: "CS 473",
+            courseName: "Algorithms I",
+            courseECTS: 3.5,
+            bilkentCourse: "CS 473",
+            bilkentCourseName: "Algorithms I",
+            bilkentCourseECTS: 3.5,
+            courseType: "Mandatory",
+            syllabus: <SyllabusButton />,
+            intent: <IntentButton />,
+            status: <SelectButton rowIndex={10} />
+        },
+        {
+            courseCode: "IE 400",
+            courseName: "Principles of Engineering Management",
+            courseECTS: 3.5,
+            bilkentCourse: "IE 400",
+            bilkentCourseName: "Principles of Engineering Management",
+            bilkentCourseECTS: 3.5,
+            courseType: "Mandatory",
+            syllabus: <SyllabusButton />,
+            intent: <IntentButton />,
+            status: <SelectButton rowIndex={11} />
+        },
+        {
+            courseCode: "LNG 111",
+            courseName: "Spanish I",
+            courseECTS: 5,
+            bilkentCourse: "LNG 111",
+            bilkentCourseName: "Spanish I",
+            bilkentCourseECTS: 5,
+            courseType: "General Elective",
+            syllabus: <SyllabusButton />,
+            intent: <IntentButton />,
+            status: <SelectButton rowIndex={12} />
+        },
+        {
+            courseCode: "CS 411",
+            courseName: "Software Architecture Design",
+            courseECTS: 5,
+            bilkentCourse: "CS 411",
+            bilkentCourseName: "Software Architecture Design",
+            bilkentCourseECTS: 5,
+            courseType: "Technical Elective",
+            syllabus: <SyllabusButton />,
+            intent: <IntentButton />,
+            status: <SelectButton rowIndex={13} />
+        },
+        {
+            courseCode: "CS 413",
+            courseName: "Software Engineering Project Management",
+            courseECTS: 5,
+            bilkentCourse: "CS 413",
+            bilkentCourseName: "Software Engineering Project Management",
+            bilkentCourseECTS: 5,
+            courseType: "Technical Elective",
+            syllabus: <SyllabusButton />,
+            intent: <IntentButton />,
+            status: <SelectButton rowIndex={14} />
+        },
+        {
+            courseCode: "CS 415",
+            courseName: "Software Product Line Engineering",
+            courseECTS: 5,
+            bilkentCourse: "CS 415",
+            bilkentCourseName: "Software Product Line Engineering",
+            bilkentCourseECTS: 5,
+            courseType: "Technical Elective",
+            syllabus: <SyllabusButton />,
+            intent: <IntentButton />,
+            status: <SelectButton rowIndex={15} />
+        },
     ]
 
     let submitButton
@@ -521,7 +705,7 @@ export default function WishListScreen() {
                                 <Select
                                     labelId="demo-select-small"
                                     id="demo-select-small"
-                                    vawlue={bilkentCourseTransferred}
+                                    value={bilkentCourseTransferred}
                                     label="Bilkent Course Transferred"
                                     onChange={handleBilkentCourseTransferred}
                                 >
@@ -530,7 +714,7 @@ export default function WishListScreen() {
                                     </MenuItem>
                                     {coursesData.filter(obj =>
                                         (obj.courseType === courseTypeLabel || courseTypeLabel === "Additional")).map(obj => obj.courseCode).map((row, index) =>
-                                            <MenuItem value={index} key={index}>{row}</MenuItem>
+                                            <MenuItem value={row} key={index}>{row}</MenuItem>
                                         )}
                                 </Select>
                             </FormControl>
@@ -544,7 +728,30 @@ export default function WishListScreen() {
                             </Box>
                             <Grid container>
                                 <Grid xs={12} item>
-                                    <StyledTable headers={prevAcceptedHeaders} rows={prevAcceptedRows} />
+                                    <TableContainer sx={{ marginTop: 5, marginLeft: 1, }} component={Paper}>
+                                        <Table aria-label="customized table">
+                                            <TableHead>
+                                                <TableRow>
+                                                    {headers.map((rows) =>
+                                                        rows.map((row, index) =>
+                                                            <StyledTableCellTwo key={index} align="center">{row}</StyledTableCellTwo>
+                                                        )
+                                                    )}
+                                                </TableRow>
+                                            </TableHead>
+
+                                            <TableBody>
+                                                {prevAcceptedRows.filter(obj =>
+                                                    ((obj.courseType === courseTypeLabel || courseTypeLabel === "Additional") && obj.bilkentCourse === bilkentCourseTransferred)).map((obj, index) =>
+                                                        <TableRow key={index}>
+                                                            {Object.values(obj).map((cell, index) =>
+                                                                <StyledTableCellTwo key={index} align="center" component="th" scope="row">{cell}</StyledTableCellTwo>
+                                                            )}
+                                                        </TableRow>
+                                                    )}
+                                            </TableBody>
+                                        </Table>
+                                    </TableContainer>
                                 </Grid>
                             </Grid>
                         </Box>

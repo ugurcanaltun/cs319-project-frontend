@@ -5,10 +5,12 @@ import StyledTable from "../../components/StyledTable";
 import Button from '@mui/material/Button';
 import { useGetUserQuery, useGetAllWishesQuery, useGetApplicationQuery } from '../../redux/api/apiSlice';
 import { useState, useEffect } from 'react'
+import DownloadIcon from '@mui/icons-material/Download';
 
 export default function PreApprovalStudent() {
     const { data: userData, isSuccess: isSuccessUser } = useGetUserQuery()
     const { data: wishesData, isSuccess: isSuccessWishes } = useGetAllWishesQuery()
+    console.log(wishesData)
     const { data: applicationData, isSuccess: isSuccessApplication } = useGetApplicationQuery()
     const headersEmpty = [];
     const rowsEmpty = [];
@@ -25,6 +27,10 @@ export default function PreApprovalStudent() {
     const [rowsSignatures, setRowsSignatures] = useState([[" ", " ", " ", " "]])
     const [isPreApp, setIsPreApp] = useState(false)
 
+    const onClickDownload = () => {
+
+    }
+
     useEffect(() => {
         console.log(applicationData)
         if (isSuccessUser && isSuccessWishes && isSuccessApplication) {
@@ -36,7 +42,7 @@ export default function PreApprovalStudent() {
                 let row = []
                 row.push(i + 1)
                 row.push(wishesData.wishes[i].courseToCountAsBilkentCourse.courseCode)
-                row.push(wishesData.wishes[i].courseToCountAsBilkentCourse.hostCourseName)
+                row.push(wishesData.wishes[i].courseToCountAsBilkentCourse.nameOfCourse)
                 row.push(wishesData.wishes[i].courseToCountAsBilkentCourse.ects_credit)
                 row.push(wishesData.wishes[i].bilkentCourse.courseType)
                 row.push(wishesData.wishes[i].bilkentCourse.ects_credit)
@@ -78,6 +84,9 @@ export default function PreApprovalStudent() {
                 </Grid>
             </Grid>
             <Box sx={{ display: 'flex', mt: 4, justifyContent: 'flex-end' }}>
+                <Button onClick={onClickDownload} sx={{ display: 'flex', marginLeft: 1, backgroundColor: "#008000" }} edge="start" endIcon={<DownloadIcon />} variant="contained" component="label">
+                    Download
+                </Button>
                 {submitButton}
             </Box>
         </Box>
