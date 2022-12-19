@@ -11,9 +11,9 @@ export const apiSlice = createApi({
     }
 
   }),
-  tagTypes: ['User', 'Tasks', 'Transcripts', 
-  'Syllabus', 'ScoreTable', 'Wish', 'WishList', 'PreApproval', 
-  'Application', 'File', 'Placements'],
+  tagTypes: ['User', 'Tasks', 'Transcripts',
+    'Syllabus', 'ScoreTable', 'Wish', 'WishList', 'PreApproval',
+    'Application', 'File', 'Placements'],
   endpoints: (builder) => ({
     getUser: builder.query({
       query: () => '/erasmus/getUser',
