@@ -1,6 +1,6 @@
 import * as React from 'react';
 import './App.css';
-import { BrowserRouter as Router, Routes, Route} from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import LoginScreen from './screens/LoginScreen';
 import HomeScreen from './screens/HomeScreen';
 import AnnouncementsScreen from './screens/AnnouncementsScreen'
@@ -27,33 +27,33 @@ function App() {
   return (
     <Router>
       <Routes>
-        <Route index element={<LoginScreen/>} />
-        <Route path="login" element={<LoginScreen/>}/>
-        <Route path="home" element={<HomeScreen/>}>
-          <Route index element={<ToDoListScreen/>}/>
-          <Route path="todo" element={<ToDoListScreen/>}/>
-          <Route path="announcements" element={<AnnouncementsScreen/>}/>
-          <Route path="application" element={<ApplicationScreen/>}/>
-          <Route path="checklist" element={<ChecklistScreen/>}/>
-          <Route path="contacts" element={<ContactsScreen/>}/>
-          <Route path="courseTransfer" element={<CourseTransferScreen/>}/>
-          <Route path="placements" element={<PlacementScreen/>}/>
-          <Route path="evaluations" element={<EvaluationsScreen/>}/>
-          <Route path="forum" element={<ForumScreen/>}/>
-          <Route path="learningAgreement" element={<LearningAgreementScreen/>}/>
-          <Route path="message" element={<MessageScreen/>}/>
-          <Route path="preapproval" element={<PreApprovalScreen/>}/>
-          <Route path="wishlist" element={<WishListScreen/>}/>
-          <Route path="scoreTable" element={<UploadScoreTable/>}/>
-          <Route path="transcripts" element={<UploadTranscript/>}/>
-          <Route path="courseProposals" element={<CourseProposals/>}/>
-          <Route path="deadlines" element={<Deadlines/>}/>
-          <Route path="coordinators" element={<CoordinatorsScreen/>}/>
-          <Route path="transferrableCourses" element={<TransferrableCoursesScreen/>}/>
+        <Route index element={<LoginScreen />} />
+        <Route path="login" element={<LoginScreen />} />
+        <Route path="home" element={<HomeScreen />}>
+          <Route index element={<ToDoListScreen />} />
+          <Route path="todo" element={<ToDoListScreen />} />
+          <Route path="announcements" element={<AnnouncementsScreen />} />
+          <Route path="application" element={<ApplicationScreen />} />
+          <Route path="checklist" element={<ChecklistScreen />} />
+          <Route path="contacts" element={<ContactsScreen />} />
+          <Route path="courseTransfer" element={<CourseTransferScreen />} />
+          <Route path="placements" element={<PlacementScreen />} />
+          <Route path="evaluations" element={<EvaluationsScreen />} />
+          <Route path="forum" element={<ForumScreen />} />
+          <Route path="learningAgreement" element={<LearningAgreementScreen />} />
+          <Route path="message" element={<MessageScreen />} />
+          <Route path="preapproval" element={<PreApprovalScreen />} />
+          <Route path="wishlist" element={<WishListScreen />} />
+          <Route path="scoreTable" element={<UploadScoreTable />} />
+          <Route path="transcripts" element={<UploadTranscript />} />
+          <Route path="courseProposals" element={<CourseProposals />} />
+          <Route path="deadlines" element={<Deadlines />} />
+          <Route path="coordinators" element={<CoordinatorsScreen />} />
+          <Route path="transferrableCourses" element={<TransferrableCoursesScreen />} />
         </Route>
       </Routes>
     </Router>
-);
+  );
 }
 
 export default App;

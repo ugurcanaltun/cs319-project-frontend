@@ -9,21 +9,25 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useNavigate } from 'react-router-dom';
-import { useGetUserQuery } from '../redux/api/apiSlice';
+import axios from 'axios'
+
 const theme = createTheme();
 
 export default function LoginScreen() {
-    const { data, error, isLoading, isFetching, isSuccess } = useGetUserQuery()
     const navigate = useNavigate();
     const handleSubmit = (event) => {
         event.preventDefault();
         const formData = new FormData(event.currentTarget);
         const userState = {
-            username: formData.get('username'),
-            userType: formData.get('userRole')
+            userName: formData.get('username'),
+            password: formData.get('password')
         }
-        console.log(data)
-        navigate("/home")
+        axios.post('http://localhost:8080/auth/authenticate', userState)
+            .then(function (response) {
+                localStorage.setItem("role", response.data.role)
+                localStorage.setItem("token", response.data.token)
+                navigate("/home")
+            })
     };
 
     return (
@@ -59,8 +63,8 @@ export default function LoginScreen() {
                             margin="normal"
                             required
                             fullWidth
-                            name="userRole"
-                            label="User Role"
+                            name="password"
+                            label="Password"
                             id="userRole"
                             autoComplete="user-role"
                         />

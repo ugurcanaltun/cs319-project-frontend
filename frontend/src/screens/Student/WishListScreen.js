@@ -45,13 +45,13 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
 
 const StyledTableCellTwo = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
-      backgroundColor: "#201F2B",
-      color: theme.palette.common.white,
+        backgroundColor: "#201F2B",
+        color: theme.palette.common.white,
     },
     [`&.${tableCellClasses.body}`]: {
-      fontSize: 14,
+        fontSize: 14,
     },
-  }));
+}));
 
 export default function WishListScreen() {
     const { data, error, isLoading, isFetching, isSuccess } = useGetAllWishesQuery()
@@ -70,7 +70,7 @@ export default function WishListScreen() {
     }
 
     const handleUploadButton = (event) => {
-        if(file){
+        if (file) {
             event.preventDefault()
             const formData = new FormData()
             formData.append("file", file)
@@ -91,19 +91,19 @@ export default function WishListScreen() {
         }).then((response) => {
             // create file link in browser's memory
             const href = URL.createObjectURL(response.data);
-        
+
             // create "a" HTML element with href to file & click
             const link = document.createElement('a');
             link.href = href;
             link.setAttribute('download', 'learningAgreement.pdf'); //or any other extension
             document.body.appendChild(link);
             link.click();
-        
+
             // clean up "a" element & remove ObjectURL
             document.body.removeChild(link);
             URL.revokeObjectURL(href);
         });
-    } 
+    }
 
     const [addWish] = useAddWishMutation()
 
@@ -112,18 +112,18 @@ export default function WishListScreen() {
         if (isSuccess) {
             console.log(data)
             let aa = []
-            for (let i = 0; i < data.length; i++) {
+            for (let i = 0; i < data.wishes.length; i++) {
                 let row = []
-                row.push(data[i].courseToCountAsBilkentCourse.courseCode)
-                row.push(data[i].courseToCountAsBilkentCourse.hostCourseName)
-                row.push(data[i].courseToCountAsBilkentCourse.ects_credit)
-                row.push(data[i].bilkentCourse.courseCode)
-                row.push(data[i].bilkentCourse.nameOfCourse)
-                row.push(data[i].bilkentCourse.ects_credit)
-                row.push(data[i].bilkentCourse.courseType)
+                row.push(data.wishes[i].courseToCountAsBilkentCourse.courseCode)
+                row.push(data.wishes[i].courseToCountAsBilkentCourse.nameOfCourse)
+                row.push(data.wishes[i].courseToCountAsBilkentCourse.ects_credit)
+                row.push(data.wishes[i].bilkentCourse.courseCode)
+                row.push(data.wishes[i].bilkentCourse.nameOfCourse)
+                row.push(data.wishes[i].bilkentCourse.ects_credit)
+                row.push(data.wishes[i].bilkentCourse.courseType)
                 row.push(<SyllabusButton />)
-                row.push(<IntentButton intent={data[i].intent} />)
-                if (data[i].courseToCountAsBilkentCourse.approved) {
+                row.push(<IntentButton intent={data.wishes[i].intent} />)
+                if (data.wishes[i].courseToCountAsBilkentCourse.approved) {
                     row.push("Approved")
                 }
                 else { row.push("Not Approved") }
@@ -162,14 +162,14 @@ export default function WishListScreen() {
             }).then((response) => {
                 // create file link in browser's memory
                 const href = URL.createObjectURL(response.data);
-            
+
                 // create "a" HTML element with href to file & click
                 const link = document.createElement('a');
                 link.href = href;
                 link.setAttribute('download', `${props.syllabusTitle}.pdf`); //or any other extension
                 document.body.appendChild(link);
                 link.click();
-            
+
                 // clean up "a" element & remove ObjectURL
                 document.body.removeChild(link);
                 URL.revokeObjectURL(href);
@@ -324,45 +324,21 @@ export default function WishListScreen() {
         // const formData = new FormData(document.getElementById("aa"))
         let row = [courseCode, courseName, ECTS, coursesData[bilkentCourseTransferred].courseCode,
             coursesData[bilkentCourseTransferred].courseName, coursesData[bilkentCourseTransferred].courseECTS,
-            courseTypeLabel, <SyllabusButton syllabusTitle={fileName}/>, <IntentButton intent={intent} />, "Not Approved"]
+            courseTypeLabel, <SyllabusButton syllabusTitle={fileName} />, <IntentButton intent={intent} />, "Not Approved"]
         setRows([...rows, row])
-        // const bilkentCourse = {
-        //     bilkentCourse: {
-        //         courseCode: row[3],
-        //         courseType: row[6],
-        //         ects_credit: row[5],
-        //     }
-        // }
-        // const courseToCountAsBilkentCourse = {
-        //     courseToCountAsBilkentCourse: {
-        //         approved: true,
-        //         courseCode: row[0],
-        //         ects_credit: row[2],
-        //         nameOfCourse: row[1],
-        //     }
-        // }
-        // const wish = {
-        //     wish: {
-        //         standing: "",
-        //         syllabus: "",
-        //         intent: "",
-        //     }
-        // }
-        // formData.append("bilkentCourse", bilkentCourse)
-        // formData.append("courseToCountAsBilkentCourse", courseToCountAsBilkentCourse)
-        // formData.append("wish", wish)
-        // console.log(formData)
+
         const obj = {
+            approved: false,
             bilkentCourseCode: row[3],
             bilkentCourseType: row[6],
             bilkentEcts_credit: row[5],
-            approved: true,
+            "bilkentCourseName": "bilkentCourse1",
             hostCourseCode: row[0],
             hostEcts_credit: row[2],
-            hostNameOfCourse: row[1],
+            hostCourseName: row[1],
+            intent: "",
             standing: "",
-            syllabus: "",
-            intent: ""
+            syllabus: ""
         }
         console.log(obj)
         addWish(obj)
@@ -379,22 +355,16 @@ export default function WishListScreen() {
             setRows([...rows, row])
             setOpenDialog(false)
             const obj = {
-                bilkentCourse: {
-                    courseCode: row[3],
-                    courseType: row[6],
-                    ects_credit: row[5],
-                },
-                courseToCountAsBilkentCourse: {
-                    approved: true,
-                    courseCode: row[0],
-                    ects_credit: row[2],
-                    nameOfCourse: row[1],
-                },
-                wish: {
-                    standing: "",
-                    syllabus: "",
-                    intent: "",
-                }
+                bilkentCourseCode: row[3],
+                bilkentCourseType: row[6],
+                bilkent_Ects_credit: row[5],
+                approved: true,
+                hostCourseCode: row[0],
+                host_Ects_credit: row[2],
+                hostNameOfCourse: row[1],
+                standing: "",
+                syllabus: "",
+                intent: ""
             }
             console.log(obj)
             addWish(obj)
@@ -414,9 +384,8 @@ export default function WishListScreen() {
         ["EEE391", "Signals", 5, <SelectButton rowIndex={2} />],
     ]
 
-    let submitButton;
-    if (wishListApproved) submitButton = <Button sx={{ backgroundColor: "#201F2B", marginLeft: 20 }} variant="contained">Submit</Button>
-    else submitButton = <Button disabled sx={{ backgroundColor: "#201F2B", marginLeft: 20 }} variant="contained">Submit</Button>
+    let submitButton
+    submitButton = <Button sx={{ backgroundColor: "#201F2B", marginLeft: 20 }} variant="contained">Submit</Button>
 
     return (
         <Box sx={{ flexGrow: 1 }}>
@@ -443,46 +412,46 @@ export default function WishListScreen() {
                 </Grid>
             </Grid>
             <TableContainer sx={{ marginTop: 5, marginLeft: 1, }} component={Paper}>
-            <Table aria-label="customized table">
-                <TableHead>
-                <TableRow>
-                    {headers.map((rows) =>
-                    rows.map((row, index) =>
-                        <StyledTableCellTwo key={index} align="center">{row}</StyledTableCellTwo>
-                    )
-                    )}
-                </TableRow>
-                </TableHead>
+                <Table aria-label="customized table">
+                    <TableHead>
+                        <TableRow>
+                            {headers.map((rows) =>
+                                rows.map((row, index) =>
+                                    <StyledTableCellTwo key={index} align="center">{row}</StyledTableCellTwo>
+                                )
+                            )}
+                        </TableRow>
+                    </TableHead>
 
-                <TableBody>
-                {rows.map((row, index) =>
-                    row[row.length - 1] === "Approved" ?
-                    <TableRow sx={{ backgroundColor: "#5eff89" }} key={index}>
-                    {row.map((cell, index) => {
-                        return (
-                        <StyledTableCellTwo key={index} align="center" component="th" scope="row">{cell}</StyledTableCellTwo>
-                        )
-                    })}
-                    </TableRow>
-                    : row[row.length - 1] === "Declined" ?
-                    <TableRow sx={{ backgroundColor: "#ff0000" }} key={index}>
-                    {row.map((cell, index) => {
-                        return (
-                        <StyledTableCellTwo key={index} align="center" component="th" scope="row">{cell}</StyledTableCellTwo>
-                        )
-                    })}
-                    </TableRow>
-                    : 
-                    <TableRow sx={{ backgroundColor: "#ffffe0" }} key={index}>
-                    {row.map((cell, index) => {
-                        return (
-                        <StyledTableCellTwo key={index} align="center" component="th" scope="row">{cell}</StyledTableCellTwo>
-                        )
-                    })}
-                    </TableRow>
-                )}
-                </TableBody>
-            </Table>
+                    <TableBody>
+                        {rows.map((row, index) =>
+                            row[row.length - 1] === "Approved" ?
+                                <TableRow sx={{ backgroundColor: "#5eff89" }} key={index}>
+                                    {row.map((cell, index) => {
+                                        return (
+                                            <StyledTableCellTwo key={index} align="center" component="th" scope="row">{cell}</StyledTableCellTwo>
+                                        )
+                                    })}
+                                </TableRow>
+                                : row[row.length - 1] === "Declined" ?
+                                    <TableRow sx={{ backgroundColor: "#ff0000" }} key={index}>
+                                        {row.map((cell, index) => {
+                                            return (
+                                                <StyledTableCellTwo key={index} align="center" component="th" scope="row">{cell}</StyledTableCellTwo>
+                                            )
+                                        })}
+                                    </TableRow>
+                                    :
+                                    <TableRow sx={{ backgroundColor: "#ffffe0" }} key={index}>
+                                        {row.map((cell, index) => {
+                                            return (
+                                                <StyledTableCellTwo key={index} align="center" component="th" scope="row">{cell}</StyledTableCellTwo>
+                                            )
+                                        })}
+                                    </TableRow>
+                        )}
+                    </TableBody>
+                </Table>
             </TableContainer>
             <Grid container sx={{ mt: 5 }}>
                 <Grid item xs={5}></Grid>
@@ -580,104 +549,104 @@ export default function WishListScreen() {
                         </Box>
                         :
                         <>
-                        <Box sx={{ ml: 18 }}>
-                        <TableContainer sx={{ width: 801, marginTop: 5, marginLeft: 1, }} component={Paper}>
-                        <Table aria-label="customized table">
-                        <TableHead>
-                        <TableRow sx={{ width: 200 }}>
-                            {addNewCourseHeaders.map((rows) =>
-                                rows.map((row, index) =>
-                                    <StyledTableCell key={index} sx={{ width: 200 }} align="left">{row}</StyledTableCell>
-                                )
-                            )}
-                            </TableRow>
-                            </TableHead>
-                            <TableBody>
-                            <TableRow sx={{ display: "flex", width: 200 }}>
-                                <td style={{ display: "flex", width: 200 }}>
-                                    <div style={{ width: 200 }}>
-                                        <TextField
-                                            value={courseCode}
-                                            sx={{ width: 200 }}
-                                            id="standard-basic"
-                                            label="Enter"
-                                            variant="standard"
-                                            onChange={(event) => { setCourseCode(event.target.value) }} />
-                                    </div>
-                                </td>
-                                <td style={{ display: "flex", width: 200 }}>
-                                    <div style={{ width: 200 }}>
-                                        <TextField
-                                            value={courseName}
-                                            sx={{ width: 200 }}
-                                            id="standard-basic"
-                                            label="Enter"
-                                            variant="standard"
-                                            onChange={(event) => { setCourseName(event.target.value) }} />
-                                    </div>
-                                </td>
-                                <td style={{ display: "flex", width: 200 }}>
-                                    <div style={{ width: 200 }}>
-                                        <TextField
-                                            value={ECTS}
-                                            sx={{ width: 200 }}
-                                            id="standard-basic"
-                                            label="Enter"
-                                            variant="standard"
-                                            onChange={(event) => { setECTS(event.target.value) }} />
-                                    </div>
-                                </td>
-                                <td style={{ display: "flex", width: 200 }}>
-                                    <div style={{ width: 200 }}>
-                                        <TextField
-                                            value={intent}
-                                            sx={{ width: 200 }}
-                                            id="standard-basic"
-                                            label="Enter"
-                                            variant="standard"
-                                            onChange={(event) => { setIntent(event.target.value) }} />
-                                    </div>
-                                </td>
-                            </TableRow>
-                            </TableBody>
-                            </Table>
-                            </TableContainer>
+                            <Box sx={{ ml: 18 }}>
+                                <TableContainer sx={{ width: 801, marginTop: 5, marginLeft: 1, }} component={Paper}>
+                                    <Table aria-label="customized table">
+                                        <TableHead>
+                                            <TableRow sx={{ width: 200 }}>
+                                                {addNewCourseHeaders.map((rows) =>
+                                                    rows.map((row, index) =>
+                                                        <StyledTableCell key={index} sx={{ width: 200 }} align="left">{row}</StyledTableCell>
+                                                    )
+                                                )}
+                                            </TableRow>
+                                        </TableHead>
+                                        <TableBody>
+                                            <TableRow sx={{ display: "flex", width: 200 }}>
+                                                <td style={{ display: "flex", width: 200 }}>
+                                                    <div style={{ width: 200 }}>
+                                                        <TextField
+                                                            value={courseCode}
+                                                            sx={{ width: 200 }}
+                                                            id="standard-basic"
+                                                            label="Enter"
+                                                            variant="standard"
+                                                            onChange={(event) => { setCourseCode(event.target.value) }} />
+                                                    </div>
+                                                </td>
+                                                <td style={{ display: "flex", width: 200 }}>
+                                                    <div style={{ width: 200 }}>
+                                                        <TextField
+                                                            value={courseName}
+                                                            sx={{ width: 200 }}
+                                                            id="standard-basic"
+                                                            label="Enter"
+                                                            variant="standard"
+                                                            onChange={(event) => { setCourseName(event.target.value) }} />
+                                                    </div>
+                                                </td>
+                                                <td style={{ display: "flex", width: 200 }}>
+                                                    <div style={{ width: 200 }}>
+                                                        <TextField
+                                                            value={ECTS}
+                                                            sx={{ width: 200 }}
+                                                            id="standard-basic"
+                                                            label="Enter"
+                                                            variant="standard"
+                                                            onChange={(event) => { setECTS(event.target.value) }} />
+                                                    </div>
+                                                </td>
+                                                <td style={{ display: "flex", width: 200 }}>
+                                                    <div style={{ width: 200 }}>
+                                                        <TextField
+                                                            value={intent}
+                                                            sx={{ width: 200 }}
+                                                            id="standard-basic"
+                                                            label="Enter"
+                                                            variant="standard"
+                                                            onChange={(event) => { setIntent(event.target.value) }} />
+                                                    </div>
+                                                </td>
+                                            </TableRow>
+                                        </TableBody>
+                                    </Table>
+                                </TableContainer>
                             </Box>
                             <Grid container sx={{ mt: 6 }} spacing={2}>
-                            <Grid item >
-                            {file ?
-                            <Button sx={{ display: 'flex',  marginLeft: 1, backgroundColor: "#008000" }} edge="start" endIcon={<UploadIcon />} variant="contained" component="label">
-                                {fileName}
-                                <input onChange={onFileChange} hidden name="file1" accept="application/pdf" multiple type="file" />
-                            </Button>
-                            :
-                            <Button sx={{ display: 'flex',  marginLeft: 1, backgroundColor: "#201F2B" }} edge="start" endIcon={<UploadIcon />} variant="contained" component="label">
-                                {fileName}
-                                <input onChange={onFileChange} hidden name="file1" accept="application/pdf" multiple type="file" />
-                            </Button>
-                            }           
-                            </Grid>
-                            <Grid item>
-                            <Button onClick={handleDownloadButton} sx={{ display: 'flex', marginLeft: 1, backgroundColor: "#201F2B" }} edge="start" variant="contained" component="label">
-                                <DownloadIcon/>
-                            </Button>
-                            </Grid>
-                            <Grid item>
-                            <Button onClick={handleUploadButton} sx={{ display: 'flex', width: 120, marginLeft: 1, backgroundColor: "#201F2B" }} edge="start" variant="contained" component="label">
-                                Submit
-                            </Button>
-                            </Grid>
-                            <Grid item sx={{ml: 64}}>
-                            <form id="aa">
-                            <Button
-                            sx={{ backgroundColor: "#201F2B" }}
-                            variant="contained"
-                            onClick={HandleSubmitNewCourse}
-                            id="new-course-button"
-                            disabled={!isSubmitFilled}>Submit New Course
-                            </Button>
-                            </form>
-                            </Grid>
+                                <Grid item >
+                                    {file ?
+                                        <Button sx={{ display: 'flex', marginLeft: 1, backgroundColor: "#008000" }} edge="start" endIcon={<UploadIcon />} variant="contained" component="label">
+                                            {fileName}
+                                            <input onChange={onFileChange} hidden name="file1" accept="application/pdf" multiple type="file" />
+                                        </Button>
+                                        :
+                                        <Button sx={{ display: 'flex', marginLeft: 1, backgroundColor: "#201F2B" }} edge="start" endIcon={<UploadIcon />} variant="contained" component="label">
+                                            {fileName}
+                                            <input onChange={onFileChange} hidden name="file1" accept="application/pdf" multiple type="file" />
+                                        </Button>
+                                    }
+                                </Grid>
+                                <Grid item>
+                                    <Button onClick={handleDownloadButton} sx={{ display: 'flex', marginLeft: 1, backgroundColor: "#201F2B" }} edge="start" variant="contained" component="label">
+                                        <DownloadIcon />
+                                    </Button>
+                                </Grid>
+                                <Grid item>
+                                    <Button onClick={handleUploadButton} sx={{ display: 'flex', width: 120, marginLeft: 1, backgroundColor: "#201F2B" }} edge="start" variant="contained" component="label">
+                                        Submit
+                                    </Button>
+                                </Grid>
+                                <Grid item sx={{ ml: 64 }}>
+                                    <form id="aa">
+                                        <Button
+                                            sx={{ backgroundColor: "#201F2B" }}
+                                            variant="contained"
+                                            onClick={HandleSubmitNewCourse}
+                                            id="new-course-button"
+                                            disabled={!isSubmitFilled}>Submit New Course
+                                        </Button>
+                                    </form>
+                                </Grid>
                             </Grid>
                         </>
                     }

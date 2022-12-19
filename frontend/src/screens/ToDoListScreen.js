@@ -36,6 +36,7 @@ function OperationSection(props) {
     const [updateTask] = useUpdateTaskMutation()
     const [deleteTask] = useDeleteTaskMutation()
 
+
     const handleCheckButton = () => {
         console.log(props.id)
         updateTask({
@@ -81,7 +82,9 @@ function OperationSection(props) {
 }
 
 export default function ToDoListScreen() {
-    const { data, error, isLoading, isFetching, isSuccess } = useGetTasksQuery()
+    const { data, error, isLoading, isFetching, isSuccess } = useGetTasksQuery(localStorage.getItem("token"))
+
+
 
     const headers = [
         ["Task", "Deadline", "Status", "Operations"]

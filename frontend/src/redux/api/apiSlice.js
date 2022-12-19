@@ -1,8 +1,16 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
+import authHeader from '../../components/authHeader'
 
 export const apiSlice = createApi({
   reducerPath: 'api',
-  baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:8080' }),
+  baseQuery: fetchBaseQuery({
+    baseUrl: 'http://localhost:8080',
+    prepareHeaders: (headers, { getState }) => {
+      headers.set("Authorization", `Bearer ${localStorage.getItem("token")}`)
+      return headers;
+    }
+
+  }),
   tagTypes: ['User', 'Tasks', 'Transcripts', 'Syllabus', 'ScoreTable', 'Wish', 'WishList', 'PreApproval', 'Application', 'File'],
   endpoints: (builder) => ({
     getUser: builder.query({
@@ -12,7 +20,9 @@ export const apiSlice = createApi({
 
     // TASK
     getTasks: builder.query({
-      query: () => '/erasmus/1/getAllTasks',
+      query: () => ({
+        url: '/erasmus/1/getAllTasks',
+      }),
       providesTags: ['Tasks'],
     }),
     updateTask: builder.mutation({
@@ -61,7 +71,7 @@ export const apiSlice = createApi({
     // }),
     addWish: builder.mutation({
       query: (wish) => ({
-        url: `/erasmus/1/courseWishList/add/1`,
+        url: `/erasmus/1/courseWishList/add/2`,
         method: 'POST',
         body: wish,
       }),
@@ -76,7 +86,7 @@ export const apiSlice = createApi({
     //   invalidatesTags: ["WishList"],
     // }),
     getAllWishes: builder.query({
-      query: () => `erasmus/1/courseWishList/getAllWishes/1`,
+      query: () => `/erasmus/1/application/getWishList/0`,
       providesTags: ['WishList']
     }),
 
@@ -145,7 +155,7 @@ export const apiSlice = createApi({
 
     // Application
     getApplication: builder.query({
-      query: (id) => `erasmus/1/application/getByType/0`,
+      query: (id) => `/erasmus/1/application/getByType/0`,
       providesTags: ['Application'],
     }),
 
@@ -157,6 +167,14 @@ export const apiSlice = createApi({
         body: fileName,
       }),
       invalidatesTags: ['File'],
+    }),
+
+    tryAuth: builder.mutation({
+      query: (credentials) => ({
+        url: '/auth/authenticate',
+        method: 'POST',
+        body: credentials
+      })
     })
 
 
@@ -172,7 +190,7 @@ export const {
   useGetApplicationQuery,
   useGetAllWishesQuery,
   useUploadFileMutation,
-  useAddWishMutation
-
+  useAddWishMutation,
+  useTryAuthMutation
   // useUploadSyllabus,
 } = apiSlice

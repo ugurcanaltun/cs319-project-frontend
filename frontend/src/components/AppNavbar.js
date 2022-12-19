@@ -13,7 +13,6 @@ import MessageIcon from '@mui/icons-material/Message';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import { Link } from 'react-router-dom';
 import AccountMenu from './AccountMenu';
-import { useGetUserQuery } from '../redux/api/apiSlice';
 import Switch from './Switch'
 
 const drawerWidth = 240;
@@ -37,9 +36,7 @@ const AppBar = styled(MuiAppBar, {
 }));
 
 export default function AppNavbar(props) {
-
-    const { data, error, isLoading, isFetching, isSuccess } = useGetUserQuery()
-    const userType = data.role
+    const userType = localStorage.getItem("role")
     let navBarItems;
 
     if (userType === "student") {
