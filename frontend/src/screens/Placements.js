@@ -16,8 +16,8 @@ const headers = [
     "Last Name",
     "Student ID",
     "Total Point",
-    "Duration Preferred",
-    "Preferred University"]
+    "Duration Preferred", 
+  "Placed University"]
 ]
 
 const width = 1200;
@@ -39,8 +39,9 @@ export default function Placements() {
 
   useEffect(() => {
     if (isSuccess) {
+      console.log(data)
         let placedRows = []
-        for (let i = 0; i < data.placementTable.applications; i++) {
+        for (let i = 0; i < data.placementTable.applications.length; i++) {
             let row = []
             row.push(i+1)
             row.push(data.placementTable.applications[i].firstName)
@@ -53,7 +54,7 @@ export default function Placements() {
         }
         setPlacedRow([...placedRow, ...placedRows])
         let waitingRows = []
-        for (let i = 0; i < data.waitingBin.applications; i++) {
+        for (let i = 0; i < data.waitingBin.applications.length; i++) {
           let row = []
           row.push(i+1)
           row.push(data.waitingBin.applications[i].firstName)
@@ -64,7 +65,7 @@ export default function Placements() {
           row.push(data.waitingBin.applications[i].nameOfPlacedHostUniversity)
           waitingRows.push(row)
         }
-        setWaitingRow(...waitingRow, ...waitingRows)
+        setWaitingRow([...waitingRow, ...waitingRows])
 
     }
   }, [data, isSuccess])
@@ -85,6 +86,7 @@ export default function Placements() {
             </TableHead>
 
             <TableBody>
+              {console.log(placedRow)}
               {placedRow.map((row, index) =>
                 <TableRow key={index}>
                   {row.map((cell, index) => {
