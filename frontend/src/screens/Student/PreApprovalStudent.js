@@ -6,6 +6,7 @@ import Button from '@mui/material/Button';
 import { useGetUserQuery, useGetAllWishesQuery, useGetApplicationQuery, useDownloadPDFMutation } from '../../redux/api/apiSlice';
 import { useState, useEffect } from 'react'
 import DownloadIcon from '@mui/icons-material/Download';
+import axios from 'axios'
 
 export default function PreApprovalStudent() {
     const { data: userData, isSuccess: isSuccessUser } = useGetUserQuery()
@@ -32,6 +33,28 @@ export default function PreApprovalStudent() {
         downloadPDF(0)
     }
 
+    const handleDownloadButton = () => {
+        axios({
+            url: `http://localhost:8080/downloadFile/PreApproval.pdf`, //your url
+            method: 'GET',
+            responseType: 'blob', // important
+        }).then((response) => {
+            // create file link in browser's memory
+            const href = URL.createObjectURL(response.data);
+        
+            // create "a" HTML element with href to file & click
+            const link = document.createElement('a');
+            link.href = href;
+            link.setAttribute('download', 'PreApprovalDownloaded.pdf'); //or any other extension
+            document.body.appendChild(link);
+            link.click();
+        
+            // clean up "a" element & remove ObjectURL
+            document.body.removeChild(link);
+            URL.revokeObjectURL(href);
+        });
+    }
+
     useEffect(() => {
         console.log(applicationData)
         if (isSuccessUser && isSuccessWishes && isSuccessApplication) {
@@ -55,8 +78,8 @@ export default function PreApprovalStudent() {
     }, [userData, wishesData, applicationData])
 
     let submitButton;
-    if (isPreApp) submitButton = <Button sx={{ backgroundColor: "#201F2B", marginLeft: 20 }} variant="contained">Submit</Button>
-    else submitButton = <Button disabled sx={{ backgroundColor: "#201F2B", marginLeft: 20 }} variant="contained">Submit</Button>
+    if (isPreApp) submitButton = <Button sx={{ backgroundColor: "#201F2B", ml: 2}} variant="contained">Submit</Button>
+    else submitButton = <Button disabled sx={{ backgroundColor: "#201F2B", ml: 2}} variant="contained">Submit</Button>
     return (
         <Box sx={{ flexGrow: 1, width: '100%' }}>
             <Box sx={{ flexGrow: 1, mb: -4 }}>
@@ -85,8 +108,9 @@ export default function PreApprovalStudent() {
                 </Grid>
             </Grid>
             <Box sx={{ display: 'flex', mt: 4, justifyContent: 'flex-end' }}>
+                <Button sx={{ backgroundColor: "#201F2B", mt: 2, ml: 1 }} variant="contained" onClick={handleDownloadButton}>Download</Button>
                 <Button onClick={onClickDownload} sx={{ display: 'flex', marginLeft: 1, backgroundColor: "#008000" }} edge="start" endIcon={<DownloadIcon />} variant="contained" component="label">
-                    Download
+                    Generate PDF
                 </Button>
                 {submitButton}
             </Box>
