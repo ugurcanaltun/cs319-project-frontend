@@ -20,7 +20,7 @@ import { useGetUserQuery } from '../redux/api/apiSlice';
 
 export default function AnnouncementsScreen() {
     const { data, error, isLoading, isFetching, isSuccess } = useGetUserQuery()
-    const userType = data.users.role
+    const userType = data.role
     const discussions = [
         {
             id: 0,

@@ -175,8 +175,16 @@ export const apiSlice = createApi({
         method: 'POST',
         body: credentials
       })
-    })
+    }),
 
+    getDataFromExcel: builder.mutation({
+      query: (excel) => ({
+        url: '/getDataFromExcel',
+        method: 'POST',
+        body: excel,
+      }),
+      invalidatesTags: ['Excels'],
+    })
 
   }),
 })
@@ -191,6 +199,7 @@ export const {
   useGetAllWishesQuery,
   useUploadFileMutation,
   useAddWishMutation,
-  useTryAuthMutation
+  useTryAuthMutation,
+  useGetDataFromExcelMutation
   // useUploadSyllabus,
 } = apiSlice

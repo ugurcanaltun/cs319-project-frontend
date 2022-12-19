@@ -3,36 +3,54 @@ import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import StyledTable from "../../components/StyledTable";
 import Button from '@mui/material/Button';
+import { useGetUserQuery, useGetAllWishesQuery, useGetApplicationQuery} from '../../redux/api/apiSlice';
+import { useState, useEffect } from 'react'
 
 export default function PreApprovalStudent() {
+    const { data: userData, isSuccess: isSuccessUser } = useGetUserQuery()
+    const { data: wishesData, isSuccess: isSuccessWishes } = useGetAllWishesQuery()
+    const { data: applicationData, isSuccess: isSuccessApplication } = useGetApplicationQuery()
     const headersEmpty = [];
     const rowsEmpty = [];
-    const rowsName = [["Name", " ", "ID Number", " "],
-    ["Surname", " ", "Department", " "]];
-    const rowNameOfInstitution = [["Name of the institution", " "]];
-    const rowAcademicYear = [["Academic Year", " "],
-    ["Semester", " "]];
-    const infoHeader = [["Host institution courses to be transferred upon approval",
-        "Course or requirement to be exempted if transferred course is completed with a passing grade †"]];
-    const headersCourseTransfer = [[" ", " Course Code", "Course Name", "Credits",
-        "Course Code and Name for a Required Course, Elective Group Name for an Elective Requirement",
-        "Credits", "Elective Requirement Exemptions only: Course code(s) of directly equivalent course(s), if any **"]];
-    const rowsCourseTransfer = [[1, " ", " ", " ", " ", " ", " "],
-    [2, " ", " ", " ", " ", " ", " "],
-    [3, " ", " ", " ", " ", " ", " "],
-    [4, " ", " ", " ", " ", " ", " "],
-    [5, " ", " ", " ", " ", " ", " "],
-    [6, " ", " ", " ", " ", " ", " "]];
-    const headerSignatures = [["Approved by", "Name", "Signture", "Date"]];
-    const rowsSignatures = [[" ", " ", " ", " "]];
+    const [rowsName, setRowsName] = useState([["Name", " ", "ID Number", " "], ["Surname", " ", "Department", " "]])
+    const [rowNameOfInstitution, setRowNameOfInstitution] = useState([["Name of the institution", " "]])
+    const [rowAcademicYear, setRowAcademicYear] = useState([["Academic Year", " "], ["Semester", " "]])
+    const [infoHeader, setInfoHeader] = useState([["Host institution courses to be transferred upon approval", 
+    "Course or requirement to be exempted if transferred course is completed with a passing grade †"]])
+    const [headersCourseTransfer, setHeadersCourseTransfer] = useState([[" ", " Course Code", "Course Name", "Credits",
+    "Course Code and Name for a Required Course, Elective Group Name for an Elective Requirement",
+    "Credits", "Elective Requirement Exemptions only: Course code(s) of directly equivalent course(s), if any **"]])
+    const [rowsCourseTransfer, setRowsCourseTransfer] = useState([])
+    const [headerSignatures, setHeaderSignatures] = useState([["Approved by", "Name", "Signture", "Date"]])
+    const [rowsSignatures, setRowsSignatures] = useState([[" ", " ", " ", " "]])
+    const[isPreApp, setIsPreApp] = useState(false)
 
-    const preAppOK = false;
+    useEffect(() => {
+        if(isSuccessUser && isSuccessWishes) {
+            setRowsName([["Name", userData.firstName, "ID Number", userData.schoolId], ["Surname", userData.lastName, "Department", userData.department]])
+            setRowNameOfInstitution([["Name of the institution", applicationData.placedHostUniversity]])
+            setRowAcademicYear([["Academic Year", userData.academicYear], ["Semester", applicationData.appliedAcademicSemester]])
+            let aa = []
+            for (let i = 0; i < wishesData.length; i++) {
+                let row = []
+                row.push(i+1)
+                row.push(wishesData[i].courseToCountAsBilkentCourse.courseCode)
+                row.push(wishesData[i].courseToCountAsBilkentCourse.hostCourseName)
+                row.push(wishesData[i].courseToCountAsBilkentCourse.ects_credit)
+                row.push(wishesData[i].bilkentCourse.courseType)
+                row.push(wishesData[i].bilkentCourse.ects_credit)
+                row.push(wishesData[i].bilkentCourse.courseCode)
+                aa.push(row)
+            }
+            setRowsCourseTransfer([...rowsCourseTransfer, ...aa])
+        }
+    },[userData,wishesData,applicationData])
 
     let submitButton;
-    if (preAppOK) submitButton = <Button sx={{ backgroundColor: "#201F2B", marginLeft: 20 }} variant="contained">Submit</Button>
+    if (isPreApp) submitButton = <Button sx={{ backgroundColor: "#201F2B", marginLeft: 20 }} variant="contained">Submit</Button>
     else submitButton = <Button disabled sx={{ backgroundColor: "#201F2B", marginLeft: 20 }} variant="contained">Submit</Button>
     return (
-        <Box sx={{ flexGrow: 1 }}>
+        <Box sx={{ flexGrow: 1, width: '100%'}}>
             <Box sx={{ flexGrow: 1, mb: -4 }}>
                 <h1>Pre Approval</h1>
             </Box>
@@ -57,14 +75,10 @@ export default function PreApprovalStudent() {
                 <Grid item xs={12}>
                     <StyledTable headers={headerSignatures} rows={rowsSignatures} />
                 </Grid>
-                <Grid item xs={10}>
-                </Grid>
-                <Box sx={{ flexGrow: 1, mt: 4, marginLeft: 190 }}>
-                    <Grid item xs={2}>
-                        {submitButton}
-                    </Grid>
-                </Box>
             </Grid>
+            <Box sx={{display: 'flex', mt: 4, justifyContent: 'flex-end'}}>
+                {submitButton}
+            </Box>
         </Box>
     )
 }
