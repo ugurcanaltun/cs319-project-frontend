@@ -11,7 +11,9 @@ export const apiSlice = createApi({
     }
 
   }),
-  tagTypes: ['User', 'Tasks', 'Transcripts', 'Syllabus', 'ScoreTable', 'Wish', 'WishList', 'PreApproval', 'Application', 'File'],
+  tagTypes: ['User', 'Tasks', 'Transcripts', 
+  'Syllabus', 'ScoreTable', 'Wish', 'WishList', 'PreApproval', 
+  'Application', 'File', 'Placements'],
   endpoints: (builder) => ({
     getUser: builder.query({
       query: () => '/erasmus/getUser/1',
@@ -184,6 +186,11 @@ export const apiSlice = createApi({
         body: excel,
       }),
       invalidatesTags: ['Excels'],
+    }),
+
+    getPlacements: builder.query({
+      query: () => "/erasmus/getPlacementManager",
+      providesTags: ['Placements']
     })
 
   }),
@@ -200,6 +207,7 @@ export const {
   useUploadFileMutation,
   useAddWishMutation,
   useTryAuthMutation,
-  useGetDataFromExcelMutation
+  useGetDataFromExcelMutation,
+  useGetPlacementsQuery,
   // useUploadSyllabus,
 } = apiSlice
