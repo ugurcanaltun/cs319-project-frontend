@@ -49,11 +49,11 @@ export default function UploadScoreTable() {
     event.preventDefault()
     const formData = new FormData()
     formData.append("file", file, fileName)
-    formData.append("PlacementManagerDao", new Blob([JSON.stringify(  {
+    formData.append("PlacementManagerDao", new Blob([JSON.stringify({
       "academicYear": "2022-2023",
       "applicationType": "ERASMUS",
-      "departmentName": "CS",  
-    })], {type:"application/json"}))
+      "departmentName": "CS",
+    })], { type: "application/json" }))
     uploadExcel(formData)
   }
 
@@ -61,35 +61,35 @@ export default function UploadScoreTable() {
     <div>
       <h1>Score Table</h1>
       <FormControl sx={{ m: 1, width: 240, height: 50 }} size="small">
-      <InputLabel id="demo-select-small">Department</InputLabel>
-      <Select
-        labelId="demo-select-small"
-        id="demo-select-small"
-        value={text}
-        label="Department"
-        onChange={handleChange}
-      >
-        <MenuItem value="">
-          <em>None</em>
-        </MenuItem>
-        {selector.map((row, index) =>
-          <MenuItem value={index} key={index}>{row}</MenuItem>
-        )}
-      </Select>
-    </FormControl>
+        <InputLabel id="demo-select-small">Department</InputLabel>
+        <Select
+          labelId="demo-select-small"
+          id="demo-select-small"
+          value={text}
+          label="Department"
+          onChange={handleChange}
+        >
+          <MenuItem value="">
+            <em>None</em>
+          </MenuItem>
+          {selector.map((row, index) =>
+            <MenuItem value={index} key={index}>{row}</MenuItem>
+          )}
+        </Select>
+      </FormControl>
       <h2>Upload Here</h2>
       <div style={{ display: "flex" }}>
         {file ?
-        <Button sx={{ display: 'flex',  marginLeft: 1, backgroundColor: "#008000" }} edge="start" endIcon={<UploadIcon />} variant="contained" component="label">
+          <Button sx={{ display: 'flex', marginLeft: 1, backgroundColor: "#008000" }} edge="start" endIcon={<UploadIcon />} variant="contained" component="label">
             {fileName}
             <input onChange={onFileChange} hidden name="file1" accept=".xls, .xlsx" multiple type="file" />
-        </Button>
-        :
-        <Button sx={{ display: 'flex',  marginLeft: 1, backgroundColor: "#201F2B" }} edge="start" endIcon={<UploadIcon />} variant="contained" component="label">
+          </Button>
+          :
+          <Button sx={{ display: 'flex', marginLeft: 1, backgroundColor: "#201F2B" }} edge="start" endIcon={<UploadIcon />} variant="contained" component="label">
             {fileName}
             <input onChange={onFileChange} hidden name="file1" accept=".xls, .xlsx" multiple type="file" />
-        </Button>
-        }  
+          </Button>
+        }
         <Button onClick={handleSubmitButton} sx={{ display: 'flex', width: 120, marginLeft: 1, backgroundColor: "#201F2B" }} variant="contained">
           Submit
         </Button>

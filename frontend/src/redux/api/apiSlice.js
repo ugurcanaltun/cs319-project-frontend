@@ -13,7 +13,7 @@ export const apiSlice = createApi({
   }),
   tagTypes: ['User', 'Tasks', 'Transcripts',
     'Syllabus', 'ScoreTable', 'Wish', 'WishList', 'PreApproval',
-    'Application', 'File', 'Placements'],
+    'Application', 'File', 'Placements', 'PDF'],
   endpoints: (builder) => ({
     getUser: builder.query({
       query: () => '/erasmus/getUser',
@@ -191,6 +191,15 @@ export const apiSlice = createApi({
     getPlacements: builder.query({
       query: () => "/erasmus/getPlacementManager",
       providesTags: ['Placements']
+    }),
+
+    downloadPDF: builder.mutation({
+      query: (appTypeInt) => ({
+        url: `/${appTypeInt}/createPdf`,
+        method: 'POST',
+        body: appTypeInt
+      }),
+      invalidatesTags: ['PDF']
     })
 
   }),
@@ -209,5 +218,6 @@ export const {
   useTryAuthMutation,
   useGetDataFromExcelMutation,
   useGetPlacementsQuery,
+  useDownloadPDFMutation
   // useUploadSyllabus,
 } = apiSlice

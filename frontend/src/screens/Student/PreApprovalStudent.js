@@ -3,7 +3,7 @@ import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import StyledTable from "../../components/StyledTable";
 import Button from '@mui/material/Button';
-import { useGetUserQuery, useGetAllWishesQuery, useGetApplicationQuery } from '../../redux/api/apiSlice';
+import { useGetUserQuery, useGetAllWishesQuery, useGetApplicationQuery, useDownloadPDFMutation } from '../../redux/api/apiSlice';
 import { useState, useEffect } from 'react'
 import DownloadIcon from '@mui/icons-material/Download';
 
@@ -12,6 +12,7 @@ export default function PreApprovalStudent() {
     const { data: wishesData, isSuccess: isSuccessWishes } = useGetAllWishesQuery()
     console.log(wishesData)
     const { data: applicationData, isSuccess: isSuccessApplication } = useGetApplicationQuery()
+    const [downloadPDF] = useDownloadPDFMutation()
     const headersEmpty = [];
     const rowsEmpty = [];
     const [rowsName, setRowsName] = useState([["Name", " ", "ID Number", " "], ["Surname", " ", "Department", " "]])
@@ -28,7 +29,7 @@ export default function PreApprovalStudent() {
     const [isPreApp, setIsPreApp] = useState(false)
 
     const onClickDownload = () => {
-
+        downloadPDF(0)
     }
 
     useEffect(() => {
