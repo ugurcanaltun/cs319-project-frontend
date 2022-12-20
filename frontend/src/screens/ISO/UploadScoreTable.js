@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import SelectLabels from '../../components/SelectLabels'
 import StyledTable from '../../components/StyledTable'
 import Button from '@mui/material/Button';
@@ -11,29 +11,66 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
-
-const headers = [
-  ["File", "File Format", "Status", "Download"]
-];
-
-const rows = [
-  ["Score Table", ".xls", <DoneIcon />, <DownloadIcon />],
-]
-
-const selector = [
-  "CS",
-  "EEE",
-  "ME",
-  "IE",
-]
+import axios from 'axios'
+import { useUploadFileMutation } from '../../redux/api/apiSlice';
 
 const width = 800;
 
 export default function UploadScoreTable() {
+  const [uploadFile] = useUploadFileMutation()
   const [uploadExcel] = useGetDataFromExcelMutation()
   const [file, setFile] = useState()
+  const [fileUploaded, setFileUploaded] = useState(false)
   const [fileName, setFileName] = useState("Upload")
-  const [text, setText] = React.useState('')
+  const [text, setText] = useState('')
+  const [selector, setSelector] = useState([
+    "CS",
+    "EEE",
+    "ME",
+    "IE",
+  ])
+  const headers = [["File", "File Format", "Status", "Download"]]
+  const [rows, setRows] = useState([])
+
+  useEffect(() => {
+    if (fileUploaded) {
+      let row = []
+      row.push(fileName)
+      row.push(".xlsx")
+      row.push(<DoneIcon/>)
+      row.push(<DownloadButton/>)
+      setRows([...rows,row])
+    }
+  }, [fileUploaded])
+
+  function DownloadButton() {
+    const onClick = () => {
+      axios({
+          url: `http://localhost:8080/downloadFile/${fileName}`, //your url
+          method: 'GET',
+          responseType: 'blob', // important
+      }).then((response) => {
+          // create file link in browser's memory
+          const href = URL.createObjectURL(response.data);
+      
+          // create "a" HTML element with href to file & click
+          const link = document.createElement('a');
+          link.href = href;
+          link.setAttribute('download', 'ScoreTable.xlsx'); //or any other extension
+          document.body.appendChild(link);
+          link.click();
+      
+          // clean up "a" element & remove ObjectURL
+          document.body.removeChild(link);
+          URL.revokeObjectURL(href);
+      });
+    }
+    return (
+      <Button onClick={onClick}>
+        <DownloadIcon/>
+      </Button>
+    )
+  }
 
   const handleChange = (event) => {
     setText(event.target.value);
@@ -55,6 +92,17 @@ export default function UploadScoreTable() {
       "departmentName": "CS",
     })], { type: "application/json" }))
     uploadExcel(formData)
+    if(file){
+      event.preventDefault()
+      const formData = new FormData()
+      formData.append("file", file)
+      formData.append("fileName", file.name)
+      formData.append("fileDownloadUri", `http://localhost:8080/downloadFile/${file.name}`)
+      formData.append("fileType", file.type)
+      formData.append("size", file.size)
+      uploadFile(formData)
+      setFileUploaded(true)
+    }
   }
 
   return (

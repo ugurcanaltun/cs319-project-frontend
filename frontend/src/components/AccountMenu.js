@@ -71,7 +71,7 @@ export default function AccountMenu() {
         anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
       >
         <MenuItem>
-          <Avatar sx={{ backgroundColor: '#282733' }} /> My Profile
+          <Avatar sx={{ backgroundColor: '#282733' }} /> {localStorage.getItem("fullName")}
         </MenuItem>
         <Divider />
 

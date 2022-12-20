@@ -9,6 +9,7 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { useGetPlacementsQuery } from '../redux/api/apiSlice'
 import { useState, useEffect } from 'react'
+import Button from '@mui/material/Button'
 
 const headers = [
     ["#",
@@ -31,6 +32,7 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
     fontSize: 14,
   },
 }));
+
 
 export default function Placements() {
   const { data, error, isLoading, isFetching, isSuccess } = useGetPlacementsQuery()
@@ -125,6 +127,9 @@ export default function Placements() {
             </TableBody>
           </Table>
         </TableContainer>
+        <Button variant="contained" sx={{backgroundColor: "#201F2B", mt: 4}}>
+          Submit
+        </Button>
     </div>
   )
 }

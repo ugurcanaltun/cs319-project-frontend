@@ -2,46 +2,36 @@ import * as React from 'react';
 import StyledTable from '../components/StyledTable';
 import Button from '@mui/material/Button';
 import { useGetApplicationQuery, useGetUserQuery } from '../redux/api/apiSlice';
+import { useState, useEffect } from 'react'
 
 export default function ApplicationsScreen() {
     const { data, error, isLoading, isFetching, isSuccess } = useGetApplicationQuery()
-
-    let hasApplication = false
-    const invHeaders = [
-        ["#", "Host University", "Semester", "Semester Start Date", "Semester End Date"]
-    ];
-
-    const appHeaders = [
-        ["#", "Host University", "Semester", "Semester Start Date", "Semester End Date",
+    const [isErasmus, setIsErasmus] = useState(true)
+    const [hasApplication, setHasApplication] = useState(true)
+    const [rows, setRows] = useState([])
+    const headers = [
+        ["#", "Host University", "Applied Academic Semester", "Application Type",
             "Application Status"]
-    ];
+    ] 
 
-    let appRows = [
-        ["1", "vrij", "spring", "january", "june", "-"]
-    ];
-
-    let invRows = [
-        ["1", "vrij", "spring", "january", "june"]
-    ];
-    let headers = []
-    let rows = []
-
-    if (isSuccess) {
-        if (data.placed) {
-            headers = appHeaders
-            rows = appRows;
-            hasApplication = true
+    useEffect(() => {
+        if(isSuccess){
+            console.log(data)
+            let row = []
+            row.push(1)
+            row.push(data.nameOfPlacedHostUniversity)
+            row.push(data.appliedAcademicSemester)
+            row.push(data.applicationType)
+            if(data.placed){
+                row.push("Placed")
+            }
+            else{
+                row.push("In Waiting Bin")
+            }
+            setRows([...rows,row])
         }
-        else {
-            headers = invHeaders
-            rows = invRows;
-            hasApplication = false
-        }
-        console.log(data);
-    }
+    }, [data, isSuccess])
 
-
-    // API
 
     const width = 1200;
 

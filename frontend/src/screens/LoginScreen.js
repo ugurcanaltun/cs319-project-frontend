@@ -27,10 +27,13 @@ export default function LoginScreen() {
                 localStorage.setItem("role", response.data.role)
                 localStorage.setItem("token", response.data.token)
                 navigate("/home")
+            }).catch(function(err) {
+                alert("This user does not exist!")
             })
     };
 
     return (
+        
         <ThemeProvider theme={theme}>
             <Container component="main" maxWidth="xs">
                 <CssBaseline />
@@ -54,7 +57,7 @@ export default function LoginScreen() {
                             required
                             fullWidth
                             id="username"
-                            label="Name and Surname"
+                            label="ID"
                             name="username"
                             autoComplete="username"
                             autoFocus
@@ -65,6 +68,7 @@ export default function LoginScreen() {
                             fullWidth
                             name="password"
                             label="Password"
+                            type="password"
                             id="userRole"
                             autoComplete="user-role"
                         />

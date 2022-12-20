@@ -6,6 +6,7 @@ import AppNavbar from '../components/AppNavbar';
 import AppSidebar from '../components/AppSidebar';
 import { Outlet } from "react-router-dom";
 
+
 function SidebarAndNavbar () {
     const [open, setOpen] = React.useState(false);
     return (

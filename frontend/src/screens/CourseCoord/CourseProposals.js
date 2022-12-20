@@ -11,10 +11,10 @@ const headers = [
     ["Student Name", "Bilkent Course Code", "Host Course Code", "Syllabus", "Intent", "Operations"],
 ]
 
-const intent = "i wanna see some ass"
+const intent = "I want to take software engineering at Erasmus"
 
 const rows = [
-    ["Uğur Can Altun", "CS319", "CMPE3131", <DownloadButton />, <ScrollDialogg />, <OperationSection />],
+    ["Uğur Can Altun", "CS319", "CMPE313", <DownloadButton />, <ScrollDialogg />, <OperationSection />],
 ]
 
 function ScrollDialogg() {

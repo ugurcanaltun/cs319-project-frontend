@@ -389,10 +389,10 @@ export default function WishListScreen() {
         },
         {
             courseCode: "CMPE 350",
-            courseName: "Operating Systems",
+            courseName: "Database Systems",
             courseECTS: 5,
             bilkentCourse: "CS 353",
-            bilkentCourseName: "Operating Systems",
+            bilkentCourseName: "Database Systems",
             bilkentCourseECTS: 5,
             courseType: "Mandatory",
             syllabus: <SyllabusButton />,
@@ -400,7 +400,7 @@ export default function WishListScreen() {
             status: <SelectButton rowIndex={1} />
         },
         {
-            courseCode: "EEE 391",
+            courseCode: "EEE 123",
             courseName: "Basics of Signals and Systems",
             courseECTS: 5,
             bilkentCourse: "EEE 391",
@@ -424,7 +424,7 @@ export default function WishListScreen() {
             status: <SelectButton rowIndex={3} />
         },
         {
-            courseCode: "ADA 265",
+            courseCode: "FA 111",
             courseName: "How Houses Build People",
             courseECTS: 5,
             bilkentCourse: "ADA 265",
@@ -508,7 +508,7 @@ export default function WishListScreen() {
             status: <SelectButton rowIndex={10} />
         },
         {
-            courseCode: "IE 400",
+            courseCode: "IE 333",
             courseName: "Principles of Engineering Management",
             courseECTS: 3.5,
             bilkentCourse: "IE 400",

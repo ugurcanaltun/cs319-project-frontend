@@ -19,6 +19,8 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
+import { useGetUserQuery } from '../redux/api/apiSlice';
+import axios from 'axios';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
@@ -35,6 +37,7 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
 function OperationSection(props) {
     const [updateTask] = useUpdateTaskMutation()
     const [deleteTask] = useDeleteTaskMutation()
+
 
 
     const handleCheckButton = () => {
@@ -83,7 +86,12 @@ function OperationSection(props) {
 
 export default function ToDoListScreen() {
     const { data, error, isLoading, isFetching, isSuccess } = useGetTasksQuery(localStorage.getItem("token"))
-
+    const { data: userData,  isSuccess:userSuccess } = useGetUserQuery(localStorage.getItem("token"))
+    if (userSuccess) {
+        console.log(userData)
+        localStorage.setItem("fullName", userData.firstName + " " + userData.lastName)
+        if (localStorage.getItem("role") == "student") localStorage.setItem("id", userData.schoolId)
+    }
 
 
     const headers = [
